@@ -116,6 +116,83 @@ const robots = defineCollection({
 	}),
 });
 
+const cases = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string(),
+		slug: z.string().optional(),
+		date: z.date().optional(),
+		industry: z.string().optional(),
+		company: z.string().optional(),
+		author: z.string().optional(),
+		description: z.string().optional(),
+		coverImage: z.string().optional(),
+		body: z.string().optional(),
+	}),
+});
+
+const comparisons = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string(),
+		slug: z.string().optional(),
+		opponent: z.string(),
+		date: z.date().optional(),
+		description: z.string().optional(),
+		coverImage: z.string().optional(),
+		body: z.string().optional(),
+	}),
+});
+
+const partners = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string(),
+		slug: z.string().optional(),
+		website: z.string().optional(),
+		description: z.string().optional(),
+		logo: z.string().optional(),
+		body: z.string().optional(),
+	}),
+});
+
+const vacancies = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string(),
+		slug: z.string().optional(),
+		department: z.string().optional(),
+		location: z.string().optional(),
+		format: z.string().optional(),
+		salary: z.string().optional(),
+		description: z.string().optional(),
+		body: z.string().optional(),
+	}),
+});
+
+const clients = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string(),
+		slug: z.string().optional(),
+		industry: z.string().optional(),
+		logo: z.string().optional(),
+		description: z.string().optional(),
+		body: z.string().optional(),
+	}),
+});
+
+const checklists = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string(),
+		slug: z.string().optional(),
+		description: z.string().optional(),
+		coverImage: z.string().optional(),
+		body: z.string().optional(),
+	}),
+});
+
 export const collections = {
 	authors,
 	articles,
@@ -124,4 +201,10 @@ export const collections = {
 	tags,
 	versions,
 	robots,
+	cases,
+	comparisons,
+	partners,
+	vacancies,
+	clients,
+	checklists,
 };

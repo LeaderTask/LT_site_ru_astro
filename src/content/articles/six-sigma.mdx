@@ -1,301 +1,189 @@
 ---
-title: 'Six sigma methodology, basic principles'
-date: 2024-02-29T00:00:00.000Z
-categories:
-  - articles
-coverImage: /sixsigma.webp
+title: "Методология 6 сигм, основные принципы"
+slug: "six-sigma"
+date: "2023-04-19T15:11:55.000Z"
+updatedAt: "2025-04-01T15:38:21.000Z"
+author: "yakirillov"
+description: "6 sigma, работа методологии Six Sigma в управлении производственными процессами компаний, плюсы и минусы, использование инструментов 6 sigma на практике."
+coverImage: "/sixsigma.webp"
+tags: ["Блог"]
 isFollow: true
-description: >-
-  Work of Six Sigma methodology in the management of production processes of
-  companies, pros and cons. Using 6 sigma tools in practice.
-author: src/content/authors/ted-scott.mdx
 ---
 
-The main goal of project management is to achieve the planned goal without
-exceeding the budget. For this purpose, it is important to organize all work
-processes correctly and minimize the number of errors and defects. Various
-techniques and tools can be used for this purpose. For example, the concept of
-"Six Sigma", focused on users and accuracy of indicators. This method appeared
-in the 80s, was developed by Motorola Corporation, and in the 90s became the key
-strategy of General Electric. The technique is based on the "philosophy of lean
-thinking". What does this technique represent? What advantages and disadvantages
-does it possess? How does it help in project management? Let's try to
-understand.
+Главная цель управления проектом – достижение запланированной цели без превышения бюджета. Для этого важно правильно организовать все рабочие процессы, свести к минимуму количество ошибок и брака. С этой целью можно использовать различные методики и инструменты. Например, концепцию «Шесть сигм», ориентированную на пользователей и точность показателей. Данный метод появился в 80-е годы, был разработан корпорацией Motorola, а в 90-е стал ключевой стратегией компании General Electric. В основе методики используется «философия бережливого мышления». Что представляет собой эта техника? Какими преимуществами и недостатками обладает? Как помогает в управлении проектами? Попробуем разобраться.
 
-## What is Six Sigma
+## Что такое «Шесть сигм»
 
-![What is Six Sigma](/chto-takoe-shest-sigm-1024x682-1.webp)
+![Что такое шесть сигм](https://www.leadertask.ru/wp-content/uploads/2023/04/chto-takoe-shest-sigm-1024x682.jpg)
 
-This term is related to the Lean methodology aimed at optimizing work processes.
-The concept of Lean manufacturing was formed after World War II, in Japan. The 6
-Sigma methodology was first used by Motorola Corporation to combat manufacturing
-defects. Both of these approaches are used together to improve work processes.
+Данный термин связан с методологией Lean, направленной на оптимизацию рабочих процессов. Концепция Lean manufacturing или «бережливое производство» сформировалась после Второй мировой войны, в Японии. Методика 6 Сигм была впервые использована корпорацией Моторола для борьбы с производственным браком. Оба этих подхода применяются совместно для совершенствования рабочих процессов.
 
-Sigma is a letter of the Greek alphabet denoting a standard deviation from the
-norm. In probability theory, the 6 Sigma approach is expressed by the formula:
-no more than 3.4 defects per million operations. At Motorola, this principle was
-used to measure the errors allowed in the product manufacturing process. The 6
-Sigma system consisted of six levels, each with a certain number of defects:
+Сигма — буква греческого алфавита, обозначающая стандартное отклонение от нормы. В теории вероятности подход 6 Сигм выражается формулой: не более 3,4 дефектов на миллион операций. В компании Motorola этот принцип использовался для измерения погрешностей, допускаемых в процессе изготовления продукции. Система 6 Сигм включала шесть уровней, каждому из которых соответствовало определённое число дефектов:
 
-| Sigma level | Number of deficiencies (non-compliance with customer requirements) |
-| ----------- | ------------------------------------------------------------------ |
-| 6           | 1                                                                  |
-| 5           | 2                                                                  |
-| 4           | 3                                                                  |
-| 3           | 4                                                                  |
-| 2           | 5                                                                  |
-| 1           | 6                                                                  |
+Уровень сигмКоличество недостатков (несоответствий требованиям клиента)615243342516
 
-The Six Sigma concept focuses on the customer, his satisfaction with the final
-result of the work. It requires mandatory standardization of the service or
-product. Any deviations from the established norms should be minimal. The number
-6 in this case is conditional. You can define for yourself any number of quality
-levels. They can be 12 or, for example, 4. But, according to the developers,
-this is the distribution of deviations that corresponds to the majority of
-processes. In accordance with this gradation, the business of the sixth level is
-considered the most successful, and the first - unprofitable.
+Концепция Six Sigma ориентируется на клиента, его удовлетворённость конечным результатом работы. Она требует обязательной стандартизации услуги или продукта. Любые отклонения от установленных норм должны быть минимальными. Цифра 6 в данном случае является условной. Вы можете определить для себя любое количество уровней качества. Их может быть 12 или, например, 4. Но, по мнению, разработчиков, именно такое распределение отклонений соответствует большинству процессов. В соответствии с данной градацией бизнес шестого уровня считается самым успешным, а первого – убыточным.
 
-## Basic principles of the Six Sigma methodology
+## Основные принципы методологии «Шесть сигм»
 
-The six sigma methodology is based on three postulates:
+Методология 6 sigma строится на трёх постулатах:
 
-- Customer orientation, customer orientation. The company should strive to meet
-  the needs of consumers. It is on the basis of their interests and needs that
-  its strategy is formed.
+- Ориентированности на заказчика, покупателя. Компания должна стремиться удовлетворить запросы потребителей. Именно на основе их интересов и потребностей формируется её стратегия.
 
-- Management of all work processes. They should be standardized and formalized.
+- Управления всеми рабочими процессами. Они должны быть стандартизированными и формализованными.
 
-- Formation of team spirit. All project participants: from the director to the
-  service staff should contribute to the company's development and strive for
-  its prosperity. All team members are united by a common goal and help each
-  other to achieve it.
+- Формировании командного духа. Все участники проекта: от директора до обслуживающего персонала должны вносить свой вклад в развитие компании, стремиться к её процветанию. Все члены команды объединены общей целью и помогают друг другу в её достижении.
 
-Other principles of the Six Sigma concept:
+Другие принципы концепции «Шесть сигм»:
 
-- Making decisions based on concrete facts and real data.
+- Принятие решений на основе конкретных фактов и реальных данных.
 
-- Implementation of the process approach in production.
+- Внедрение процессного подхода в производство.
 
-- Calculating the possible consequences of each decision.
+- Просчёт возможных последствий каждого решения.
 
-- Justified risk-taking to achieve better results.
+- Обоснованный риск для достижения лучших результатов.
 
-### Pros and cons of the methodology
+### Плюсы и минусы методики
 
-Like any other management techniques, Six Sigma has strengths and weaknesses.
-Its strengths include:
+Как любые другие методы управления, система Six Sigma имеет сильные и слабые стороны. К её преимуществам можно отнести:
 
-- Versatility. It can be used to improve any process.
+- Универсальность. Её можно использовать для совершенствования любых процессов.
 
-- Systematization of data to enable efficient analysis of information.
+- Систематизация данных, позволяющая эффективно анализировать информацию.
 
-- Progressive problem solving through a process approach.
+- Поступательное решение проблем благодаря применению процессного подхода.
 
-- Outcome Orientation.
+- Ориентация на конечный результат.
 
-- Management tools and techniques are integrated into a single system.
+- Инструменты и методы управления объединяются в единую систему.
 
-Disadvantages of technology:
+Недостатки технологии:
 
-- It is suitable only for companies with authoritative management, and requires
-  strict personnel management.
+- Она подходит только для компаний с авторитетным руководством, требует жёсткого управления персоналом.
 
-- Does not allow changes in management style or corporate culture of the
-  company. The main objective of the methodology is to reduce the number of
-  defects. It does not take into account the possibility of improving planning
-  or production.
+- Не допускает изменение стиля управления или корпоративной культуры компании. Главная цель методики – снижение числа дефектов. При этом не учитывается возможность совершенствования [планирования](https://www.leadertask.ru/blog/planirovanie) или производства.
 
-## Six Sigma algorithms and tools
+## Алгоритмы и инструменты «Шесть сигм»
 
-![Six Sigma tools](/algoritmy-i-instrumenty-6-sigm-1024x622-1.webp)
+![Алгоритмы 6 сигм](https://www.leadertask.ru/wp-content/uploads/2023/04/algoritmy-i-instrumenty-6-sigm-1024x622.jpg)
 
-The concept uses two approaches united by the principle:
-"Plan-Do-Do-Check-Correct". The DMAIC algorithm is aimed at improving production
-processes, while the DMADV or DFSS technique is used for new product
-development.
+В концепции используются два подхода, объединённые принципом: «Планируй-Делай-Проверь-Исправь». Алгоритм DMAIC направлен на улучшение производственных процессов, а техника DMADV или DFSS используется при создании нового продукта.
 
-### DMAIC algorithm
+### Алгоритм DMAIC
 
-1. D - Define. Formulate project objectives based on customer needs. Select a
-   team, assign roles and areas of responsibility among the participants.
+- D – Define (определение). Сформулируйте [цели проекта](https://www.leadertask.ru/blog/tseli-i-zadachi-proekta) на основании потребностей клиентов. Подберите команду, распределите роли и зоны ответственности между участниками.
 
-2. M - Measure. Clarify what the client wants. Prepare the necessary
-   information, identify the "key" points and processes of the project.
+- M – Measure (измерение). Уточните, чего хочет клиент. Подготовьте нужную информацию, обозначьте «ключевые» точки и процессы проекта.
 
-3. A - Analyze. Based on the analysis of the information obtained, identify the
-   factors affecting the quality of work. Identify the main causes of defects.
-   Develop methods for their elimination.
+- A – это Analyze (анализ). На основе анализа полученной информации выделите факторы, влияющие на качество работы. Определите основные причины возникновения дефектов. Разработайте методы для их устранения.
 
-4. I - Improve. Optimize existing processes. Start with trial changes.
+- I – Improve (улучшение). Произведите оптимизацию существующих процессов. Начните с пробных изменений.
 
-5. C - Control. Control all the edits you make to avoid new defects. Keep track
-   of statistics, inform project participants about all changes. Duplicate the
-   process until the process is stable.
+- C – Control (контроль). Контролируйте все вносимые правки, чтобы избежать появления новых дефектов. Следите за статистикой, информируйте участников проекта обо всех изменениях. Дублируйте процесс до достижения стабильности процесса.
 
-This algorithm implies working ahead of the curve. Changing consumer preferences
-must be predicted in advance, preventing defects from appearing. It is easier to
-prevent them than to eliminate them.
+Данный алгоритм подразумевает работу на опережение. Изменившиеся предпочтения потребителей нужно прогнозировать заранее, не допуская появления дефектов. Их легче предупредить, чем устранять.
 
-### DMADV algorithm (DFSS)
+### Алгоритм DMADV (DFSS)
 
-It stands for Define - Measure - Analyze - Design - Verify.
+Расшифровывается как Define - Measure - Analyze - Design – Verify.
 
-1. Project goals are set based on the company's strategy and the desires of
-   potential customers. A working team is formed.
+- Ставятся цели проекта на основании стратегии предприятия и желаний потенциальных покупателей. Формируется рабочая команда.
 
-2. The main characteristics of the future product are outlined.
+- Обозначаются основные характеристики будущего продукта.
 
-3. Various options for producing the product are selected and analyzed.
+- Подбираются и анализируются различные варианты производства продукта.
 
-4. Among them choose the best option, get to work.
+- Среди них выбирают оптимальный вариант, приступают к работе.
 
-5. The product is validated with pilot tests before launch.
+- Продукт перед запуском проверяется с помощью пилотных тестов.
 
-The following tools are used to implement 6 sigma technology in manufacturing
-processes:
+Для внедрения технологии 6 сигм в производственные процессы используются следующие инструменты:
 
-#### Business process maps
+Карты бизнес-процессов
 
-These are diagrams depicting the resources available to the team and its
-actions.
+Представляют собой схемы, изображающие ресурсы, имеющиеся в наличии у команды, и её действия.
 
-#### Benefit-cost analysis (CBA)
+Анализ выгод и затрат (CBA)
 
-The ratio between the costs and the expected benefits of the project is
-assessed.
+Оценивается соотношение между затратами и предполагаемыми выгодами от реализации проекта.
 
-#### CTQ tree
+Дерево показателей (CTQ tree)
 
-This is a diagram that shows the critical quality indicators. It is used at the
-initial stages of a project to clarify the requirements for a product or
-service.
+Это схема, на которой отображаются критически важные показатели качества. Её используют на начальных этапах работы над проектом для уточнения требований к продукту или услуге.
 
-#### Planning the experiment
+Планирование эксперимента
 
-This tool is used to prepare for the experiments.
+С помощью данного инструмента проводится подготовка к опытам.
 
-#### Statistical methods
+Статистические методы
 
-These include the Schuchart control chart, the Pareto curve, and other tools.
+К ним относят контрольную карту Шухарта, кривую Парето и другие инструменты.
 
-## Distribution of roles in the team
+## Распределение ролей в команде
 
-![Distribution of roles in the team](/raspredelenie-roley-1024x682-1.webp)
+![Распределение ролей в команде](https://www.leadertask.ru/wp-content/uploads/2023/04/raspredelenie-roley-1024x682.jpg)
 
-Teamwork and high employee involvement are necessary conditions for successful
-implementation of the 6 sigma methodology. In order for it to work smoothly and
-in an organized manner, the team must be properly assembled and trained. For
-this purpose, the Japanese philosophy of hierarchical organization of society is
-used. Participants of work processes are divided by seniority. The team respects
-more experienced senior colleagues who occupy the highest position in the
-hierarchy, and they, in turn, are leaders and mentors for subordinates. Roles in
-such a team are distributed as follows:
+Командная работа, высокая вовлеченность сотрудников – необходимые условия для успешного внедрения методики 6 сигм. Чтобы она работала слаженно и организованно, команду нужно правильно скомплектовать и обучить. Для этого используется японская философия иерархичного устройства общества. Участники рабочих процессов разделяются по старшинству. Команда уважает более опытных старших коллег, занимающих высшее положение в иерархии, а они, в свою очередь, являются руководителями и наставниками для подчинённых. Роли в такой команде распределяются следующим образом:
 
-- White and yellow belts are beginners doing a narrow scope of work in a
-  project.
+- Белые и жёлтые пояса – новички, выполняющие узкий объём работы в проекте.
 
-- Green Belts are small group leaders, generating ideas, implementing the
-  methodology in the processes assigned to them.
+- Зелёные пояса – это руководители небольших групп, генерирующие идеи, внедряющие методику в порученных им процессах.
 
-- Black belts are team leaders, controlling yellow and green belt performers,
-  training them, leading them to success.
+- Чёрные пояса – лидеры команд, контролирующие исполнителей с жёлтыми и зелёными поясами, обучающие их, ведущие к успеху.
 
-- Masters - supervise Black Belts, assist them in concept realization, and
-  participate in dispute resolution.
+- Мастера – руководят «чёрными поясами», помогают им в реализации концепции, участвуют в разрешении споров.
 
-- Sponsors or champions - monitor the achievement of goals, seek resources for
-  them, identify what projects or processes need to be improved.
+- Спонсоры или чемпионы – контролируют достижение целей, ищут для них ресурсы, определяют, какие проекты или процессы нужно совершенствовать.
 
-- Leaders are the top managers or senior executives who are best versed in the
-  methodology, creating the necessary conditions to implement Six Sigma in
-  production.
+- Лидеры – топ-менеджеры или высшее руководство, лучше всех разбирающиеся в методологии, создающие необходимые условия для внедрения Six Sigma в производство.
 
-## An example of Lean Six Sigma implementation in practice
+## Пример внедрения Lean Six Sigma на практике
 
-To demonstrate the effectiveness of this management concept, here are some
-examples of large companies that use 6 sigma in their work:
+Чтобы продемонстрировать эффективность данной концепции управления, приведём несколько примеров крупных компаний, использующих в работе 6 сигм:
 
-1. The author of the Six Sigma concept is Bill Smith, an employee of the quality
-   management service of Motorola Corporation. Before the introduction of this
-   technology, up to 10% of the company's annual revenue was spent on
-   eliminating the consequences of defects in production. As a result of its
-   application, the corporation saved more than 16 billion dollars in revenue
-   from 1986 to 2001.
+- Автором концепции Six Sigma является Билл Смит – сотрудник службы менеджмента качества корпорации Моторола. До внедрения данной технологии до 10% годовой выручки компании уходило на устранение последствий брака на производстве. В результате её применения корпорация с 1986 по 2001 год сэкономила более 16 миллиардов долларов дохода.
 
-2. The Six Sigma system has been used at Ford since 2000. Thanks to the
-   methodology, the automaker's revenue increased by 300 million dollars. In
-   addition, the company has created several successful projects that have been
-   appreciated by the brand's customers.
+- Система «Шесть сигм» с 2000 года используется в концерне Ford. Благодаря методике выручка автопроизводителя увеличилась на 300 миллионов долларов. Кроме того, компания создала несколько успешных проектов, которые по достоинству оценили клиенты марки.
 
-3. Boeing Airlines has been training specialists in the 6 sigma methodology
-   since 1999. In the five-year period since the program's introduction, its
-   costs have decreased by $210 million.
+- Авиакомпания Boeing с 1999 года проводит обучение специалистов по методологии 6 сигм. За пятилетний период с начала внедрения программы, её издержки снизились на 210 миллионов долларов.
 
-According to statistical observations, in 2007, 82 of the top 100
-segment-leading companies in the United States switched to Six Sigma. Over the
-next 4 years, they realized an additional 4% to 7% increase in profits.
+- Российский банк Уралсиб после перехода на управление по методу «Шесть сигм» на 32% улучшил эффективность использования ресурсов. Результата удалось достичь благодаря оперативному реагированию на изменение потребительского спроса. Скорость отправки денежных переводов в банковской системе выросла вдвое (по данным 2014 года).
 
-Here's what it looks like in practice:
+По результатам статистических наблюдений в 2007 году 82 из 100 крупнейших компаний Соединённых Штатов Америки, являющихся лидерами в своём сегменте, перешли на систему Six Sigma. В течение последующих 4 лет они получали дополнительный прирост к прибыли от 4 до 7 %.
 
-A company manufacturing cabinet furniture sold 1,000 units of sets during the
-year. 40 items were returned because of defects in the design. 15 products were
-rejected by the store due to incompleteness. 25 users left negative feedback
-about the low quality of components. In total, the company received 80
-complaints for 1000 units of products:
+Вот как это выглядит на практике:
 
-- 40 critical, resulting in direct costs (refunds);
+Предприятие, изготавливающее корпусную мебель, за год реализовало 1000 единиц комплектов. 40 изделий вернули из-за обнаруженных недостатков в конструкции. 15 изделий магазин забраковал из-за некомплектности. 25 пользователей оставили негативные отзывы о низком качестве комплектующих. Итого на 1000 единиц продукции компания получила 80 нареканий:
 
-- 25 averages (reviews) affecting the demand of a product;
+- 40 критических, приведших к прямым расходам (возврат);
 
-- 15 minor (understaffing) - their elimination did not entail large costs.
+- 25 средних (отзывы), влияющих на спрос товара;
 
-They are assigned the following points:
+- 15 незначительных (недокомплект) – их устранение не повлекло больших затрат.
 
-Critical - 3; significant - 2; marginally significant -1.
+Им присваиваются следующие баллы:
 
-Calculate their total weight:
+Критические – 3; значимые – 2; малозначимые -1.
 
-40×3+25×2+5×1 = 185 points.
+Рассчитываем их общий вес:
 
-In the second and third phases of DMAIC, 6 more "critical locations" were
-identified. As a result, the total sum of defects is: 1,000×(1+2+3+12) = 18,000
-points. The share of defects in the volume of furniture produced:
-185/18,000×100% = 1.02%.
+40х3+25х2+5х1 = 185 баллов.
 
-This deviation approaches sigma level 3. That is, the company operates
-inefficiently.
+На втором и третьем этапах DMAIC были выявлены ещё 6 «критических мест». В результате общая сумма дефектов составляет: 1000х(1+2+3+12) = 18000 баллов. Доля дефектов в объёме произведённой мебели: 185/18 000х100% = 1,02%.
 
-## LeaderTask for project management
+Это отклонение подходит к 3 уровню сигмы. То есть компания работает неэффективно.
 
-![Best Planner Apps for Android](/Leadertask_app-1024x716.webp)
+## Применение ЛидерТаск для управления проектами
 
-Various digital systems and tools are successfully used to organize project
-management. With their help, it is easier to organize interaction between
-participants in a team. Optimize all processes in the production of goods or
-services. Minimize errors and costs by controlling activities at every stage.
-LeaderTask is one of such services that replaces several programs used for
-strategic, current planning and project management. The application has a full
-set of various options for effective teamwork. It can be used to set goals,
-control their achievement, create assignments and tasks, and delegate them to
-other executives.
+![ЛидерТаск](https://www.leadertask.ru/wp-content/uploads/2023/04/leadertask-1024x751.jpg)
 
-In the program you can exchange information, discuss any project issues in the
-corporate chat room, track the progress of each performer. Identify possible
-bottlenecks in a timely manner. Control the consumption of time and other
-important resources. The application has a convenient calendar for planning, the
-necessary tools for working according to the GTD methodology, the Pareto
-principle, flexible Agile and Scrum technologies. LeaderTask synchronizes with
-various digital platforms and does not require an internet connection.
+Для организации [управления проектами](https://www.leadertask.ru/blog/upravlenie-proektami) успешно используются различные цифровые системы и инструменты. С их помощью проще организовать взаимодействие между участниками в команде. Оптимизировать все процессы при производстве товара или услуги. Минимизировать ошибки и издержки благодаря контролю деятельности на каждом этапе. ЛидерТаск – один из подобных сервисов, заменяющий несколько программ, использующихся для стратегического, текущего планирования и управления проектами. У приложения имеется полноценный набор разнообразных опций для эффективной работы в команде. Его можно использовать для постановки целей, контроля их достижения, создания поручений и задач, делегирования их другим исполнителям.
 
-## Conclusion
+В программе можно обмениваться информацией, обсуждать любые вопросы проекта в корпоративном чате, отслеживать прогресс каждого исполнителя. Своевременно выявлять возможные «узкие места». Контролировать расход времени и других важных ресурсов. В приложение встроен удобный календарь для планирования, имеется необходимый инструментарий для работы по методике [GTD](https://www.leadertask.ru/blog/gtd), [принципу Парето](https://www.leadertask.ru/blog/princip-pareto), гибким [Agile](https://www.leadertask.ru/blog/agile), [Scrum](https://www.leadertask.ru/blog/scrum) технологиям. ЛидерТаск синхронизируется с различными цифровыми платформами, не требует подключения к интернету.
 
-The Six Sigma concept is aimed at finding defects and their causes. For this
-purpose, statistical, experimental research and systematic quality management
-are used. Successful implementation and use of the methodology depends on the
-competence of project managers and their competent interaction with other
-project participants.
+## Заключение
 
-Practical experience of large foreign companies has shown that one manager with
-"black belt" qualification can realize 5-6 projects per year. One such
-specialist can save the company up to 175 thousand dollars, increasing its
-profit per year to 1 million.
+Концепция Six Sigma направлена на поиск дефектов и причин их возникновения. Для этого применяются статистические, экспериментальные исследования и систематический менеджмент качества. Успешность внедрения и использования методики зависит от компетентности [проектных менеджеров](https://www.leadertask.ru/blog/project-manager) и их грамотного взаимодействия с другими участниками проекта.
+
+Практический опыт крупных зарубежных компаний показал, что один менеджер с квалификацией «чёрного пояса» за год может реализовать 5 - 6 проектов. Один такой специалист может сэкономить для компании до 175 тысяч долларов, увеличив её прибыль в год до 1 миллиона.

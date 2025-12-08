@@ -6,6 +6,12 @@ import {
 	TagsCollection,
 	VersionsCollection,
 	RobotsCollection,
+	CasesCollection,
+	ComparisonsCollection,
+	PartnersCollection,
+	VacanciesCollection,
+	ClientsCollection,
+	ChecklistsCollection,
 } from './collections';
 
 declare const process: {
@@ -36,7 +42,20 @@ export default defineConfig({
 		},
 	},
 	schema: {
-		collections: [AuthorsCollection, ArticlesCollection, PageCollection, TagsCollection, VersionsCollection, RobotsCollection],
+		collections: [
+			AuthorsCollection,
+			ArticlesCollection,
+			PageCollection,
+			TagsCollection,
+			VersionsCollection,
+			RobotsCollection,
+			CasesCollection,
+			ComparisonsCollection,
+			PartnersCollection,
+			VacanciesCollection,
+			ClientsCollection,
+			ChecklistsCollection,
+		],
 	},
 	search: {
 		tina: {
