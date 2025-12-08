@@ -1,0 +1,202 @@
+---
+import Layout from './Layout.astro';
+import { formatDate } from '@/shared';
+import Breadcrumbs from '@/shared/ui/Breadcrumbs/Breadcrumbs.astro';
+import RightSidebar from '@/entities/blog/ui/RightSidebar/RightSidebar.astro';
+import AuthorLink from '@/entities/blog/ui/AuthorLink/AuthorLink.astro';
+import BlogCard from '@/entities/blog/ui/BlogCard/BlogCard.astro';
+import type { CollectionEntry } from 'astro:content';
+import type { EnrichedPost } from '@/shared/types';
+import ProseContent from '@/shared/ui/ProseContent/ProseContent.astro';
+import { marked } from 'marked';
+
+interface Props {
+	title: string;
+	h1: string;
+	date: Date;
+	updatedAt: Date;
+	authorEntry?: CollectionEntry<'authors'> | null;
+	authorId?: string | null;
+	tags?: string[];
+	rightSidebar?: {
+		title?: string;
+		description?: string;
+		linkText?: string;
+		linkUrl?: string;
+	};
+	breadcrumbs: Array<{ label: string; url: string }>;
+	recommendation?: EnrichedPost[];
+	description?: string;
+	image?: string;
+	url?: string;
+	isFollow?: boolean;
+}
+
+const {
+	title,
+	h1,
+	date,
+	updatedAt,
+	authorEntry,
+	authorId,
+	tags,
+	rightSidebar,
+	breadcrumbs,
+	recommendation = [],
+	description = '',
+	image = '',
+	url = '',
+	isFollow,
+} = Astro.props as Props;
+
+const datePublished = date.toISOString().split('T')[0];
+const dateModified = updatedAt?.toISOString().split('T')[0] || datePublished;
+
+const blogPostingSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	mainEntityOfPage: {
+		'@type': 'WebPage',
+		'@id': url,
+	},
+	headline: title,
+	description: description,
+	image: image,
+	author: {
+		'@type': 'Person',
+		name: 'LeaderTask Editorial Team',
+	},
+	publisher: {
+		'@type': 'Organization',
+		name: 'LeaderTask',
+		logo: {
+			'@type': 'ImageObject',
+			url: Astro.site + 'logo.webp',
+		},
+	},
+	datePublished: datePublished,
+	dateModified: dateModified,
+};
+
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: breadcrumbs.map((crumb, index) => ({
+		'@type': 'ListItem',
+		position: index + 1,
+		name: crumb.label,
+		item: Astro.site + crumb.url.replace(/^\//, ''),
+	})),
+};
+
+const extractFirstParagraph = (html: string): string => {
+	const match = html.match(/<p[^>]*>(.*?)<\/p>/is);
+	if (match && match[1]) {
+		return match[1].replace(/<[^>]+>/g, '').trim();
+	}
+	return '';
+};
+
+const onsetDescription = (post: EnrichedPost) => {
+	if (post.data.description) {
+		return post.data.description;
+	}
+
+	if (!post.body) {
+		return '';
+	}
+
+	const parsedBody = marked.parse(post.body) as string;
+	return extractFirstParagraph(parsedBody).slice(0, 119) + '...';
+};
+---
+
+<Layout
+	title={title}
+	description={description}
+	canonical={url}
+	isFollow={isFollow}
+	og={{
+		type: 'article',
+		title,
+		description,
+		url,
+		image,
+		siteName: 'LeaderTask',
+		articlePublishedTime: datePublished,
+		articleModifiedTime: dateModified,
+	}}
+>
+	<section class="mt-3">
+		<Breadcrumbs breadcrumbs={breadcrumbs} />
+		<h1 class="text-[32px] lg:text-[44px] leading-9 lg:leading-13 font-bold my-15 text-center">
+			{h1}
+		</h1>
+		<article class="bg-white rounded-5 shadow-md grid lg:grid-cols-a1a gap-8 p-4 lg:p-8">
+			<slot name="anchor-list" />
+			<div class="flex flex-col gap-8 lg:p-8">
+				<div class="flex justify-between items-center pb-6 border-b border-light">
+					{
+						authorEntry && authorId ? (
+							<AuthorLink
+								size="w-9 h-9 lg:w-10 lg:h-10"
+								author={{ ...authorEntry.data, id: authorId }}
+							/>
+						) : (
+							<div />
+						)
+					}
+					<p class="text-gray-600 text-sm">
+						{formatDate(date)}
+					</p>
+				</div>
+				<ProseContent type="article">
+					<slot />
+				</ProseContent>
+				<ul class="flex flex-wrap gap-2">
+					{
+						tags?.map((tag) => (
+							<li class="px-5 py-1.5 bg-dark-alpha text-sm select-none cursor-pointer rounded-1.5 text-white hover:bg-primary transition-colors duration-200">
+								{tag}
+							</li>
+						))
+					}
+				</ul>
+			</div>
+			{
+				rightSidebar && (
+					<RightSidebar
+						class="w-50 hidden lg:flex"
+						{...rightSidebar}
+					/>
+				)
+			}
+		</article>
+		{
+			recommendation.length > 0 && (
+				<section class="mt-15 lg:mt-30 flex flex-col gap-10 lg:gap-15">
+					<h2 class="text-[24px] lg:text-[32px] font-bold text-center">You might also like</h2>
+					<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+						{recommendation.map((article) => (
+							<BlogCard
+								post={article}
+								description={onsetDescription(article)}
+							/>
+						))}
+					</ul>
+				</section>
+			)
+		}
+	</section>
+
+	<script
+		slot="script"
+		type="application/ld+json"
+		set:html={JSON.stringify(blogPostingSchema)}
+	/>
+	<script
+		slot="script"
+		type="application/ld+json"
+		set:html={JSON.stringify(breadcrumbSchema)}
+	/>
+</Layout>

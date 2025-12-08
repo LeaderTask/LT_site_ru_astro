@@ -1,0 +1,30 @@
+---
+interface Props {
+	breadcrumbs: {
+		label: string;
+		url: string;
+	}[];
+}
+
+const { breadcrumbs } = Astro.props;
+---
+
+<ul
+	class="flex items-center"
+	data-breadcrumbs
+>
+	{
+		breadcrumbs.map((breadcrumb: { label: string; url: string }, index: number) => (
+			<li class="w-max flex items-center">
+				<a
+					href={breadcrumb.url}
+					class={`px-1.5 py-0.5 whitespace-nowrap truncate overflow-hidden text-sm hover:text-accent-orange ${index === breadcrumbs.length - 1 ? 'text-accent-orange font-bold text-base' : 'text-secondary'}`}
+					data-link-index={index}
+				>
+					{breadcrumb.label}
+				</a>
+				{index < breadcrumbs.length - 1 && <span class="block p-0.5">/</span>}
+			</li>
+		))
+	}
+</ul>

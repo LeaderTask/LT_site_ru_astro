@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import AboutHeroBlock from '@/widgets/AboutHeroBlock/AboutHeroBlock.astro';
+import OurJourney from '@/widgets/OurJourney/OurJourney.astro';
+
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.slug === 'about');
+---
+
+<Layout
+	title={page?.data.title || 'About us'}
+	description={page?.data.description}
+	isFollow={page?.data.isFollow}
+>
+	<AboutHeroBlock />
+	<OurJourney />
+</Layout>

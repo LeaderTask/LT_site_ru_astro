@@ -1,0 +1,44 @@
+---
+import DeviceCard from '@/shared/ui/DeviceCard/DeviceCard.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	cardClass?: string;
+	list: {
+		icon: string;
+		title: string;
+		link: string;
+		description?: string;
+		iconClass?: string;
+	}[];
+}
+
+const { title, description, list } = Astro.props;
+---
+
+<div class="section-top-indent flex flex-col gap-6 lg:gap-15 items-center justify-center">
+	<div class="text-center flex flex-col gap-4 lg:gap-6">
+		<h2 class="font-bold text-[24px] leading-7 md:text-[44px] md:leading-13 text-primary sm:max-w-50 md:max-w-none mx-auto">
+			{title}
+		</h2>
+		<p class="font-regular text-[16px] leading-6 md:text-[20px] md:leading-8 text-secondary">
+			{description}
+		</p>
+	</div>
+	<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+		{
+			list.map((item: any) => (
+				<DeviceCard
+					device={{
+						...item,
+						iconColor: 'text-secondary',
+						textColor: 'text-secondary',
+						arrowColor: 'text-secondary',
+					}}
+					cardClass="py-5.5 px-4 md:px-10 lg:p-9 xl:p-15"
+				/>
+			))
+		}
+	</div>
+</div>

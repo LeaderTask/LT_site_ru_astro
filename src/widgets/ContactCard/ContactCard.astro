@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import { getImageDimensions } from '@/shared';
+
+interface Props {
+	title: string;
+	value: string;
+	link?: string;
+	iconSrc: string;
+	textColor?: string;
+	description?: string;
+}
+
+const { title, value, link, iconSrc, textColor, description } = Astro.props;
+const iconDimensions = iconSrc.startsWith('/') ? await getImageDimensions(iconSrc) : { width: 40, height: 40 };
+
+const Tag = link ? 'a' : 'div';
+const linkProps = link
+	? {
+			href: link,
+			target: '_blank',
+			rel: 'noopener noreferrer',
+		}
+	: {};
+---
+
+<Tag
+	{...linkProps}
+	class="contact-card pointer flex flex-col items-center justify-center rounded-4 px-4 pt-4 pb-6 md:px-6 md:pt-6 md:pb-8 bg-white"
+>
+	<Image
+		src={iconSrc}
+		alt={title}
+		width={iconDimensions.width}
+		height={iconDimensions.height}
+		class="w-10 h-10 mb-3"
+	/>
+	<h3 class="font-bold text-[18px] leading-6 md:text-[24px] md:leading-8 text-primary mb-2">
+		{title}
+	</h3>
+	<p
+		class:list={['medium text-[16px] leading-6 md:text-[20px] md:leading-8 p-1', { 'mb-2': description }]}
+		style={textColor ? `color: ${textColor}` : undefined}
+	>
+		{value}
+	</p>
+	{description && <span class="medium text-[14px] leading-5 text-secondary">{description}</span>}
+</Tag>
+
+<style>
+	.contact-card {
+		box-shadow:
+			0 4px 8px rgba(0, 0, 0, 0.01),
+			0 15px 15px rgba(0, 0, 0, 0.01),
+			0 35px 21px rgba(0, 0, 0, 0.01);
+		transition:
+			box-shadow 0.3s ease,
+			transform 0.3s ease;
+	}
+
+	.contact-card:hover {
+		box-shadow:
+			0 -2px 4px rgba(0, 0, 0, 0.02),
+			0 -8px 8px rgba(0, 0, 0, 0.02),
+			0 -18px 11px rgba(0, 0, 0, 0.01),
+			0 -33px 13px rgba(0, 0, 0, 0),
+			0 6px 14px rgba(0, 0, 0, 0.03),
+			0 25px 25px rgba(0, 0, 0, 0.03),
+			0 56px 33px rgba(0, 0, 0, 0.02),
+			0 99px 40px rgba(0, 0, 0, 0);
+		transform: translateY(-2px);
+	}
+</style>

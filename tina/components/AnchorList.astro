@@ -1,0 +1,20 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+
+const customClass = ['hidden lg:block sticky top-25 h-max w-60', className].filter(Boolean).join(' ');
+---
+
+<aside
+	class={customClass}
+	id="anchor-list"
+>
+	<ul
+		class="flex flex-col gap-1.5"
+		id="anchor-list-items"
+	>
+	</ul>
+</aside>

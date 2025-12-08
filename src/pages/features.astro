@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import HeroFeaturesBlock from '@/widgets/HeroFeaturesBlock/HeroFeaturesBlock.astro';
+import CreationTask from '@/widgets/CreationTask/CreationTask.astro';
+import DemoFeatures from '@/widgets/DemoFeatures/DemoFeatures.astro';
+import FeaturesAccordion from '@/widgets/FeaturesAccordion/FeaturesAccordion.astro';
+import Calendar from '@/widgets/Calendar/Calendar.astro';
+import WorkingSystem from '@/widgets/WorkingSystem/WorkingSystem.astro';
+import TeamWork from '@/widgets/TeamWork/TeamWork.astro';
+import TeamManagement from '@/widgets/TeamManagement/TeamManagement.astro';
+import { FEATURES_SLIDER_1_ITEMS, FEATURES_SLIDER_2_ITEMS } from '@/shared/const';
+
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.slug === 'features');
+---
+
+<Layout
+	title={page?.data.title || 'Features'}
+	description={page?.data.description}
+	isFollow={page?.data.isFollow}
+>
+	<HeroFeaturesBlock />
+	<CreationTask />
+	<FeaturesAccordion
+		items={FEATURES_SLIDER_1_ITEMS}
+		reverse={false}
+		title="Customize tasks"
+		gradientText="to your needs"
+	/>
+	<WorkingSystem />
+	<FeaturesAccordion
+		items={FEATURES_SLIDER_2_ITEMS}
+		reverse={true}
+		title="Define priorities and keep"
+		gradientText="things in order"
+	/>
+	<Calendar showTitle={false} />
+	<TeamWork />
+	<TeamManagement />
+	<DemoFeatures />
+</Layout>

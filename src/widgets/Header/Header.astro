@@ -1,0 +1,85 @@
+---
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import MobileMenu from './MobileMenu.astro';
+import { getLinkToGetStarted, getImageDimensions } from '@/shared';
+import { Image } from 'astro:assets';
+
+const initialDevice: 'web' | 'android' | 'ios' = 'web';
+const initialLoginLink = getLinkToGetStarted(initialDevice);
+const initialGetStartedLink = getLinkToGetStarted(initialDevice);
+const logoDimensions = await getImageDimensions('/logo-full.webp');
+---
+
+<header
+	id="header"
+	class="sticky top-0 z-50 transition-all duration-200 bg-gray"
+>
+	<div
+		class="px-2.5 h-13 lg:h-auto relative z-10 py-2 lg:py-5 bg-gray lg:px-16 mx-auto xl:container flex justify-between items-center"
+	>
+		<a
+			href="/"
+			class="flex items-center gap-4"
+			aria-label="LeaderTask - перейти на главную страницу"
+		>
+			<Image
+				src="/logo-full.webp"
+				alt="logo"
+				class="w-28.75 h-7 lg:w-41 lg:h-10"
+				width={logoDimensions.width}
+				height={logoDimensions.height}
+			/>
+		</a>
+		<div class="flex items-center gap-2.5 lg:gap-8">
+			<nav class="items-center gap-2.5 hidden lg:flex">
+				<AppButton
+					variant="secondary"
+					hrefTextColor="#0A0A0C"
+					href="/features"
+				>
+					Features
+				</AppButton>
+				<AppButton
+					variant="secondary"
+					href="/pricing"
+					hrefTextColor="#0A0A0C"
+				>
+					Pricing
+				</AppButton>
+				<AppButton
+					id="login-button"
+					variant="secondary"
+					icon="icon-login"
+					iconsClass="w-5 h-5"
+					hrefTextColor="#0A0A0C"
+					href={initialLoginLink}
+				>
+					Log in
+				</AppButton>
+			</nav>
+			<AppButton
+				id="get-started-button"
+				variant="primary-stroke"
+				size="md"
+				hrefTextColor="#FF4C00"
+				href={initialGetStartedLink}
+			>
+				Get started for free
+			</AppButton>
+			<button
+				id="mobile-menu-toggle"
+				class="burger lg:hidden!"
+				aria-label="Открыть меню навигации"
+				aria-expanded="false"
+				aria-controls="mobile-menu"
+			>
+				<span class="burger__lines">
+					<span class="burger__line"></span>
+					<span class="burger__line"></span>
+					<span class="burger__line"></span>
+				</span>
+			</button>
+		</div>
+	</div>
+	<MobileMenu />
+</header>

@@ -1,0 +1,76 @@
+---
+interface Props {
+	icon: any;
+	title: string;
+	description: string;
+	isActive: boolean;
+	dataIndex: number;
+	accordionId: string;
+}
+
+const { icon, title, description, isActive, dataIndex, accordionId } = Astro.props;
+const itemId = `${accordionId}-item-${dataIndex}`;
+---
+
+<div
+	id={itemId}
+	class="bg-white rounded-5 shadow-card p-6 cursor-pointer transition-all duration-300"
+	data-item-index={dataIndex}
+	data-active={isActive}
+	data-item-id={itemId}
+	data-accordion-id={accordionId}
+	data-index={dataIndex}
+>
+	<div class="flex items-start gap-4">
+		<div class="w-8 h-8 flex items-center justify-center shrink-0 relative">
+			<svg
+				class="w-8 h-8 absolute inset-0 transition-opacity duration-300"
+				id={`${itemId}-main-icon-normal`}
+				style={isActive ? 'opacity: 0;' : 'opacity: 1;'}
+			>
+				<use href={`/icons/all-icons.svg#${icon}`}></use>
+			</svg>
+			<svg
+				class="w-8 h-8 absolute inset-0 transition-opacity duration-300"
+				id={`${itemId}-main-icon-fill`}
+				style={isActive ? 'opacity: 1;' : 'opacity: 0;'}
+			>
+				<use href={`/icons/all-icons.svg#${icon}-fill`}></use>
+			</svg>
+		</div>
+		<div class="flex-1 min-w-0">
+			<div class="flex items-center justify-between gap-3 mb-3">
+				<h4 class="text-[24px] leading-7 font-bold text-primary">
+					{title}
+				</h4>
+				<div class="w-8 h-8 flex items-center justify-center shrink-0 relative">
+					<svg
+						class="w-8 h-8 absolute inset-0 transition-opacity duration-300"
+						id={`${itemId}-toggle-icon-plus`}
+						style={isActive ? 'opacity: 0;' : 'opacity: 1;'}
+					>
+						<use href={`/icons/all-icons.svg#icon-plus-features`}></use>
+					</svg>
+					<svg
+						class="w-8 h-8 absolute inset-0 transition-opacity duration-300"
+						id={`${itemId}-toggle-icon-minus`}
+						style={isActive ? 'opacity: 1;' : 'opacity: 0;'}
+					>
+						<use href={`/icons/all-icons.svg#icon-minus-features`}></use>
+					</svg>
+				</div>
+			</div>
+			<div
+				id={`${itemId}-content`}
+				class="grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out"
+				style={isActive ? 'grid-template-rows: 1fr;' : 'grid-template-rows: 0fr;'}
+			>
+				<div class="min-h-0">
+					<p class="text-[20px] leading-7 text-secondary">
+						{description}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

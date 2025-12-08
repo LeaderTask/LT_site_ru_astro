@@ -1,0 +1,252 @@
+---
+interface Props {
+	pageNumber: number;
+	modelValue: number;
+	baseUrl?: string;
+	mode?: 'ssr' | 'client';
+}
+
+const { pageNumber, modelValue, baseUrl, mode = 'client' } = Astro.props;
+const paginationId = `pagination-${Math.random().toString(36).substr(2, 9)}`;
+
+const getPageUrl = (page: number): string => {
+	if (baseUrl) {
+		return baseUrl.replace(/\{page\}/g, page.toString());
+	}
+	return '#';
+};
+
+const isSSR = mode === 'ssr';
+const allPages = pageNumber > 2 ? Array.from({ length: pageNumber - 2 }, (_, i) => i + 2) : [];
+---
+
+<nav
+	class="p-2 flex gap-1.5 user-select-none lg:gap-2 bg-white rounded-4"
+	id={paginationId}
+	data-pagination
+	data-current-page={modelValue}
+	data-page-number={pageNumber}
+	data-mode={mode}
+	style="display: none;"
+>
+	{
+		isSSR ? (
+			modelValue === 1 ? (
+				<span
+					class="p-1 w-6 h-6 m-mobile:w-8 m-mobile:h-8 opacity-50 cursor-not-allowed rotate-180 text-secondary rounded-2 flex items-center justify-center"
+					aria-disabled="true"
+					aria-label="Перейти на предыдущую страницу"
+				>
+					<svg
+						width="16"
+						height="16"
+						viewBox="0 0 16 16"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+					>
+						<path
+							d="M6 12L10 8L6 4"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</span>
+			) : (
+				<a
+					href={getPageUrl(modelValue - 1)}
+					class="p-1 w-6 h-6 m-mobile:w-8 m-mobile:h-8 transition-colors rotate-180 text-secondary rounded-2 cursor-pointer hover:text-accent-orange flex items-center justify-center"
+					aria-label="Перейти на предыдущую страницу"
+				>
+					<svg
+						width="16"
+						height="16"
+						viewBox="0 0 16 16"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+					>
+						<path
+							d="M6 12L10 8L6 4"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</a>
+			)
+		) : (
+			<button
+				class="p-1 w-6 h-6 m-mobile:w-8 m-mobile:h-8 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-secondary rotate-180 text-secondary rounded-2 cursor-pointer hover:text-accent-orange"
+				data-action="prev"
+				disabled={modelValue === 1}
+				aria-label="Перейти на предыдущую страницу"
+			>
+				<svg aria-hidden="true">
+					<use href="/icons/all-icons.svg#icon-chevrone-right" />
+				</svg>
+			</button>
+		)
+	}
+	<ul class="flex gap-1.5 lg:gap-2">
+		<li>
+			{
+				isSSR ? (
+					<a
+						href={getPageUrl(1)}
+						data-page="1"
+						class={`w-6 h-6 text-[10px] m-mobile:w-8 m-mobile:h-8 m-mobile:text-[14px] transition-colors rounded-2 cursor-pointer flex items-center justify-center ${
+							modelValue === 1
+								? 'bg-accent-orange text-white hover:text-white'
+								: 'text-secondary hover:text-accent-orange'
+						}`}
+						aria-label={`Перейти на страницу 1${modelValue === 1 ? ', текущая страница' : ''}`}
+						aria-current={modelValue === 1 ? 'page' : undefined}
+					>
+						1
+					</a>
+				) : (
+					<button
+						class={`w-6 h-6 text-[10px] m-mobile:w-8 m-mobile:h-8 m-mobile:text-[14px] transition-colors text-secondary rounded-2 cursor-pointer hover:text-accent-orange ${modelValue === 1 ? 'bg-accent-orange text-white hover:text-white' : ''}`}
+						data-page="1"
+						aria-label={`Перейти на страницу 1${modelValue === 1 ? ', текущая страница' : ''}`}
+						aria-current={modelValue === 1 ? 'page' : undefined}
+					>
+						1
+					</button>
+				)
+			}
+		</li>
+		<span
+			class="pagination-ellipsis w-6 h-6 text-[10px] m-mobile:w-8 m-mobile:h-8 m-mobile:text-[14px] flex justify-center items-center cursor-default select-none text-secondary"
+			data-ellipsis="first"
+		>
+			...
+		</span>
+		{
+			allPages.map((page) => (
+				<li>
+					{isSSR ? (
+						<a
+							href={getPageUrl(page)}
+							data-page={page}
+							class={`w-6 h-6 text-[10px] m-mobile:w-8 m-mobile:h-8 m-mobile:text-[14px] transition-colors rounded-2 cursor-pointer flex items-center justify-center ${
+								modelValue === page
+									? 'bg-accent-orange text-white hover:text-white'
+									: 'text-secondary hover:text-accent-orange'
+							}`}
+							aria-label={`Перейти на страницу ${page}${modelValue === page ? ', текущая страница' : ''}`}
+							aria-current={modelValue === page ? 'page' : undefined}
+						>
+							{page}
+						</a>
+					) : (
+						<button
+							class={`w-6 h-6 text-[10px] m-mobile:w-8 m-mobile:h-8 m-mobile:text-[14px] transition-colors text-secondary rounded-2 cursor-pointer hover:text-accent-orange ${modelValue === page ? 'bg-accent-orange text-white hover:text-white' : ''}`}
+							data-page={page}
+							aria-label={`Перейти на страницу ${page}${modelValue === page ? ', текущая страница' : ''}`}
+							aria-current={modelValue === page ? 'page' : undefined}
+						>
+							{page}
+						</button>
+					)}
+				</li>
+			))
+		}
+		<span
+			class="pagination-ellipsis w-6 h-6 text-[10px] m-mobile:w-8 m-mobile:h-8 m-mobile:text-[14px] flex justify-center items-center cursor-default select-none text-secondary"
+			data-ellipsis="last"
+		>
+			...
+		</span>
+		<li>
+			{
+				isSSR ? (
+					<a
+						href={getPageUrl(pageNumber)}
+						data-page={pageNumber}
+						class="w-6 h-6 text-[10px] m-mobile:w-8 m-mobile:h-8 m-mobile:text-[14px] transition-colors text-secondary rounded-2 cursor-pointer hover:text-accent-orange flex items-center justify-center"
+						aria-label={`Перейти на страницу ${pageNumber}${modelValue === pageNumber ? ', текущая страница' : ''}`}
+						aria-current={modelValue === pageNumber ? 'page' : undefined}
+					>
+						{pageNumber}
+					</a>
+				) : (
+					<button
+						class="w-6 h-6 text-[10px] m-mobile:w-8 m-mobile:h-8 m-mobile:text-[14px] transition-colors text-secondary rounded-2 cursor-pointer hover:text-accent-orange"
+						data-page={pageNumber}
+						aria-label={`Перейти на страницу ${pageNumber}${modelValue === pageNumber ? ', текущая страница' : ''}`}
+						aria-current={modelValue === pageNumber ? 'page' : undefined}
+					>
+						{pageNumber}
+					</button>
+				)
+			}
+		</li>
+	</ul>
+	{
+		isSSR ? (
+			modelValue === pageNumber ? (
+				<span
+					class="p-1 w-6 h-6 m-mobile:w-8 m-mobile:h-8 opacity-50 cursor-not-allowed rounded-2 text-secondary flex items-center justify-center"
+					aria-disabled="true"
+					aria-label="Перейти на следующую страницу"
+				>
+					<svg
+						width="16"
+						height="16"
+						viewBox="0 0 16 16"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+					>
+						<path
+							d="M6 12L10 8L6 4"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</span>
+			) : (
+				<a
+					href={getPageUrl(modelValue + 1)}
+					class="p-1 w-6 h-6 m-mobile:w-8 m-mobile:h-8 transition-colors rounded-2 cursor-pointer hover:text-accent-orange flex items-center justify-center text-secondary"
+					aria-label="Перейти на следующую страницу"
+				>
+					<svg
+						width="16"
+						height="16"
+						viewBox="0 0 16 16"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+					>
+						<path
+							d="M6 12L10 8L6 4"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</a>
+			)
+		) : (
+			<button
+				class="p-1 w-6 h-6 text-[10px] m-mobile:w-8 m-mobile:h-8 m-mobile:text-[14px] transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-secondary rounded-2 cursor-pointer hover:text-accent-orange"
+				data-action="next"
+				disabled={modelValue === pageNumber}
+				aria-label="Перейти на следующую страницу"
+			>
+				<svg aria-hidden="true">
+					<use href="/icons/all-icons.svg#icon-chevrone-right" />
+				</svg>
+			</button>
+		)
+	}
+</nav>

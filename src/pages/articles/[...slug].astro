@@ -1,0 +1,132 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import { getMdxContentName, getMdxId } from '@/shared';
+import { generatedEnrichedPosts } from '@/shared/helpers/generatedEnrichedPosts';
+import type { CollectionEntry } from 'astro:content';
+import type { EnrichedPost } from '@/shared/types';
+import Button from '@tina/components/Button.astro';
+import AnchorList from '@tina/components/AnchorList.astro';
+import CtaBlock from '@tina/components/CtaBlock.astro';
+import Img from '@tina/components/Img.astro';
+import ImgBlock from '@tina/components/ImgBlock.astro';
+import CustomLink from '@tina/components/CustomLink.astro';
+import FaqBlock from '@tina/components/FaqBlock.astro';
+import HeadingLink from '@tina/components/HeadingLink.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('articles');
+	return posts.map((post) => ({
+		params: { slug: getMdxId(post.id) },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props as { post: CollectionEntry<'articles'> };
+
+const { Content } = await post.render();
+
+const mdxComponents = {
+	Button,
+	CtaBlock,
+	Img,
+	ImgBlock,
+	CustomLink,
+	FaqBlock,
+	HeadingLink,
+};
+
+const breadcrumbs = [
+	{
+		label: 'Home',
+		url: '/',
+	},
+	{
+		label: 'Blog',
+		url: '/articles/page/1',
+	},
+	{
+		label: post.data.breadcrumb ?? post.data.title,
+		url: `/articles/${getMdxId(post.id)}`,
+	},
+];
+
+const authorId = post.data.author ? getMdxContentName(post.data.author) : null;
+const authorEntry = authorId ? await getEntry('authors', authorId) : null;
+// eslint-disable-next-line no-undef
+const currentPostUrl = new URL(`/articles/${post.id.replace(/\.mdx?$/, '')}`, Astro.site || Astro.url.origin).href;
+
+let recommendationEntries: EnrichedPost[] = [];
+
+if (post.data.recommendation && post.data.recommendation.length > 0) {
+	const entries = await Promise.all(
+		post.data.recommendation.map(async (rec) => {
+			const articleId = getMdxContentName(rec.article);
+			if (!articleId) return null;
+			try {
+				const articleEntry = await getEntry('articles', articleId);
+				if (!articleEntry || articleEntry.id === post.id) return null;
+				return articleEntry;
+			} catch {
+				return null;
+			}
+		})
+	);
+	const compact = entries.filter((e): e is CollectionEntry<'articles'> => e !== null).slice(0, 3);
+	recommendationEntries = await generatedEnrichedPosts(compact);
+}
+
+if (recommendationEntries.length === 0) {
+	const allPosts = await getCollection('articles');
+	const currentTagPaths = (post.data.tags || []).map((tag) => (typeof tag === 'string' ? tag : tag.tag));
+
+	if (currentTagPaths.length > 0) {
+		const postsWithSimilarTags = allPosts
+			.filter((p) => {
+				if (p.id === post.id) return false;
+				const postTagPaths = (p.data.tags || []).map((tag) => (typeof tag === 'string' ? tag : tag.tag));
+				return postTagPaths.some((tagPath) => currentTagPaths.includes(tagPath));
+			})
+			.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+			.slice(0, 3);
+
+		if (postsWithSimilarTags.length > 0) {
+			recommendationEntries = await generatedEnrichedPosts(postsWithSimilarTags);
+		}
+	}
+
+	if (recommendationEntries.length === 0) {
+		const latestPosts = allPosts
+			.filter((p) => p.id !== post.id)
+			.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+			.slice(0, 3);
+
+		recommendationEntries = await generatedEnrichedPosts(latestPosts);
+	}
+}
+---
+
+<BlogLayout
+	title={post.data.title ?? post.data.h1}
+	h1={post.data.h1 ?? post.data.title}
+	date={post.data.date}
+	updatedAt={post.data.updatedAt ?? post.data.date}
+	authorEntry={authorEntry}
+	authorId={authorId}
+	description={post.data.description}
+	image={post.data.coverImage}
+	url={currentPostUrl}
+	tags={post.data.tags
+		?.map((tag) => getMdxContentName(typeof tag === 'string' ? tag : tag.tag))
+		.filter((tag): tag is string => Boolean(tag))}
+	rightSidebar={post.data.rightSidebar}
+	breadcrumbs={breadcrumbs}
+	recommendation={recommendationEntries}
+	isFollow={post.data.isFollow}
+>
+	<Content components={mdxComponents} />
+
+	<Fragment slot="anchor-list">
+		<AnchorList class="w-60" />
+	</Fragment>
+</BlogLayout>

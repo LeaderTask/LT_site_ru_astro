@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets';
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import GradientTextElem from '@/shared/ui/GradientTextElem/GradientTextElem.astro';
+import { getLinkToGetStarted } from '@/shared/helpers';
+import ThousandsSwiper from './ThousandsSwiper.astro';
+
+type REVIEW = {
+	id: number;
+	name: string;
+	platform: string;
+	text: string;
+	date: string;
+};
+
+const REVIEWS_LIST: REVIEW[] = [
+	{
+		id: 1,
+		name: 'aatanat',
+		platform: 'app-store',
+		text: 'I was looking for an app to help me plan different areas of my life: studies, relationships, hobbies. I like that <span class="text-accent-orange">the app syncs with my laptop and phone, and that it\'s intuitive - I quickly figured it out</span> and wrote down all my tasks, and then just looked at it and marked what I needed to do during the day.',
+		date: 'April 17, 2025',
+	},
+	{
+		id: 2,
+		name: 'komarov-d-v',
+		platform: 'app-store',
+		text: '<span class="text-accent-orange">Very easy and convenient to use. It saves a lot of time, makes it comfortable to plan working hours!</span> The reminders about scheduled events are just GREAT, no need to worry that you will forget something!',
+		date: 'April 9, 2025',
+	},
+	{
+		id: 3,
+		name: 'Ilsur Shaidullin',
+		platform: 'google-play',
+		text: 'Seven years ago I was looking for a good task planner, found Leadertask, started using it, everything was great. But because the sysadmin refused to install it on my work PC, I had to stop using it with regret. I changed company and was surprised when at the beginning of this year, looking for a good planner, I realized that Leadertask stayed among my favorites. <span class="text-accent-orange">The main plus for me is usability, everything is intuitive. I recommend it.</span>',
+		date: 'May 8, 2025',
+	},
+	{
+		id: 4,
+		name: 'Ildar Sul',
+		platform: 'google-play',
+		text: 'Very convenient app. I bought the premium version, <span class="text-accent-orange">synchronization works, tasks get done.</span> Overall everything is great.',
+		date: 'September 6, 2025',
+	},
+	{
+		id: 5,
+		name: 'Nina Artamonova',
+		platform: 'google-play',
+		text: 'This is a very convenient and functional app. All tasks and plans are in one place. You can create tasks and build a schedule at any time, whether you\'re on the go with your phone or using your computer. <span class="text-accent-orange">Everything syncs, and reminders pop up, the interface is convenient and clear.</span>',
+		date: 'July 4, 2025',
+	},
+	{
+		id: 6,
+		name: 'Two Kik',
+		platform: 'app-store',
+		text: 'If I could only keep one app on my phone, it would be LeaderTask without a doubt. Thank you to the developers <span class="text-accent-orange">for improving the program and providing timely updates and fixes.</span> I use it every day and am delighted by what our developers are capable of creating! ❤️',
+		date: 'June 11, 2025',
+	},
+];
+
+const REVIEWS_COLUMNS: REVIEW[][] = [REVIEWS_LIST.slice(0, 2), REVIEWS_LIST.slice(2, 4), REVIEWS_LIST.slice(4, 6)];
+
+const initialDevice: 'web' | 'android' | 'ios' = 'web';
+const initialGetStartedLink = getLinkToGetStarted(initialDevice);
+---
+
+<section class="section-top-indent grid lg:gap-15">
+	<h3 class="text-[24px] leading-7 lg:text-[44px] pb-10 lg:pb-0 lg:leading-10 font-bold text-center text-primary">
+		<GradientTextElem>Thousands of users</GradientTextElem>
+		are <br class="lg:hidden" /> already using LeaderTask
+	</h3>
+	<div class="grid-cols-3 hidden lg:grid gap-8">
+		{
+			REVIEWS_COLUMNS.map((column) => (
+				<div class="flex w-full flex-col gap-8">
+					{column.map((testimonial) => (
+						<div class="py-5 px-6 bg-white shadow-card rounded-5 flex flex-col gap-3">
+							<div class="flex justify-between">
+								<span class="text-[20px] leading-6 font-medium text-primary">{testimonial.name}</span>
+								<Image
+									src={`/${testimonial.platform}_logo.webp`}
+									alt={`${testimonial.platform} logo`}
+									width={32}
+									height={32}
+									class="w-8 h-8"
+									loading="lazy"
+								/>
+							</div>
+							<p
+								class="text-secondary font-semibold"
+								set:html={testimonial.text}
+							/>
+							<span class="text-tertiary text-[14px] leading-6">{testimonial.date}</span>
+						</div>
+					))}
+				</div>
+			))
+		}
+	</div>
+	<ThousandsSwiper />
+	<AppButton
+		id="thousands-get-started-button"
+		size="lg"
+		clickEffect={true}
+		customClass="w-max mx-auto"
+		href={initialGetStartedLink}
+	>
+		Get started for free
+	</AppButton>
+</section>

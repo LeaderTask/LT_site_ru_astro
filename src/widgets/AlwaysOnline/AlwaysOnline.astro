@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import { getLinkToGetStarted } from '@/shared/helpers';
+import { getImageDimensions } from '@/shared';
+
+const imagesDimensions = {
+	alwaysOnline: await getImageDimensions('/always-online.webp'),
+	alwaysMobile: await getImageDimensions('/always_mobile.webp'),
+};
+---
+
+<section class="section-top-indent">
+	<div class="bg-accent-orange rounded-[10px] lg:rounded-5 grid lg:grid-cols-a1 items-center">
+		<div class="flex flex-col lg:max-w-132 p-8 gap-8">
+			<div class="flex flex-col text-center lg:text-left gap-6">
+				<h3 class="text-[24px] leading-7 lg:text-[44px] lg:leading-13 font-bold text-white">
+					Always with you – online and offline
+				</h3>
+				<p class="text-[16px] lg:text-[20px] lg:leading-8 text-white">
+					Use LeaderTask offline. All your tasks will sync across devices the moment you're back online.
+				</p>
+			</div>
+			<AppButton
+				variant="white"
+				size="lg"
+				customClass="w-max mx-auto lg:mx-0"
+				clickEffect={true}
+				hrefTextColor="#FF4C00"
+				href={getLinkToGetStarted('web')}
+				id="always-online-button"
+			>
+				Get started for free
+			</AppButton>
+		</div>
+		<div class="h-43.75 px-4 pb-6 lg:p-0 lg:h-135 w-full flex justify-center lg:justify-end">
+			<Image
+				src="/always-online.webp"
+				alt="Always online"
+				width={imagesDimensions.alwaysOnline.width}
+				height={imagesDimensions.alwaysOnline.height}
+				class="w-full max-w-188 h-full object-contain hidden lg:block"
+			/>
+			<Image
+				src="/always_mobile.webp"
+				alt="Always online"
+				width={imagesDimensions.alwaysMobile.width}
+				height={imagesDimensions.alwaysMobile.height}
+				class="w-full h-full object-contain lg:hidden"
+			/>
+		</div>
+	</div>
+</section>

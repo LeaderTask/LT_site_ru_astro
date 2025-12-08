@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.slug === 'offer');
+
+if (!page) {
+	throw new Error('Page not found');
+}
+
+const { Content } = await page.render();
+---
+
+<Layout
+	title={page.data.title}
+	description={page.data.description}
+	isFollow={page.data.isFollow}
+>
+	<main class="container mx-auto px-4 py-8 max-w-4xl">
+		<article class="bg-white rounded-lg shadow-md overflow-hidden">
+			<div class="p-8">
+				<h1 class="text-3xl font-bold mb-6">{page.data.title}</h1>
+				<div class="prose prose-lg max-w-none">
+					<Content />
+				</div>
+			</div>
+		</article>
+	</main>
+</Layout>

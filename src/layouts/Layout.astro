@@ -1,0 +1,224 @@
+---
+interface LayoutProps {
+	title: string;
+	canonical?: string;
+	description?: string;
+	isFollow?: boolean;
+	og?: {
+		type?: string;
+		title?: string;
+		description?: string;
+		url?: string;
+		image?: string;
+		siteName?: string;
+		articlePublishedTime?: string;
+		articleModifiedTime?: string;
+	};
+}
+
+const { title, canonical, description, isFollow, og } = Astro.props as LayoutProps;
+import Footer from '@/widgets/Footer/Footer.astro';
+import CookiesPopup from '@/widgets/CookiesPopup/CookiesPopup.astro';
+import Header from '@/widgets/Header/Header.astro';
+import '@/styles/global.css';
+
+const siteOrigin = Astro.site;
+const canonicalURL = canonical || (siteOrigin ? new globalThis.URL(Astro.url.pathname, siteOrigin).href : Astro.url.pathname);
+const hasFullWidth = Astro.slots.has('full-width');
+const hasDefaultSlot = Astro.slots.has('default');
+
+const metaDescription = description || 'LeaderTask - time and task management system';
+const robotsContent = isFollow === true ? 'index, follow' : 'nofollow';
+const ogData = og || {};
+const ogTitle = ogData.title || title;
+const ogDescription = ogData.description || metaDescription;
+const ogUrl = ogData.url || canonicalURL;
+const ogImage = ogData.image;
+const ogSiteName = ogData.siteName || 'LeaderTask';
+const ogType = ogData.type;
+const ogArticlePublishedTime = ogData.articlePublishedTime;
+const ogArticleModifiedTime = ogData.articleModifiedTime;
+---
+
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="description"
+			content={metaDescription}
+		/>
+		<meta
+			name="robots"
+			content={robotsContent}
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<meta
+			property="og:title"
+			content={ogTitle}
+		/>
+		<meta
+			property="og:description"
+			content={ogDescription}
+		/>
+		{
+			ogType && (
+				<meta
+					property="og:type"
+					content={ogType}
+				/>
+			)
+		}
+		{
+			ogUrl && (
+				<meta
+					property="og:url"
+					content={ogUrl}
+				/>
+			)
+		}
+		{
+			ogImage && (
+				<meta
+					property="og:image"
+					content={ogImage}
+				/>
+			)
+		}
+		<meta
+			property="og:site_name"
+			content={ogSiteName}
+		/>
+		{
+			ogArticlePublishedTime && (
+				<meta
+					property="article:published_time"
+					content={ogArticlePublishedTime}
+				/>
+			)
+		}
+		{
+			ogArticleModifiedTime && (
+				<meta
+					property="article:modified_time"
+					content={ogArticleModifiedTime}
+				/>
+			)
+		}
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="/favicon.svg"
+		/>
+		<link
+			rel="preload"
+			href="/fonts/Cygre-Regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			href="/fonts/Cygre-SemiBold.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			href="/fonts/Cygre-Bold.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="canonical"
+			href={canonicalURL}
+		/>
+		<meta
+			name="generator"
+			content={Astro.generator}
+		/>
+		<title>{title}</title>
+		<slot name="head" />
+	</head>
+	<body class="bg-gray grid grid-rows-a1a min-h-screen font-body">
+		<Header />
+
+		<main>
+			{hasFullWidth && <slot name="full-width" />}
+			{
+				hasDefaultSlot && (
+					<div class="px-2.5 lg:px-16 xl:container w-full mx-auto">
+						<slot />
+					</div>
+				)
+			}
+		</main>
+
+		<Footer />
+		<CookiesPopup />
+		<slot name="script" />
+		<script>
+			(function () {
+				if (typeof window === 'undefined') return;
+				window.addEventListener('load', function () {
+					setTimeout(function () {
+						(function (m, e, t, r, i) {
+							// eslint-disable-next-line @typescript-eslint/no-explicit-any
+							(m as any)[i] =
+								// eslint-disable-next-line @typescript-eslint/no-explicit-any
+								(m as any)[i] ||
+								function () {
+									// eslint-disable-next-line @typescript-eslint/no-explicit-any
+									((m as any)[i].a = (m as any)[i].a || []).push(arguments);
+								};
+							// eslint-disable-next-line @typescript-eslint/no-explicit-any
+							(m as any)[i].l = Number(new Date());
+							for (let j = 0; j < document.scripts.length; j++) {
+								const script = document.scripts[j] as HTMLScriptElement;
+								if (script.src === r) {
+									return;
+								}
+							}
+							const k = e.createElement(t) as HTMLScriptElement;
+							const a = e.getElementsByTagName(t)[0];
+							if (k && a) {
+								k.async = true;
+								k.defer = true;
+								k.src = r;
+								a.parentNode?.insertBefore(k, a);
+							}
+						})(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
+						if (typeof (window as any).ym === 'function') {
+							// eslint-disable-next-line @typescript-eslint/no-explicit-any
+							(window as any).ym(49744999, 'init', {
+								webvisor: true,
+								clickmap: true,
+								accurateTrackBounce: true,
+								trackLinks: true,
+							});
+						}
+					}, 1000);
+				});
+			})();
+		</script>
+		<noscript>
+			<div>
+				<img
+					src="https://mc.yandex.ru/watch/49744999"
+					style="position:absolute; left:-9999px;"
+					alt=""
+				/>
+			</div>
+		</noscript>
+		<script>
+			import '@/shared/scripts/widgets-init';
+		</script>
+	</body>
+</html>

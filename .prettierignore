@@ -1,0 +1,11 @@
+node_modules
+dist
+.astro
+tina/__generated__
+pnpm-lock.yaml
+package-lock.json
+!src/
+src/content/
+public
+src/tina/__generated__/
+src/tina/tina-lock.json

@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import BlogBlock from '@/widgets/BlogBlock/BlogBlock.astro';
+import { generatedEnrichedPosts } from '@/shared/helpers/generatedEnrichedPosts';
+import type { EnrichedPost } from '@/shared/types';
+import { getImageDimensions } from '@/shared';
+
+export async function getStaticPaths() {
+	const authors = await getCollection('authors');
+	return authors.map((author) => ({
+		params: { slug: author.slug },
+		props: { author },
+	}));
+}
+
+const { author } = Astro.props as { author: CollectionEntry<'authors'> };
+const { slug } = Astro.params;
+const posts = await getCollection('articles');
+const tags = await getCollection('tags');
+
+const filteredPosts = posts.filter((post) => {
+	const authorPath = post.data.author;
+	if (!authorPath) return false;
+	return authorPath.includes(slug);
+});
+
+const enrichedPosts: EnrichedPost[] = await generatedEnrichedPosts(filteredPosts);
+const avatarDimensions =
+	author.data.avatar && author.data.avatar.startsWith('/')
+		? await getImageDimensions(author.data.avatar)
+		: { width: 240, height: 240 };
+---
+
+<Layout
+	title={author.data.firstName + ' ' + author.data.lastName}
+	description={author.data.description}
+	isFollow={author.data.isFollow}
+>
+	<section class="section-top-indent">
+		<div class="grid justify-items-center lg:justify-items-start lg:grid-cols-1a gap-10">
+			<div class="flex w-full flex-col gap-2 lg:gap-2.5">
+				<h1 class="text-[24px] text-center lg:text-left leading-7 font-bold text-primary lg:text-[44px] lg:leading-13">
+					{author.data.firstName + ' ' + author.data.lastName}
+				</h1>
+				<p class="text-[20px] lg:text-[28px] text-center lg:text-left lg:leading-10 font-semibold text-accent-orange">
+					{author.data.position}
+				</p>
+				<span class="lg:text-[20px] lg:leading-8 mt-2 lg:mt-0 text-base text-secondary">
+					{author.data.description}
+				</span>
+			</div>
+			{
+				author.data.avatar && (
+					<Image
+						src={author.data.avatar}
+						alt="author"
+						width={avatarDimensions.width}
+						height={avatarDimensions.height}
+						class="w-30 row-start-1 lg:row-start-auto h-30 lg:w-60 lg:h-60 object-cover rounded-5"
+					/>
+				)
+			}
+		</div>
+	</section>
+	<section class="section-top-indent grid gap-6 lg:gap-8">
+		<h2 class="text-[24px] leading-7 lg:text-[32px] lg:leading-9 font-bold text-primary text-center">Author's articles</h2>
+		<BlogBlock
+			posts={enrichedPosts}
+			tags={tags}
+		/>
+	</section>
+</Layout>

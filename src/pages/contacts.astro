@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import ContactCard from '@/widgets/ContactCard/ContactCard.astro';
+
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.slug === 'contacts');
+
+if (!page) {
+	throw new Error('Page not found');
+}
+
+const items = [
+	{
+		title: 'Support Email',
+		value: '911@leadertask.com',
+		link: 'mailto:911@leadertask.com',
+		iconSrc: '/mail.webp',
+		textColor: '#FF4C00',
+	},
+	{
+		title: 'Telegram',
+		value: '@leadertask_support',
+		link: 'https://t.me/leadertask_support',
+		iconSrc: '/telegram-contacts.webp',
+		textColor: '#1D87B9',
+	},
+	{
+		title: 'WhatsApp',
+		value: '+7 920 651-27-20 ',
+		link: 'https://wa.me/79206512720',
+		iconSrc: '/whatsapp.webp',
+		textColor: '#20B658',
+	},
+	{
+		title: 'Working Hours',
+		value: 'Mon - Fri: 9:00 AM - 6:00 PM',
+		iconSrc: '/clock.webp',
+		textColor: '#310CFF',
+		description: 'UTC+3',
+	},
+];
+---
+
+<Layout
+	title={page.data.title}
+	description={page.data.description}
+	isFollow={page.data.isFollow}
+>
+	<article class="bg-gray">
+		<div class="mt-15 lg:mt-30">
+			<h1 class="text-center text-[32px] leading-9 md:text-[72px] md:leading-20 font-bold mb-10 lg:mb-15 text-primary">
+				{page.data.title}
+			</h1>
+			<div class="flex flex-col gap-6 lg:gap-8">
+				<div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+					{
+						items.slice(0, 3).map((item) => (
+							<ContactCard
+								title={item.title}
+								value={item.value}
+								link={item.link}
+								iconSrc={item.iconSrc}
+								textColor={item.textColor}
+							/>
+						))
+					}
+				</div>
+				{
+					items.slice(3).map((item) => (
+						<ContactCard
+							title={item.title}
+							value={item.value}
+							iconSrc={item.iconSrc}
+							textColor={item.textColor}
+							description={item.description}
+						/>
+					))
+				}
+			</div>
+		</div>
+	</article>
+</Layout>

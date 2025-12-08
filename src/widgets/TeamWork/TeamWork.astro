@@ -1,0 +1,90 @@
+---
+import { Image } from 'astro:assets';
+import GradientTextElem from '@/shared/ui/GradientTextElem/GradientTextElem.astro';
+import { getImageDimensions } from '@/shared';
+
+const teamWorkItems = [
+	{
+		id: 1,
+		image: 'team-work-1.webp',
+		title: 'Assignments and permissions',
+		description: 'Delegate tasks to colleagues, set deadlines, and monitor progress.',
+	},
+	{
+		id: 2,
+		image: 'team-work-2.webp',
+		title: 'Team projects',
+		description: 'Collaborate on shared projects, exchange comments, and work on files together.',
+	},
+	{
+		id: 3,
+		image: 'team-work-3.webp',
+		title: 'Shared boards',
+		description: 'Share Kanban boards so your team or clients always see the big picture in real time.',
+	},
+	{
+		id: 4,
+		image: 'team-work-4.webp',
+		title: 'Notifications',
+		description: 'Get updates on new tasks, changes, and assignments – always stay in the loop.',
+	},
+	{
+		id: 5,
+		image: 'team-work-5.webp',
+		title: 'Roles and access controls',
+		description: 'Set flexible permissions and organize teams for smoother management.',
+	},
+	{
+		id: 6,
+		image: 'team-work-6.webp',
+		title: 'Public boards',
+		description: 'Share boards with external partners to align on plans and gather feedback efficiently.',
+	},
+];
+
+const teamWorkImagesDimensions = await Promise.all(
+	teamWorkItems.map(async (item) => ({
+		image: item.image,
+		dimensions: await getImageDimensions(`/${item.image}`),
+	}))
+);
+const getTeamWorkImageDim = (imageName: string) =>
+	teamWorkImagesDimensions.find(
+		(img: { image: string; dimensions: { width: number; height: number } }) => img.image === imageName
+	)?.dimensions || { width: 800, height: 600 };
+---
+
+<section class="flex flex-col gap-8 md:gap-10 xl:gap-15 items-center pt-15 md:pt-20 xl:pt-30">
+	<h3
+		class="text-[24px] md:text-[32px] lg:text-[38px] xl:text-[44px] leading-8 md:leading-10 lg:leading-12 xl:leading-14 font-bold text-primary text-center"
+	>
+		<span class="md:hidden">Define priorities and keep <br /> <GradientTextElem>things in order</GradientTextElem></span>
+		<span class="hidden md:block">
+			<GradientTextElem>Collaborate</GradientTextElem>
+			with your
+			<GradientTextElem>team</GradientTextElem>
+		</span>
+	</h3>
+	<div class="w-full flex justify-center items-start flex-wrap gap-4 md:gap-6 lg:gap-8">
+		{
+			teamWorkItems.map((item) => (
+				<div class="w-full lg:max-w-104">
+					<Image
+						src={`/${item.image}`}
+						alt={item.title}
+						width={getTeamWorkImageDim(item.image).width}
+						height={getTeamWorkImageDim(item.image).height}
+						class="w-full h-auto max-h-50 object-top md:max-h-70 lg:max-w-104 object-cover rounded-2.5 md:rounded-3 lg:rounded-4"
+						loading="lazy"
+					/>
+					<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-7 md:leading-8 lg:leading-9 font-bold text-primary mt-4 md:mt-5 lg:mt-6 mb-2 md:mb-2.5 lg:mb-3">
+						{item.title}
+					</h4>
+					<p class="text-[16px] md:text-[18px] lg:text-[20px] leading-6 lg:leading-7 text-secondary">
+						{item.description}
+					</p>
+				</div>
+			))
+		}
+	</div>
+</section>

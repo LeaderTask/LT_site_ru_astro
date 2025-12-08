@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import PlatformHeroBlock from '@/widgets/PlatformHeroBlock/PlatformHeroBlock.astro';
+import KeyFeaturesPlatforms from '@/widgets/KeyFeaturesPlatforms/KeyFeaturesPlatforms.astro';
+import PlatformDevices from '@/widgets/PlatformDevices/PlatformDevices.astro';
+import PlatformsSlider from '@/widgets/PlatformsSlider/PlatformsSlider.astro';
+import { HERO_BLOCK_PLATFORM_PAGES, FEATURES_BLOCK_PLATFORM_PAGES, SLIDER_ITEMS_PLATFORM_PAGES } from '@/shared/const';
+
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.slug === 'platforms/ios');
+---
+
+<Layout
+	title={page?.data.title || 'iOS | LeaderTask'}
+	description={page?.data.description}
+	isFollow={page?.data.isFollow}
+>
+	<PlatformHeroBlock heroBlock={HERO_BLOCK_PLATFORM_PAGES.ios} />
+	<KeyFeaturesPlatforms features={FEATURES_BLOCK_PLATFORM_PAGES.ios} />
+	<PlatformsSlider
+		sliderItems={SLIDER_ITEMS_PLATFORM_PAGES.ios}
+		sliderId="platforms-swiper-ios"
+	/>
+	<PlatformDevices currentPagePlatform="ios" />
+</Layout>

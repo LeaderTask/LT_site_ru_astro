@@ -1,0 +1,69 @@
+---
+import ImgComponent from './Img.astro';
+import type { ImgBlockProps } from '@/shared/types';
+import { renderTextElement } from '@/shared/helpers';
+
+const { textPosition = 'right', textType = 'p', text, href, variant } = Astro.props as ImgBlockProps;
+const { src, alt, id } = Astro.props as ImgBlockProps;
+
+const textElement = renderTextElement(textType, text, href);
+const textTag = textElement.tag;
+const textClass = variant === 'icon' ? 'my-[0px]! mb-[8px]! md:mb-[0px]!' : '';
+const imgClass = variant === 'icon' ? 'mb-[0px]! md:mb-[32px]!' : '';
+---
+
+<div class={`flex gap-2 md:gap-4 ${variant === 'icon' ? 'flex-col md:flex-row md:items-center' : 'flex-row'}`}>
+	{
+		textPosition === 'left' ? (
+			<>
+				{textTag === 'a' && (
+					<a
+						href={href}
+						class={textClass}
+					>
+						{text}
+					</a>
+				)}
+				{textTag === 'h1' && <h1 class={textClass}>{text}</h1>}
+				{textTag === 'h2' && <h2 class={textClass}>{text}</h2>}
+				{textTag === 'h3' && <h3 class={textClass}>{text}</h3>}
+				{textTag === 'h4' && <h4 class={textClass}>{text}</h4>}
+				{textTag === 'h5' && <h5 class={textClass}>{text}</h5>}
+				{textTag === 'h6' && <h6 class={textClass}>{text}</h6>}
+				{textTag === 'p' && <p class={textClass}>{text}</p>}
+				<ImgComponent
+					src={src}
+					alt={alt}
+					variant={variant}
+					id={id}
+					class={imgClass}
+				/>
+			</>
+		) : (
+			<>
+				<ImgComponent
+					src={src}
+					alt={alt}
+					variant={variant}
+					id={id}
+					class={imgClass}
+				/>
+				{textTag === 'a' && (
+					<a
+						href={href}
+						class={textClass}
+					>
+						{text}
+					</a>
+				)}
+				{textTag === 'h1' && <h1 class={textClass}>{text}</h1>}
+				{textTag === 'h2' && <h2 class={textClass}>{text}</h2>}
+				{textTag === 'h3' && <h3 class={textClass}>{text}</h3>}
+				{textTag === 'h4' && <h4 class={textClass}>{text}</h4>}
+				{textTag === 'h5' && <h5 class={textClass}>{text}</h5>}
+				{textTag === 'h6' && <h6 class={textClass}>{text}</h6>}
+				{textTag === 'p' && <p class={textClass}>{text}</p>}
+			</>
+		)
+	}
+</div>

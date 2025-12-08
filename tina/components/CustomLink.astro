@@ -1,0 +1,27 @@
+---
+interface Props {
+	href: string;
+	text: string;
+	target?: '_self' | '_blank';
+	rel?: string;
+	'aria-label'?: string;
+	title?: string;
+}
+
+const { href, text, target = '_self', rel, 'aria-label': ariaLabel, title } = Astro.props;
+
+const isExternal = href.startsWith('http://') || href.startsWith('https://') || href.startsWith('//');
+const defaultRel = target === '_blank' && isExternal ? 'noopener noreferrer' : undefined;
+const finalRel = rel || defaultRel || undefined;
+---
+
+<a
+	href={href}
+	target={target}
+	rel={finalRel}
+	aria-label={ariaLabel}
+	title={title}
+	class="text-accent-blue no-underline visited:text-accent-purple-link"
+>
+	{text}
+</a>

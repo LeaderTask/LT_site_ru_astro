@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Img from '@tina/components/Img.astro';
+import ImgBlock from '@tina/components/ImgBlock.astro';
+import ProseContent from '@/shared/ui/ProseContent/ProseContent.astro';
+
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.slug === 'user-agreement');
+
+if (!page) {
+	throw new Error('Page not found');
+}
+const mdxComponents = { Img, ImgBlock };
+const { Content } = await page.render();
+---
+
+<Layout
+	title={page.data.title}
+	description={page.data.description}
+	isFollow={page.data.isFollow}
+>
+	<article class="bg-gray overflow-hidden">
+		<div class="mt-10 md:px-8 md:mt-20">
+			<h2 class="text-[24px] leading-7 font-bold mb-4 md:text-[44px] md:leading-13 md:mb-8 text-primary">
+				{page.data.title}
+			</h2>
+			<ProseContent customClasses="flex flex-col gap-10">
+				<Content components={mdxComponents} />
+			</ProseContent>
+		</div>
+	</article>
+</Layout>

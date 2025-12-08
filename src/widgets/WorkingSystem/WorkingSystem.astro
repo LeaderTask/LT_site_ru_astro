@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets';
+import GradientTextElem from '@/shared/ui/GradientTextElem/GradientTextElem.astro';
+import { getImageDimensions } from '@/shared';
+
+const imagesDimensions = {
+	workingSystem1: await getImageDimensions('/working-system-1.webp'),
+	workingSystem2: await getImageDimensions('/working-system-2.webp'),
+	workingSystem3: await getImageDimensions('/working-system-3.webp'),
+	workingSystem4: await getImageDimensions('/working-system-4.webp'),
+};
+---
+
+<section class="flex flex-col gap-8 md:gap-10 xl:gap-15 items-center">
+	<h3
+		class="text-[24px] md:text-[32px] lg:text-[38px] xl:text-[44px] leading-8 md:leading-10 lg:leading-12 xl:leading-14 font-bold text-primary text-center"
+	>
+		Build your
+		<br class="md:hidden" />
+		<GradientTextElem>ideal working system</GradientTextElem>
+	</h3>
+	<div class="w-full flex flex-wrap justify-center items-start gap-4 lg:gap-6 select-none">
+		<div
+			class="group w-full md:w-[calc(50%-24px)] lg:w-77.5 flex flex-col gap-3 bg-orange-light rounded-3 md:rounded-3 lg:rounded-4 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden max-h-118.75 md:max-h-none"
+		>
+			<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">Task tree</h4>
+			<p class="text-[16px] md:text-[16px] leading-6 text-secondary">
+				Structure tasks and subtasks <br class="md:hidden" /> hierarchically — a perfect method <br class="md:hidden" /> for
+				managing complex projects.
+			</p>
+			<Image
+				src="/working-system-1.webp"
+				alt="Working system 1"
+				width={imagesDimensions.workingSystem1.width}
+				height={imagesDimensions.workingSystem1.height}
+				class="max-w-59.25 md:max-w-none w-full h-full object-cover pt-2.5 px-2.75 md:translate-y-7.5 md:transition-transform md:duration-300 md:group-hover:translate-y-0 self-center"
+			/>
+		</div>
+		<div
+			class="group w-full md:w-[calc(50%-10px)] lg:max-w-77.5 flex flex-col gap-3 bg-purple-light rounded-3 md:rounded-3 lg:rounded-4 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden max-h-118.75 md:max-h-none"
+		>
+			<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">Projects</h4>
+			<p class="text-[16px] md:text-[16px] leading-5 md:leading-6 text-secondary">
+				Create projects with unlimited nested tasks and subprojects to maintain clarity.
+			</p>
+			<Image
+				src="/working-system-2.webp"
+				alt="Working system 2"
+				width={imagesDimensions.workingSystem2.width}
+				height={imagesDimensions.workingSystem2.height}
+				class="max-w-59.25 md:max-w-none w-full h-full object-cover pt-2.5 px-2.75 md:translate-y-7.5 md:transition-transform md:duration-300 md:group-hover:translate-y-0 self-center"
+			/>
+		</div>
+		<div
+			class="group w-full md:w-[calc(50%-10px)] lg:max-w-77.5 flex flex-col gap-3 bg-white rounded-3 md:rounded-3 lg:rounded-4 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden max-h-118.75 md:max-h-none"
+		>
+			<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">Kanban boards</h4>
+			<p class="text-[16px] md:text-[16px] leading-5 md:leading-6 text-secondary">
+				Visualize your workflow from start to finish – move tasks through stages and stay on top of progress.
+			</p>
+			<Image
+				src="/working-system-3.webp"
+				alt="Working system 3"
+				width={imagesDimensions.workingSystem3.width}
+				height={imagesDimensions.workingSystem3.height}
+				class="max-w-59.25 md:max-w-none w-full h-full object-cover pt-2.5 px-2.75 md:translate-y-7.5 md:transition-transform md:duration-300 md:group-hover:translate-y-0 self-center"
+			/>
+		</div>
+		<div
+			class="group w-full md:w-[calc(50%-10px)] lg:max-w-77.5 flex flex-col gap-3 bg-gray-light rounded-3 md:rounded-3 lg:rounded-4 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden max-h-118.75 md:max-h-none"
+		>
+			<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">Favorites</h4>
+			<p class="text-[16px] md:text-[16px] leading-5 md:leading-6 text-secondary">
+				Bookmark important tasks and projects so you can access them quickly.
+			</p>
+			<Image
+				src="/working-system-4.webp"
+				alt="Working system 4"
+				width={imagesDimensions.workingSystem4.width}
+				height={imagesDimensions.workingSystem4.height}
+				class="max-w-59.25 md:max-w-none w-full h-full object-cover pt-2.5 px-2.75 md:translate-y-7.5 md:transition-transform md:duration-300 md:group-hover:translate-y-0 self-center"
+			/>
+		</div>
+	</div>
+</section>

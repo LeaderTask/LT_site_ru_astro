@@ -1,0 +1,32 @@
+---
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+	linkText?: string;
+	linkUrl?: string;
+	class?: string;
+}
+
+const { title, description, linkText, linkUrl, class: className = '' } = Astro.props;
+
+const customClass = ['bg-orange-light sticky top-25 rounded-5 w-50 h-max flex flex-col gap-2 p-5', className]
+	.filter(Boolean)
+	.join(' ');
+---
+
+<aside class={customClass}>
+	{title && <h5 class="text-primary font-bold text-base">{title} </h5>}
+	{description && <p class="text-secondary text-sm">{description}</p>}
+	{
+		linkText && linkUrl && (
+			<AppButton
+				href={linkUrl}
+				customClass="mt-3 text-center"
+			>
+				{linkText}
+			</AppButton>
+		)
+	}
+</aside>

@@ -1,0 +1,166 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { formatDate } from '@/shared';
+import Breadcrumbs from '@/shared/ui/Breadcrumbs/Breadcrumbs.astro';
+import RightSidebar from '@/entities/blog/ui/RightSidebar/RightSidebar.astro';
+import ProseContent from '@/shared/ui/ProseContent/ProseContent.astro';
+import Button from '@tina/components/Button.astro';
+import CtaBlock from '@tina/components/CtaBlock.astro';
+import Img from '@tina/components/Img.astro';
+import ImgBlock from '@tina/components/ImgBlock.astro';
+import CustomLink from '@tina/components/CustomLink.astro';
+import FaqBlock from '@tina/components/FaqBlock.astro';
+import HeadingLink from '@tina/components/HeadingLink.astro';
+
+const versions = await getCollection('versions');
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.slug === 'versions');
+
+if (!versions || versions.length === 0) {
+	throw new Error('Page not found');
+}
+
+const mdxComponents = {
+	Button,
+	CtaBlock,
+	Img,
+	ImgBlock,
+	CustomLink,
+	FaqBlock,
+	HeadingLink,
+};
+
+const sortedVersions = [...versions].sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const versionsWithContent = await Promise.all(
+	sortedVersions.map(async (version) => {
+		const { Content } = await version.render();
+
+		return {
+			...version,
+			Content,
+		};
+	})
+);
+
+const typesSet = new Set<string>(['All']);
+sortedVersions.forEach((version) => {
+	typesSet.add(version.data.type);
+});
+const typesList = Array.from(typesSet).filter((type) => type !== 'Windows');
+
+const BREADCRUMBS = [
+	{
+		label: 'Home',
+		url: '/',
+	},
+	{
+		label: 'Release history',
+		url: '/versions',
+	},
+];
+---
+
+<Layout
+	title={page?.data.title || 'Release history'}
+	description={page?.data.description}
+	isFollow={page?.data.isFollow}
+>
+	<section
+		class="grid w-full gap-8 lg:gap-15"
+		id="versions-section"
+		data-types={JSON.stringify(typesList)}
+	>
+		<Breadcrumbs breadcrumbs={BREADCRUMBS} />
+
+		<h2 class="text-[32px] leading-8 lg:text-[38px] lg:leading-10 font-bold text-center text-primary">Release history</h2>
+
+		<ul
+			class="flex gap-2 justify-center lg:hidden"
+			id="versions-mobile-filters"
+		>
+			{
+				typesList.map((type) => {
+					return (
+						<li>
+							<button
+								type="button"
+								data-type={type}
+								class="px-1.5 py-1 min-w-10 rounded-2 font-semibold text-[14px] flex items-center justify-center filter-btn"
+							>
+								{type}
+							</button>
+						</li>
+					);
+				})
+			}
+		</ul>
+
+		<div class="bg-white rounded-5 shadow-md grid lg:grid-cols-a1a gap-8 p-4 lg:p-8">
+			<ul
+				class="w-60 hidden lg:flex flex-col sticky h-max top-25 gap-1.5"
+				id="versions-desktop-filters"
+			>
+				{
+					typesList.map((type) => {
+						return (
+							<li>
+								<button
+									type="button"
+									data-type={type}
+									class="text-primary w-full cursor-pointer hover:bg-orange-light transition-colors duration-200 rounded-3 px-3 flex items-center gap-2.5 py-2 text-sm filter-btn"
+								>
+									<i class="w-2 h-2 rounded-full transition-colors filter-icon" />
+									<span>{type}</span>
+								</button>
+							</li>
+						);
+					})
+				}
+			</ul>
+
+			<div class="flex flex-col gap-8 lg:p-8">
+				{
+					versionsWithContent.map((version) => {
+						return (
+							<article
+								data-version-type={version.data.type}
+								class="flex flex-col version-article"
+							>
+								<div class="flex flex-col lg:flex-row justify-between w-full gap-2 pb-6 mb-6 border-b border-border-light">
+									<div class="flex flex-col gap-2">
+										<h3 class="text-[24px] leading-7 lg:text-[32px] lg:leading-9 font-bold text-accent-orange">
+											{version.data.title}
+										</h3>
+										<p class="text-secondary text-[14px] leading-6 lg:text-[20px] lg:leading-8">
+											{formatDate(version.data.date)}
+										</p>
+									</div>
+									<span class="font-semibold whitespace-nowrap w-max h-max text-[14px] mt-2 text-white select-none bg-dark-alpha px-5 py-1.5 rounded-1.5">
+										{version.data.type}
+									</span>
+								</div>
+								<ProseContent
+									customClasses="[&_img]:max-h-none"
+									type="article"
+								>
+									<version.Content components={mdxComponents} />
+								</ProseContent>
+							</article>
+						);
+					})
+				}
+			</div>
+
+			{
+				versionsWithContent[0]?.data.rightSidebar && (
+					<RightSidebar
+						class="w-50 hidden lg:flex"
+						{...versionsWithContent[0].data.rightSidebar}
+					/>
+				)
+			}
+		</div>
+	</section>
+</Layout>

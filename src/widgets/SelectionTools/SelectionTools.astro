@@ -1,0 +1,88 @@
+---
+import { Image } from 'astro:assets';
+import Calendar from '@/widgets/Calendar/Calendar.astro';
+import { getImageDimensions } from '@/shared';
+
+const imagesDimensions = {
+	inFocus: await getImageDimensions('/in-focus.webp'),
+	organizeTask: await getImageDimensions('/organize_task.webp'),
+	plans: await getImageDimensions('/plans.webp'),
+	organizeTrello: await getImageDimensions('/organize_trello.webp'),
+};
+---
+
+<section class="flex flex-col gap-6 lg:gap-15">
+	<div
+		class="grid pt-4 px-4 lg:p-0 lg:grid-cols-a1 gap-3 lg:gap-8 bg-white rounded-5 lg:bg-transparent lg:rounded-none shadow-card lg:shadow-none"
+	>
+		<div class="lg:px-8 lg:max-w-120 lg:pt-19 lg:pb-23 flex flex-col gap-6 bg-white rounded-5 lg:shadow-card">
+			<div class="flex gap-3 items-center">
+				<svg class="w-5 h-5 lg:w-8 lg:h-8">
+					<use href="/icons/all-icons.svg#icon-checklist"></use>
+				</svg>
+				<p class="text-[14px] lg:text-[20px] lg:leading-6 font-bold text-secondary">Tasks</p>
+			</div>
+			<h3 class="text-[24px] lg:text-[44px] lg:leading-10 font-bold text-primary">Organize without the chaos</h3>
+			<p class="text-[16px] leading-6 lg:text-[20px] lg:leading-8 text-secondary max-w-100">
+				Bring all your work projects, personal tasks and assignments together in one place. Plan, delegate and keep on top
+				of everything that matters every day.
+			</p>
+		</div>
+		<div class="bg-orange-light hidden lg:block overflow-hidden shadow-card rounded-5 pr-0.5 pb-0.5 pt-8 pl-8">
+			<Image
+				src="/in-focus.webp"
+				alt="In Focus"
+				width={imagesDimensions.inFocus.width}
+				height={imagesDimensions.inFocus.height}
+				class="w-full max-h-112 rounded-tl-5 rounded-br-5 h-full object-cover object-top"
+			/>
+		</div>
+		<Image
+			src="/organize_task.webp"
+			alt="organize task"
+			width={imagesDimensions.organizeTask.width}
+			height={imagesDimensions.organizeTask.height}
+			class="w-full lg:hidden"
+			loading="lazy"
+			sizes="100vw"
+		/>
+	</div>
+	<div
+		class="grid pt-4 px-4 lg:p-0 lg:grid-cols-1a gap-3 lg:gap-8 bg-white rounded-5 lg:bg-transparent lg:rounded-none shadow-card lg:shadow-none"
+	>
+		<div class="bg-purple-light hidden lg:block shadow-card rounded-5 p-8">
+			<Image
+				src="/plans.webp"
+				alt="Plans"
+				width={imagesDimensions.plans.width}
+				height={imagesDimensions.plans.height}
+				class="w-full max-h-117.5 rounded-4 h-full object-cover object-top"
+			/>
+		</div>
+		<div class="lg:px-8 lg:max-w-116 lg:pt-19 lg:pb-23 flex flex-col gap-6 bg-white rounded-5 lg:shadow-card">
+			<div class="flex gap-3 items-center">
+				<svg class="w-5 h-5 lg:w-8 lg:h-8">
+					<use href="/icons/all-icons.svg#icon-trello"></use>
+				</svg>
+				<p class="text-[14px] lg:text-[20px] lg:leading-6 font-bold text-secondary">Boards</p>
+			</div>
+			<h3 class="text-[24px] lg:text-[44px] lg:leading-10 font-bold text-primary">
+				Visualize <br class="hidden lg:block" /> workflows <br class="hidden lg:block" /> and goals
+			</h3>
+			<p class="text-[16px] leading-6 lg:text-[20px] lg:leading-8 text-secondary">
+				Boards help you map the journey of a task from start to finish. Drag cards between stages, build funnels, and
+				visually manage your projects or personal workflows.
+			</p>
+		</div>
+		<Image
+			src="/organize_trello.webp"
+			alt="organize trello"
+			width={imagesDimensions.organizeTrello.width}
+			height={imagesDimensions.organizeTrello.height}
+			class="w-full lg:hidden"
+			loading="lazy"
+			sizes="100vw"
+		/>
+	</div>
+	<Calendar />
+</section>

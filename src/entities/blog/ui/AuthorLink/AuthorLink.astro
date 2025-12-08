@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import type { Author } from '@/shared/types';
+import { getMdxId, getImageDimensions } from '@/shared';
+
+interface Props {
+	author: Author;
+	size?: string;
+}
+
+const { author, size = 'w-7 h-7' } = Astro.props;
+const avatarDimensions =
+	author?.avatar && author.avatar.startsWith('/') ? await getImageDimensions(author.avatar) : { width: 28, height: 28 };
+---
+
+<a
+	href={`/authors/${getMdxId(author?.id)}`}
+	class="flex relative whitespace-nowrap z-10 w-max hover:underline items-center gap-2"
+>
+	{
+		author?.avatar ? (
+			<Image
+				src={author.avatar}
+				alt="author"
+				width={avatarDimensions.width}
+				height={avatarDimensions.height}
+				class={`rounded-1.5 ${size}`}
+			/>
+		) : (
+			<div class="rounded-1.5 w-7 h-7 bg-gray-200" />
+		)
+	}
+	<p class="text-sm font-semibold text-primary">
+		{author?.firstName}
+		{' '}
+		{author?.lastName}
+	</p>
+</a>

@@ -1,0 +1,83 @@
+---
+import { Image } from 'astro:assets';
+import 'swiper/css';
+import { getImageDimensions } from '@/shared';
+
+interface Props {
+	sliderItems: {
+		desktop?: string[];
+		mobile?: string[];
+		maxHeightImage: string;
+		maxHeightImageMobile: string;
+		slidePerView: number;
+		slidePerViewMobile: number;
+		spaceBetween: number;
+		initialSlide: number;
+	};
+	sliderId?: string;
+}
+
+const { sliderItems, sliderId = 'platforms-swiper' } = Astro.props as Props;
+
+const slides = sliderItems.desktop || [];
+const slidesDimensions = await Promise.all(
+	slides.map(async (slide: string) => ({
+		slide,
+		dimensions: slide.startsWith('/') ? await getImageDimensions(slide) : { width: 800, height: 600 },
+	}))
+);
+const getSlideDim = (slidePath: string) =>
+	slidesDimensions.find((s: { slide: string; dimensions: { width: number; height: number } }) => s.slide === slidePath)
+		?.dimensions || { width: 800, height: 600 };
+---
+
+<section>
+	<div class="bg-accent-orange rounded-5 pt-8">
+		<p class="text-[24px] lg:text-[44px] leading-10 lg:leading-15 font-bold text-white text-center pb-8 lg:pb-15 select-none">
+			App at a glance
+		</p>
+		<div
+			class="pb-15 grid relative overflow-hidden select-none"
+			style={`--height-mobile: ${sliderItems.maxHeightImageMobile}; --height-desktop: ${sliderItems.maxHeightImage};`}
+		>
+			<div
+				id={sliderId}
+				data-platforms-slider={sliderId}
+				data-desktop={JSON.stringify(sliderItems.desktop || [])}
+				data-mobile={JSON.stringify(sliderItems.mobile || [])}
+				data-slide-per-view={sliderItems.slidePerView}
+				data-slide-per-view-mobile={sliderItems.slidePerViewMobile}
+				data-space-between={sliderItems.spaceBetween}
+				data-initial-slide={sliderItems.initialSlide}
+				class="w-full h-(--height-mobile) overflow-hidden lg:h-(--height-desktop) grid-cols-full"
+			>
+				<div class="swiper-wrapper">
+					{
+						slides.map((slide: string, index: number) => (
+							<div class="swiper-slide w-full h-full">
+								<div class="w-full h-full flex items-center justify-center">
+									<Image
+										src={slide}
+										alt={`Slide ${index + 1}`}
+										width={getSlideDim(slide).width}
+										height={getSlideDim(slide).height}
+										class="w-full max-h-(--height-mobile) lg:max-h-(--height-desktop) max-w-224 h-auto object-contain"
+										loading="lazy"
+									/>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+			<div
+				class="absolute bottom-15 -left-6 lg:-left-15 z-10 h-full w-10 lg:w-25 min-h-(--height-mobile) lg:min-h-(--height-desktop) bg-linear-to-r from-accent-orange to-transparent"
+			>
+			</div>
+			<div
+				class="absolute bottom-15 -right-6 lg:-right-15 z-10 h-full w-10 lg:w-25 min-h-(--height-mobile) lg:min-h-(--height-desktop) bg-linear-to-l from-accent-orange to-transparent"
+			>
+			</div>
+		</div>
+	</div>
+</section>

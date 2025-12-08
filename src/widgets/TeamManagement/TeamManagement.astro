@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+import GradientTextElem from '@/shared/ui/GradientTextElem/GradientTextElem.astro';
+import { getImageDimensions } from '@/shared';
+
+const imagesDimensions = {
+	teamManagement1: await getImageDimensions('/team-management-1.webp'),
+	teamManagement2: await getImageDimensions('/team-management-2.webp'),
+	teamManagement3: await getImageDimensions('/team-management-3.webp'),
+};
+---
+
+<section class="flex flex-col gap-8 md:gap-10 xl:gap-15 items-center pt-15 md:pt-20 xl:pt-30">
+	<h3
+		class="text-[24px] md:text-[32px] lg:text-[38px] xl:text-[44px] leading-8 md:leading-10 lg:leading-12 xl:leading-14 font-bold text-primary text-center"
+	>
+		Work from
+		<br class="md:hidden" />
+		<GradientTextElem>anywhere, any time</GradientTextElem>
+	</h3>
+	<div class="w-full flex flex-wrap md:flex-nowrap justify-center gap-4 md:gap-5 lg:gap-6 max-w-320">
+		<div class="w-full flex flex-col gap-3 bg-orange-light rounded-2.5 md:rounded-5 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden">
+			<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">Offline Mode</h4>
+			<p class="text-[16px] leading-6 text-secondary mb-3">
+				Keep working without internet – changes sync automatically when you're back online.
+			</p>
+			<Image
+				src="/team-management-1.webp"
+				alt="Team Management 1"
+				width={imagesDimensions.teamManagement1.width}
+				height={imagesDimensions.teamManagement1.height}
+				class="w-full h-full object-cover"
+			/>
+		</div>
+		<div class="w-full flex flex-col gap-3 bg-purple-light rounded-2.5 md:rounded-5 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden">
+			<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">Device Sync</h4>
+			<p class="text-[16px] leading-6 text-secondary mb-3">
+				Keep all tasks, projects, and changes at your fingertips — on any device.
+			</p>
+			<Image
+				src="/team-management-2.webp"
+				alt="Team Management 2"
+				width={imagesDimensions.teamManagement2.width}
+				height={imagesDimensions.teamManagement2.height}
+				class="w-full h-full object-cover"
+			/>
+		</div>
+		<div class="w-full flex flex-col gap-3 bg-gray-light rounded-2.5 md:rounded-5 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden">
+			<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">Integrations</h4>
+			<p class="text-[16px] leading-6 text-secondary mb-3">
+				Connect LeaderTask with Trello, Notion, Telegram, Google Calendar, and more.
+			</p>
+			<Image
+				src="/team-management-3.webp"
+				alt="Team Management 3"
+				width={imagesDimensions.teamManagement3.width}
+				height={imagesDimensions.teamManagement3.height}
+				class="w-full h-full object-cover"
+			/>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import WelcomeSection from '@/widgets/WelcomeSection/WelcomeSection.astro';
+
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.slug === 'welcome');
+---
+
+<Layout
+	title={page?.data.title || 'LeaderTask - Welcome'}
+	description={page?.data.description}
+	isFollow={page?.data.isFollow}
+>
+	<WelcomeSection />
+</Layout>

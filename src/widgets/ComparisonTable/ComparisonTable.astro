@@ -1,0 +1,344 @@
+---
+import PricingCtaButton from '@/shared/ui/PricingCtaButton/PricingCtaButton.astro';
+import FeatureValue from '@/shared/ui/FeatureValue/FeatureValue.astro';
+
+type PlanType = 'free' | 'premium' | 'business';
+
+interface Plan {
+	type: PlanType;
+	title: string;
+	titleColor: string;
+	color: 'black' | 'orange' | 'purple';
+	buttonText: string;
+	buttonClass: string;
+}
+
+const PLANS: Plan[] = [
+	{
+		type: 'free',
+		title: 'Free',
+		titleColor: 'text-primary',
+		color: 'black',
+		buttonText: 'Try Free plan now',
+		buttonClass: 'bg-primary hover:bg-dark-hover',
+	},
+	{
+		type: 'premium',
+		title: 'Premium',
+		titleColor: 'text-accent-orange',
+		color: 'orange',
+		buttonText: 'Subscribe Premium',
+		buttonClass: 'bg-accent-orange hover:bg-accent-orange-dark',
+	},
+	{
+		type: 'business',
+		title: 'Business',
+		titleColor: 'text-accent-blue',
+		color: 'purple',
+		buttonText: 'Subscribe Business',
+		buttonClass: 'bg-accent-blue hover:bg-accent-blue-link',
+	},
+];
+
+const SECTIONS = [
+	{
+		title: 'Key features',
+		features: [
+			{ name: 'Tasks', free: '100', premium: '∞', business: '∞' },
+			{ name: 'Projects', free: '10', premium: '∞', business: '∞' },
+			{ name: 'Subprojects and subtasks', free: true, premium: true, business: true },
+			{ name: 'Cards on boards', free: '100', premium: '∞', business: '∞' },
+			{ name: 'Boards', free: '3', premium: '∞', business: '∞' },
+			{ name: 'Calendar view for tasks', free: true, premium: true, business: true },
+			{ name: 'Tasks from email', free: false, premium: true, business: true },
+			{ name: 'Notifications and reminders', free: true, premium: true, business: true },
+			{ name: 'Trash bin', free: false, premium: true, business: true },
+			{ name: 'Calendar', free: true, premium: true, business: true },
+		],
+	},
+	{
+		title: 'Task properties',
+		features: [
+			{ name: 'Labels', free: '3', premium: '∞', business: '∞' },
+			{ name: 'Colors', free: '3', premium: '∞', business: '∞' },
+			{ name: 'File attachments', free: false, premium: true, business: true },
+			{ name: 'Task and card chat', free: false, premium: true, business: true },
+			{ name: 'Recurring tasks', free: false, premium: true, business: true },
+			{ name: 'Checklists', free: false, premium: true, business: true },
+		],
+	},
+	{
+		title: 'Team collaboration',
+		features: [
+			{ name: 'Shared boards', free: false, premium: false, business: true },
+			{ name: 'Shared projects', free: false, premium: false, business: true },
+			{ name: 'Task assignments', free: false, premium: false, business: true },
+			{ name: 'Department organization', free: false, premium: false, business: true },
+		],
+	},
+	{
+		title: 'Autonomy',
+		features: [
+			{ name: 'Offline mode', free: true, premium: true, business: true },
+			{ name: 'Updates', free: true, premium: true, business: true },
+			{ name: 'Sync', free: false, premium: true, business: true },
+			{ name: 'Cloud storage', free: false, premium: true, business: true },
+		],
+	},
+];
+---
+
+<div class="comparison-table w-full">
+	<div class="md:hidden">
+		<button
+			id="mobile-toggle-btn"
+			class="shadow w-full cursor-pointer bg-white rounded-2 py-2.5 px-6 flex items-center justify-center gap-1.5"
+			aria-label="Показать все функции"
+			aria-expanded="false"
+			aria-controls="mobile-content"
+		>
+			<span class="text-accent-orange font-semibold text-[16px] leading-5">See all features</span>
+			<svg
+				id="mobile-toggle-icon"
+				class="w-5 h-5 transition-transform"
+				aria-hidden="true"
+			>
+				<use href="/icons/all-icons.svg#icon-arrow-down-icon"></use>
+			</svg>
+		</button>
+
+		<div
+			id="mobile-content"
+			style="display: none; opacity: 0; transition: opacity 0.2s;"
+			class="mt-10"
+		>
+			<div class="py-5 px-8 sticky top-12 bg-gray z-10">
+				<button
+					id="mobile-prev-btn"
+					class="shadow absolute left-0 top-1/2 -translate-y-1/2 p-1 cursor-pointer bg-white rounded-2 text-secondary hidden"
+					aria-label="Предыдущий тарифный план"
+				>
+					<svg
+						class="w-5 h-5"
+						aria-hidden="true"
+					>
+						<use href="/icons/all-icons.svg#icon-arrow-horizontal-icon"></use>
+					</svg>
+				</button>
+
+				<div class="text-center">
+					<h3
+						id="mobile-plan-title"
+						class="font-bold text-[18px] leading-6 transition-all duration-100"
+						data-plan-index="0"
+					>
+						{PLANS[0].title}
+					</h3>
+				</div>
+
+				<button
+					id="mobile-next-btn"
+					class="shadow absolute right-0 top-1/2 -translate-y-1/2 p-1 cursor-pointer bg-white rounded-2 text-secondary"
+					aria-label="Следующий тарифный план"
+				>
+					<svg
+						class="w-5 h-5 rotate-180"
+						aria-hidden="true"
+					>
+						<use href="/icons/all-icons.svg#icon-arrow-horizontal-icon"></use>
+					</svg>
+				</button>
+			</div>
+
+			<div class="bg-white rounded-4 overflow-hidden mb-6">
+				{
+					SECTIONS.map((section) => (
+						<div>
+							<div class="bg-light pt-3 pb-4 px-4">
+								<h4 class="font-semibold text-[16px] leading-6 text-primary">{section.title}</h4>
+							</div>
+
+							<div>
+								{section.features.map((feature) => (
+									<div
+										class="flex items-center justify-between pl-4 pr-0 py-3 border-b border-light last:border-b-0"
+										data-feature-name={feature.name}
+									>
+										<span class="font-regular text-[16px] leading-6 text-primary">{feature.name}</span>
+										<div
+											class="mobile-feature-value"
+											data-feature-name={feature.name}
+										>
+											<FeatureValue
+												value={feature.free}
+												color="black"
+											/>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					))
+				}
+			</div>
+
+			<div class="w-full flex justify-center">
+				<div id="mobile-cta-button">
+					<PricingCtaButton
+						text={PLANS[0].buttonText}
+						planType={PLANS[0].type}
+						width="200"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="hidden md:block">
+		<div class="w-full flex justify-center">
+			<button
+				id="desktop-toggle-btn"
+				class="shadow w-full max-w-102.5 cursor-pointer bg-white rounded-2 py-2.5 px-6 flex items-center justify-center gap-1.5"
+				aria-label="Показать все функции"
+				aria-expanded="false"
+				aria-controls="desktop-content"
+			>
+				<span class="text-accent-orange font-semibold text-[16px] leading-5">See all features</span>
+				<svg
+					id="desktop-toggle-icon"
+					class="w-5 h-5 transition-transform"
+					aria-hidden="true"
+				>
+					<use href="/icons/all-icons.svg#icon-arrow-down-icon"></use>
+				</svg>
+			</button>
+		</div>
+
+		<div
+			id="desktop-content"
+			style="display: none; opacity: 0; transition: opacity 0.2s;"
+			class="mt-15"
+		>
+			<div class="grid grid-cols-4 sticky top-20.5 bg-gray z-10">
+				<div></div>
+				{
+					PLANS.map((plan) => (
+						<div class="text-center">
+							<h3
+								class="font-bold text-[24px] leading-8 px-4 pt-3 pb-5"
+								class:list={[plan.titleColor]}
+							>
+								{plan.title}
+							</h3>
+						</div>
+					))
+				}
+			</div>
+
+			<div class="bg-white rounded-4 mb-7">
+				{
+					SECTIONS.map((section) => (
+						<div>
+							<div class="grid grid-cols-4 bg-light overflow-hidden rounded-t-[16px]">
+								<div class="col-span-4 py-5 px-4">
+									<h4 class="font-semibold text-[20px] leading-6 text-primary">{section.title}</h4>
+								</div>
+							</div>
+
+							{section.features.map((feature, index) => (
+								<div
+									class:list={[
+										'grid grid-cols-4 pt-4',
+										index !== section.features.length - 1 ? 'border-b border-light' : '',
+									]}
+								>
+									<div class="p-3 px-4">
+										<span class="text-[16px] leading-6 text-primary font-regular">{feature.name}</span>
+									</div>
+									<div class="p-3 px-4 flex items-center justify-center font-medium">
+										<FeatureValue
+											value={feature.free}
+											color="black"
+										/>
+									</div>
+									<div class="p-3 px-4 flex items-center justify-center font-medium">
+										<FeatureValue
+											value={feature.premium}
+											color="orange"
+										/>
+									</div>
+									<div class="p-3 px-4 flex items-center justify-center font-medium">
+										<FeatureValue
+											value={feature.business}
+											color="purple"
+										/>
+									</div>
+								</div>
+							))}
+						</div>
+					))
+				}
+			</div>
+
+			<div class="grid grid-cols-4 gap-4 mb-5">
+				<div></div>
+				{
+					PLANS.map((plan) => (
+						<div class="w-full flex justify-center">
+							<PricingCtaButton
+								text={plan.buttonText}
+								planType={plan.type}
+								width="200"
+							/>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.shadow {
+		box-shadow:
+			0 4px 8px rgba(0, 0, 0, 0.01),
+			0 15px 15px rgba(0, 0, 0, 0.01),
+			0 35px 21px rgba(0, 0, 0, 0.01);
+		transition:
+			box-shadow 0.3s ease,
+			transform 0.3s ease;
+	}
+
+	.shadow:active {
+		transform: scale(0.98);
+	}
+
+	.slide-left-enter-active,
+	.slide-left-leave-active,
+	.slide-right-enter-active,
+	.slide-right-leave-active {
+		transition:
+			opacity 0.1s ease,
+			transform 0.1s ease;
+	}
+
+	.slide-left-enter {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+
+	.slide-left-leave {
+		opacity: 0;
+		transform: translateX(-30px);
+	}
+
+	.slide-right-enter {
+		opacity: 0;
+		transform: translateX(-30px);
+	}
+
+	.slide-right-leave {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+</style>

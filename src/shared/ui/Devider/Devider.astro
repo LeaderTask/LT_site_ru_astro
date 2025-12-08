@@ -1,0 +1,13 @@
+---
+interface Props {
+	color?: string;
+}
+
+const { color = '#848594' } = Astro.props;
+---
+
+<div
+	class="w-full h-px"
+	style={{ backgroundColor: color }}
+>
+</div>

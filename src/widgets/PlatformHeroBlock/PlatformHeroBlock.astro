@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import GradientTextElem from '@/shared/ui/GradientTextElem/GradientTextElem.astro';
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import { getImageDimensions } from '@/shared';
+
+interface Props {
+	heroBlock: {
+		platform: string;
+		gradientText: string;
+		title: string;
+		description: string;
+		features: string[];
+		image: string;
+		imageMobile?: string;
+		textButton: string;
+		linkButton: string;
+	};
+}
+
+const { heroBlock } = Astro.props;
+const heroImageDimensions = heroBlock.image.startsWith('/')
+	? await getImageDimensions(heroBlock.image)
+	: { width: 800, height: 600 };
+
+const isMobilePlatform = ['android', 'ios'].includes(heroBlock.platform);
+
+const sectionClass =
+	heroBlock.platform === 'web'
+		? 'justify-center translate-x-0 xl:translate-x-27.5'
+		: heroBlock.platform === 'windows'
+			? 'justify-center translate-x-0 xl:translate-x-42.5'
+			: 'justify-between';
+
+const imageClass = heroBlock.platform === 'web' || heroBlock.platform === 'windows' ? 'max-h-130' : 'max-h-175';
+---
+
+<div class="overflow-x-hidden">
+	<section class={`flex flex-col lg:flex-row gap-10 lg:gap-8 items-center pt-15 lg:pt-30 relative ${sectionClass}`}>
+		<div class={`flex flex-col ${heroBlock.platform === 'web' || heroBlock.platform === 'windows' ? 'px-5 lg:px-16' : ''}`}>
+			<h1 class="text-[32px] lg:text-[72px] leading-10 lg:leading-20 font-bold text-primary text-center lg:text-left w-max">
+				<GradientTextElem>{heroBlock.gradientText}</GradientTextElem>
+				<br />
+				{heroBlock.title}
+			</h1>
+			<p class="text-[16px] lg:text-[28px] leading-6 lg:leading-8 text-secondary text-center lg:text-left my-5 lg:my-10">
+				{heroBlock.description}
+			</p>
+			<div
+				class="flex flex-row flex-wrap justify-center lg:justify-start lg:flex-nowrap gap-y-2 gap-x-4 lg:gap-8 mb-6 lg:mb-15"
+			>
+				{
+					heroBlock.features.map((feature: string) => (
+						<div class="flex flex-row gap-2 items-center">
+							<svg class="w-3 h-3 lg:w-5 lg:h-5 shrink-0 mb-0.5 lg:mb-0">
+								<use href="/icons/all-icons.svg#icon-checklist" />
+							</svg>
+							<p class="text-[14px] lg:text-[20px] leading-5 lg:leading-8 text-secondary text-left">{feature}</p>
+						</div>
+					))
+				}
+			</div>
+			<AppButton
+				variant="primary"
+				size="lg"
+				href={heroBlock.linkButton}
+				clickEffect={true}
+				target={isMobilePlatform ? '_blank' : undefined}
+				rel={isMobilePlatform ? 'nofollow noreferrer noopener' : undefined}
+				customClass="w-max mx-auto lg:mx-0"
+			>
+				{heroBlock.textButton}
+			</AppButton>
+		</div>
+		<div>
+			<Image
+				id="platform-hero-image"
+				src={heroBlock.image}
+				alt="Platform hero"
+				data-mobile-src={heroBlock.imageMobile || ''}
+				width={heroImageDimensions.width}
+				height={heroImageDimensions.height}
+				class={`w-full h-full object-cover ${imageClass}`}
+			/>
+		</div>
+	</section>
+</div>

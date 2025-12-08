@@ -1,0 +1,90 @@
+---
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import { getLinkToGetStarted } from '@/shared/helpers';
+
+const initialDevice: 'web' | 'android' | 'ios' = 'web';
+const initialGetStartedLink = getLinkToGetStarted(initialDevice);
+---
+
+<div
+	id="mobile-menu"
+	class="asbolute inset-0 lg:hidden"
+>
+	<div
+		id="mobile-menu-content"
+		class="p-6 z-6 w-full justify-items-center transition-all duration-200 absolute left-0 rounded-b-2.5 grid gap-3 bg-gray -translate-y-full top-0 opacity-0"
+	>
+		<AppButton
+			customClass="w-max"
+			href="/features"
+			hrefTextColor="#0A0A0C"
+			variant="secondary"
+		>
+			Features
+		</AppButton>
+		<AppButton
+			customClass="w-max"
+			href="/pricing"
+			hrefTextColor="#0A0A0C"
+			variant="secondary"
+		>
+			Pricing
+		</AppButton>
+		<AppButton
+			id="mobile-menu-get-started-button"
+			customClass="w-max px-3 py-2"
+			href={initialGetStartedLink}
+		>
+			Get started for free
+		</AppButton>
+		<div class="flex gap-5 py-3">
+			<a
+				href="https://apps.apple.com/ru/app/leadertask-task-to-do-list/id6504613667"
+				class="w-10 h-10 rounded-3 flex items-center justify-center bg-white"
+				aria-label="Скачать LeaderTask из App Store"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<img
+					src="/apple-logo.webp"
+					alt="Apple"
+					class="w-5 h-5"
+					aria-hidden="true"
+				/>
+			</a>
+			<a
+				href="https://play.google.com/store/apps/details?id=com.leadertask.app"
+				class="w-10 h-10 rounded-3 flex items-center justify-center bg-white"
+				aria-label="Скачать LeaderTask из Google Play"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<img
+					src="/play-logo.webp"
+					alt="Google Play"
+					class="w-5 h-5"
+					aria-hidden="true"
+				/>
+			</a>
+			<a
+				href="https://www.rustore.ru/catalog/app/com.leadertask.app"
+				class="w-10 h-10 rounded-3 flex items-center justify-center bg-white"
+				aria-label="Скачать LeaderTask из Rustore"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<img
+					src="/rustore-logo.webp"
+					alt="Rustore"
+					class="w-5 h-5"
+					aria-hidden="true"
+				/>
+			</a>
+		</div>
+	</div>
+	<div
+		id="mobile-menu-overlay"
+		class="absolute inset-0 h-dvh w-full transition-all duration-200 bg-dark-alpha-40 z-5 opacity-0 pointer-events-none"
+	>
+	</div>
+</div>

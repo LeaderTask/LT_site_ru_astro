@@ -1,0 +1,167 @@
+---
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import OurJourneyCard from './OurJourneyCard.astro';
+import { getLinkToGetStarted } from '@/shared/helpers';
+
+const initialDevice: 'web' | 'android' | 'ios' = 'web';
+const initialGetStartedLink = getLinkToGetStarted(initialDevice);
+---
+
+<section class="pt-15 lg:pt-30 pb-0 md:pb-22.5">
+	<h2 class="text-[24px] leading-7 lg:text-[44px] lg:leading-13 font-bold text-primary text-center mb-6 lg:mb-15">Our Journey</h2>
+	<div class="hidden md:flex items-center justify-center gap-8">
+		<div class="flex flex-col items-start justify-center gap-30.5 self-start w-full max-w-152">
+			<OurJourneyCard
+				title="Company Founded"
+				description="Official launch of Organizer LeaderTask, LLC – the beginning of our story."
+				year="2011"
+			/>
+			<OurJourneyCard
+				title="Cloud sync introduced"
+				description="Your tasks always up to date, with seamless sync across all devices."
+				year="2014"
+			/>
+			<OurJourneyCard
+				title="Full redesign"
+				description="A complete reimagining of LeaderTask, faster, smoother, and more intuitive than ever."
+				year="2025"
+			/>
+		</div>
+		<div class="flex flex-col items-center mt-15">
+			<svg class="w-8 h-8">
+				<use href="/icons/all-icons.svg#icon-rocket"></use>
+			</svg>
+			<div class="w-px h-26.5 bg-accent-orange"></div>
+			<svg class="w-8 h-8">
+				<use href="/icons/all-icons.svg#icon-mobile-step"></use>
+			</svg>
+			<div class="w-px h-26.5 bg-accent-orange"></div>
+			<svg class="w-8 h-8">
+				<use href="/icons/all-icons.svg#icon-cloude"></use>
+			</svg>
+			<div class="w-px h-26.5 bg-accent-orange"></div>
+			<svg class="w-8 h-8">
+				<use href="/icons/all-icons.svg#icon-web-app-step"></use>
+			</svg>
+			<div class="w-px h-26.5 bg-accent-orange"></div>
+			<svg class="w-8 h-8">
+				<use href="/icons/all-icons.svg#icon-redesign"></use>
+			</svg>
+			<div class="w-px h-34.5 bg-accent-orange"></div>
+			<svg class="w-8 h-8">
+				<use href="/icons/all-icons.svg#icon-continues"></use>
+			</svg>
+		</div>
+		<div class="flex flex-col items-start justify-center gap-30.5 self-end w-full max-w-152 translate-y-22.5">
+			<OurJourneyCard
+				title="LeaderTask goes mobile"
+				description="The first Android and iOS apps bring productivity to your pocket."
+				year="2012"
+			/>
+			<OurJourneyCard
+				title="Web app released"
+				description="A fresh look and smarter tools for modern teams and individuals."
+				year="2022"
+			/>
+			<div class="flex flex-col items-start justify-center gap-3 bg-accent-orange rounded-5 px-6 py-5">
+				<p class="text-[18px] lg:text-[24px] leading-6 lg:leading-8 font-bold text-white">Our journey continues</p>
+				<p class="text-[16px] lg:text-[20px] leading-6 lg:leading-8 text-white">
+					Join us on the path to smarter productivity. We're constantly evolving so you can keep achieving.
+				</p>
+				<AppButton
+					id="our-journey-get-started-button"
+					variant="white"
+					size="md"
+					hrefTextColor="#FF4C00"
+					customClass="mt-3"
+					href={initialGetStartedLink}
+				>
+					Get started for free
+				</AppButton>
+			</div>
+		</div>
+	</div>
+	<div class="md:hidden flex flex-row justify-start gap-4 relative">
+		<div
+			id="our-journey-line"
+			class="absolute left-3.5 top-3.25 w-px bg-accent-orange z-1"
+		>
+		</div>
+		<div class="flex flex-col items-start gap-6">
+			<div class="flex flex-row items-start gap-4">
+				<svg class="w-7 h-7 mt-3 shrink-0 z-2">
+					<use href="/icons/all-icons.svg#icon-rocket"></use>
+				</svg>
+				<OurJourneyCard
+					title="Company Founded"
+					description="Official launch of Organizer LeaderTask, LLC – the beginning<br />of our story."
+					year="2011"
+				/>
+			</div>
+			<div class="flex flex-row items-start gap-4">
+				<svg class="w-7 h-7 mt-3 shrink-0 z-2">
+					<use href="/icons/all-icons.svg#icon-mobile-step"></use>
+				</svg>
+				<OurJourneyCard
+					title="LeaderTask goes mobile"
+					description="The first Android and iOS apps bring productivity to your pocket."
+					year="2012"
+				/>
+			</div>
+			<div class="flex flex-row items-start gap-4">
+				<svg class="w-7 h-7 mt-3 shrink-0 z-2">
+					<use href="/icons/all-icons.svg#icon-cloude"></use>
+				</svg>
+				<OurJourneyCard
+					title="Cloud sync introduced"
+					description="Your tasks always up to date, with seamless sync across all devices."
+					year="2014"
+				/>
+			</div>
+			<div class="flex flex-row items-start gap-4">
+				<svg class="w-7 h-7 mt-3 shrink-0 z-2">
+					<use href="/icons/all-icons.svg#icon-web-app-step"></use>
+				</svg>
+				<OurJourneyCard
+					title="Web app released"
+					description="A fresh look and smarter tools for modern teams and individuals."
+					year="2022"
+				/>
+			</div>
+			<div class="flex flex-row items-start gap-4">
+				<svg class="w-7 h-7 mt-3 shrink-0 z-2">
+					<use href="/icons/all-icons.svg#icon-redesign"></use>
+				</svg>
+				<OurJourneyCard
+					title="Full redesign"
+					description="A complete reimagining of LeaderTask, faster, smoother, and more intuitive than ever."
+					year="2025"
+				/>
+			</div>
+			<div
+				id="our-journey-continues-block"
+				class="flex flex-row items-start gap-4"
+			>
+				<svg class="w-7 h-7 mt-3 shrink-0 z-2">
+					<use href="/icons/all-icons.svg#icon-continues"></use>
+				</svg>
+				<div class="flex flex-col items-start justify-center gap-3 bg-accent-orange rounded-5 px-6 py-5 max-w-128">
+					<p class="text-[18px] lg:text-[24px] leading-6 lg:leading-8 font-bold text-white">Our journey continues</p>
+					<p class="text-[16px] lg:text-[20px] leading-6 lg:leading-8 text-white">
+						Join us on the path to smarter productivity. We're constantly evolving so you can keep achieving.
+					</p>
+					<AppButton
+						id="our-journey-mobile-get-started-button"
+						variant="white"
+						size="md"
+						hrefTextColor="#FF4C00"
+						customClass="mt-3"
+						href={initialGetStartedLink}
+					>
+						Get started for free
+					</AppButton>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

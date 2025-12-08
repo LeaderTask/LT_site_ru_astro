@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@import 'swiper/css';
+@import './styles.css';
+@import './font.css';
+
+@theme {
+	--breakpoint-s-mobile: 320px;
+	--breakpoint-m-mobile: 475px;
+	--breakpoint-tablet: 768px;
+	--breakpoint-laptop: 1440px;
+	--breakpoint-desktop: 1920px;
+
+	--font-body: Cygre, sans-serif;
+
+	/* Colors */
+	--color-inherit: inherit;
+	--color-primary: #0a0a0c;
+	--color-secondary: #4a4b56;
+	--color-tertiary: #848594;
+	--color-orange-light: #ffe6db;
+	--color-purple-light: #e1dbff;
+	--color-gray-light: #e0e0e6;
+	--color-gray: #f7f7f8;
+	--color-accent-orange: #ff4c00;
+	--color-accent-orange-dark: #e54400;
+	--color-accent-red: #ff002c;
+	--color-accent-orange-visited: #ff7033;
+	--color-accent-blue: #310cff;
+	--color-accent-blue-link: #2100d6;
+	--color-accent-purple-link: #8670ff;
+	--color-dark: #0a0a0c;
+	--color-dark-hover: #2c2c35;
+	--color-dark-overlay: #27282d;
+	--color-light: #eeeef1;
+	--color-dark-alpha: #0a0a0ccc;
+	--color-dark-alpha-40: #0a0a0c66;
+	--color-dark-alpha-90: #0a0a0ce5;
+	--color-white-alpha-20: #ffffff33;
+	--color-tertiary-alpha: #84859480;
+
+	/* Font sizes */
+
+	/* Keyframes */
+
+	/* Max width */
+	--max-width-1_2: 50%;
+
+	/* Spacing */
+	--spacing: 4px;
+	--spacing-13: 52px;
+	--spacing-15: 60px;
+	--spacing-21: 84px;
+	--spacing-28_5: 116px;
+
+	/* Border radius */
+	--radius: 4px;
+	--radius-1.5: 6px;
+	--radius-2: 8px;
+	--radius-3: 12px;
+	--radius-4: 16px;
+	--radius-5: 20px;
+	--radius-6: 24px;
+	--radius-7: 28px;
+	--radius-8: 32px;
+	--radius-9: 36px;
+	--radius-10: 40px;
+	--radius-12: 48px;
+	--radius-full: 9999px;
+
+	/* Grid template rows */
+	--grid-template-rows-aa1: repeat(2, auto) 1fr;
+	--grid-template-rows-a1: auto 1fr;
+	--grid-template-rows-1a: 1fr auto;
+	--grid-template-rows-1a1: 1fr auto 1fr;
+	--grid-template-rows-a11: auto 1fr 1fr;
+	--grid-template-rows-11a: 1fr 1fr auto;
+	--grid-template-rows-a1a: auto 1fr auto;
+	--grid-template-rows-1aa: 1fr repeat(2, auto);
+	--grid-template-rows-a1aa: auto 1fr repeat(2, auto);
+	--grid-template-rows-full: 100%;
+
+	/* Grid template columns */
+	--grid-template-columns-aa1: repeat(2, auto) 1fr;
+	--grid-template-columns-a1: auto 1fr;
+	--grid-template-columns-1a: 1fr auto;
+	--grid-template-columns-1a1: 1fr auto 1fr;
+	--grid-template-columns-a11: auto 1fr 1fr;
+	--grid-template-columns-11a: 1fr 1fr auto;
+	--grid-template-columns-a1a: auto 1fr auto;
+	--grid-template-columns-1aa: 1fr repeat(2, auto);
+	--grid-template-columns-a1aa: auto 1fr repeat(2, auto);
+	--grid-template-columns-full: 100%;
+
+	/* Shadows */
+	--shadow-card: 0px 4px 8px 0px #0a0a0c03, 0px 15px 15px 0px #0a0a0c03, 0px 35px 21px 0px #0a0a0c03;
+}

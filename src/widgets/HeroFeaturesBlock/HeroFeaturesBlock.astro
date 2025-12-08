@@ -1,0 +1,109 @@
+---
+import { Image } from 'astro:assets';
+import GradientTextElem from '@/shared/ui/GradientTextElem/GradientTextElem.astro';
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import { getImageDimensions } from '@/shared';
+
+const imagesDimensions = {
+	ideasLabel: await getImageDimensions('/ideas-label.webp'),
+	dailyPlanner: await getImageDimensions('/daily-planner.webp'),
+	repeatWindow: await getImageDimensions('/repeat-window.webp'),
+	voiceMessage: await getImageDimensions('/voice-message.webp'),
+	filterMenu: await getImageDimensions('/filter-menu.webp'),
+	robot: await getImageDimensions('/robot.webp'),
+	progressStatus: await getImageDimensions('/progress-status.webp'),
+	shopingLabel: await getImageDimensions('/shoping-label.webp'),
+	urgentLabel: await getImageDimensions('/urgent-label.webp'),
+};
+---
+
+<section>
+	<div class="pt-15 md:pt-20 xl:pt-30 flex flex-col items-center gap-8 md:gap-10 xl:gap-15">
+		<div class="flex flex-col items-center gap-5 md:gap-8 lg:gap-10 text-center">
+			<h1 class="text-[32px] lg:text-[72px] leading-10 lg:leading-20 max-w-243 font-bold text-primary">
+				<GradientTextElem>Manage</GradientTextElem>
+				tasks.
+				<br class="lg:hidden" />
+				<GradientTextElem>Achieve</GradientTextElem>
+				goals
+			</h1>
+			<p class="text-[16px] md:text-[20px] lg:text-[28px] leading-6 md:leading-8 lg:leading-10 text-secondary max-w-200">
+				Organize both personal and team tasks in one application. Manage workflows confidently and move toward results.
+			</p>
+		</div>
+		<AppButton
+			customClass="w-max"
+			size="lg"
+			clickEffect={true}
+			href="#"
+			id="get-started-button-2"
+		>
+			Get started for free
+		</AppButton>
+		<div class="relative w-full h-87.5 xl:h-170 max-w-93.75 xl:max-w-320 mx-auto">
+			<Image
+				src="/ideas-label.webp"
+				alt="Ideas label"
+				width={imagesDimensions.ideasLabel.width}
+				height={imagesDimensions.ideasLabel.height}
+				class="w-full h-full object-cover max-w-12 max-h-4 xl:max-w-36.25 xl:max-h-12.25 absolute left-0 xl:left-68.5 top-43.5 xl:top-73.5"
+			/>
+			<Image
+				src="/daily-planner.webp"
+				alt="Daily planner"
+				width={imagesDimensions.dailyPlanner.width}
+				height={imagesDimensions.dailyPlanner.height}
+				class="w-full h-full block object-cover max-w-47.5 max-h-59.25 xl:max-w-93.75 xl:max-h-117 absolute top-10 xl:top-21 left-1/2 -translate-x-1/2 xl:translate-x-0 xl:left-130"
+			/>
+			<Image
+				src="/repeat-window.webp"
+				alt="Repeat window"
+				width={imagesDimensions.repeatWindow.width}
+				height={imagesDimensions.repeatWindow.height}
+				class="w-full h-full object-cover max-w-35 max-h-18.5 xl:max-w-70 xl:max-h-37 absolute top-60.5 xl:top-114.5 left-5 xl:left-89.5"
+			/>
+			<Image
+				src="/voice-message.webp"
+				alt="Voice message"
+				width={imagesDimensions.voiceMessage.width}
+				height={imagesDimensions.voiceMessage.height}
+				class="w-full h-full object-cover max-w-33.75 max-h-7 xl:max-w-67.5 xl:max-h-14 absolute top-29.5 xl:top-41 right-5.75 xl:right-50"
+			/>
+			<Image
+				src="/filter-menu.webp"
+				alt="Filter menu"
+				width={imagesDimensions.filterMenu.width}
+				height={imagesDimensions.filterMenu.height}
+				class="w-full h-full object-cover max-w-35 max-h-17.5 xl:max-w-70 xl:max-h-35 absolute top-43.5 xl:top-83 right-5 xl:right-0"
+			/>
+			<Image
+				src="/robot.webp"
+				alt="Robot"
+				width={imagesDimensions.robot.width}
+				height={imagesDimensions.robot.height}
+				class="hidden xl:block w-full h-full object-fit max-w-27.5 max-h-26.75 lg:max-w-35 lg:max-h-34.25 xl:max-w-42 xl:max-h-41 absolute top-2.5 xl:top-17.75 left-1.25 xl:left-32.75"
+			/>
+			<Image
+				src="/progress-status.webp"
+				alt="Progress status"
+				width={imagesDimensions.progressStatus.width}
+				height={imagesDimensions.progressStatus.height}
+				class="w-full h-full object-cover max-w-22 max-h-6 xl:max-w-50 xl:max-h-13.75 absolute top-18.75 xl:top-98.5 left-0 xl:left-20.5"
+			/>
+			<Image
+				src="/shoping-label.webp"
+				alt="Shopping label"
+				width={imagesDimensions.shopingLabel.width}
+				height={imagesDimensions.shopingLabel.height}
+				class="w-full h-full object-cover max-w-16 max-h-4 xl:max-w-48.5 xl:max-h-12.25 absolute top-4 xl:top-15 right-0 xl:right-20"
+			/>
+			<Image
+				src="/urgent-label.webp"
+				alt="Urgent label"
+				width={imagesDimensions.urgentLabel.width}
+				height={imagesDimensions.urgentLabel.height}
+				class="w-full h-full object-cover max-w-13 max-h-4 xl:max-w-39.75 xl:max-h-12.25 absolute top-73.5 xl:top-142.5 right-0 xl:right-45"
+			/>
+		</div>
+	</div>
+</section>

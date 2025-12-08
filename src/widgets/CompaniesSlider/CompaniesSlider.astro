@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import 'swiper/css';
+import { getImageDimensions } from '@/shared';
+
+const slides = [
+	'albilad-bank',
+	'bnp-paribas',
+	'logivert',
+	'sitronics',
+	'kucheneli',
+	'lukoil',
+	'tajero',
+	'allieduniversal',
+	'probitek',
+	'9am',
+	'faberlic',
+	'icts',
+];
+
+const slidesDimensions = await Promise.all(
+	slides.map(async (slide) => ({
+		slide,
+		dimensions: await getImageDimensions(`/${slide}.webp`),
+	}))
+);
+const getSlideDim = (slideName: string) =>
+	slidesDimensions.find((s: { slide: string; dimensions: { width: number; height: number } }) => s.slide === slideName)
+		?.dimensions || { width: 100, height: 100 };
+---
+
+<section class="section-top-indent grid">
+	<div
+		id="companies-swiper"
+		class="w-full h-32 grid-cols-full overflow-hidden"
+	>
+		<div class="swiper-wrapper">
+			{
+				slides.map((slide) => (
+					<div class="swiper-slide w-full h-full">
+						<div class="w-full h-full flex items-center">
+							<Image
+								src={`/${slide}.webp`}
+								alt={slide}
+								width={getSlideDim(slide).width}
+								height={getSlideDim(slide).height}
+								class="w-full min-w-25 h-full object-contain"
+								loading="lazy"
+							/>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

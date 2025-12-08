@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+import GradientTextElem from '@/shared/ui/GradientTextElem/GradientTextElem.astro';
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import { getImageDimensions } from '@/shared';
+
+const imagesDimensions = {
+	desktop: await getImageDimensions('/desktop.webp', 976, 639),
+	mobile: await getImageDimensions('/mobile.webp', 244, 505),
+	heroMobile: await getImageDimensions('/hero_mobile_img.webp', 651, 868),
+};
+---
+
+<section>
+	<div class="section-top-indent flex flex-col items-center gap-10 lg:gap-15">
+		<div class="flex flex-col items-center gap-5 lg:gap-10 text-center">
+			<h1 class="text-[32px] leading-9 lg:text-[72px] lg:leading-20 max-w-230 font-bold text-primary">
+				Task manager for
+				<GradientTextElem>individual</GradientTextElem>
+				<br class="hidden lg:block" />
+				and
+				<GradientTextElem>team</GradientTextElem>
+				productivity
+			</h1>
+			<p class="text-[16px] leading-6 lg:text-[28px] lg:leading-8 text-secondary max-w-200">
+				Plan, organize, and accomplish — tasks, lists, reminders, <br class="hidden lg:block" /> projects, and more
+			</p>
+		</div>
+		<AppButton
+			customClass="w-max"
+			size="lg"
+			href="https://www.leadertask.com/web/login "
+			clickEffect={true}
+			id="get-started-button"
+		>
+			Get started for free
+		</AppButton>
+		<div class="relative w-full hidden lg:block max-w-244">
+			<Image
+				src="/desktop.webp"
+				alt="Desktop"
+				width={imagesDimensions.desktop.width}
+				height={imagesDimensions.desktop.height}
+				class="w-full h-full object-cover"
+				fetchpriority="high"
+				loading="eager"
+			/>
+			<Image
+				src="/mobile.webp"
+				alt="Mobile"
+				width={imagesDimensions.mobile.width}
+				height={imagesDimensions.mobile.height}
+				class="absolute top-33 -left-20 w-full h-full max-w-58.5 max-h-126.25 object-cover"
+				fetchpriority="high"
+				loading="eager"
+			/>
+		</div>
+		<Image
+			src="/hero_mobile_img.webp"
+			alt="hero img"
+			width={imagesDimensions.heroMobile.width}
+			height={imagesDimensions.heroMobile.height}
+			class="w-full lg:hidden"
+			fetchpriority="high"
+			loading="eager"
+			sizes="100vw"
+		/>
+	</div>
+</section>

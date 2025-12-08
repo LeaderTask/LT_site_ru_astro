@@ -1,0 +1,78 @@
+---
+interface Props {
+	currentPagePlatform: 'web' | 'windows' | 'android' | 'ios';
+}
+
+const { currentPagePlatform } = Astro.props;
+
+interface Device {
+	platform: 'web' | 'windows' | 'android' | 'ios';
+	icon: string;
+	title: string;
+	link: string;
+}
+
+const devices: Device[] = [
+	{
+		platform: 'web',
+		icon: 'icon-web-app',
+		title: 'Web app',
+		link: '/platforms/web',
+	},
+	{
+		platform: 'windows',
+		icon: 'icon-windows-app',
+		title: 'Windows',
+		link: '/platforms/windows',
+	},
+	{
+		platform: 'android',
+		icon: 'icon-android-app',
+		title: 'Android',
+		link: '/platforms/android',
+	},
+	{
+		platform: 'ios',
+		icon: 'icon-ios-app',
+		title: 'iOS',
+		link: '/platforms/ios',
+	},
+];
+
+const filteredDevices = devices.filter((device) => device.platform !== currentPagePlatform);
+---
+
+<section class="flex flex-col lg:flex-row justify-between gap-6 lg:gap-15 items-center pt-15 lg:pt-30">
+	<div class="flex flex-col gap-4 lg:gap-6 max-w-104">
+		<p
+			class="text-[24px] lg:text-[44px] lg:leading-10 text-center lg:text-left font-bold text-primary max-w-50 mx-auto lg:max-w-full"
+		>
+			Stay productive on any device
+		</p>
+		<p
+			class="text-[16px] lg:text-[20px] leading-6 lg:leading-8 text-center lg:text-left text-secondary max-w-75 mx-auto lg:max-w-full"
+		>
+			Get LeaderTask for your device and stay organized wherever you are
+		</p>
+	</div>
+	<div class="flex flex-row gap-4 lg:gap-6 flex-1 lg:h-48">
+		{
+			filteredDevices.map((device) => (
+				<a
+					href={device.link}
+					class="flex flex-col items-center justify-center h-24 w-24 lg:w-full lg:h-full gap-1 lg:gap-4 rounded-3 bg-gray-light hover:bg-white text-secondary hover:text-accent-orange transition-colors"
+				>
+					<svg class="w-7 h-7 lg:w-8 lg:h-8">
+						<use href={`/icons/all-icons.svg#${device.icon}`} />
+					</svg>
+					<div class="flex flex-row items-center justify-center gap-2 lg:gap-3 w-full">
+						<span class="text-[14px] lg:text-[22px] leading-5 lg:leading-6 font-bold">{device.title}</span>
+						<svg class="w-3 h-3 lg:w-5 lg:h-5">
+							<use href="/icons/all-icons.svg#icon-arrow-link" />
+						</svg>
+					</div>
+				</a>
+			))
+		}
+	</div>
+</section>

@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+import type { ImgProps } from '@/shared/types';
+import { getImageDimensions } from '@/shared';
+
+const { src, alt, variant, id, loading } = Astro.props as ImgProps & { loading?: 'lazy' | 'eager' };
+const imageSrc = src || '/placeholder.webp';
+const imageDimensions = imageSrc.startsWith('/') ? await getImageDimensions(imageSrc) : { width: 800, height: 600 };
+---
+
+<Image
+	src={imageSrc}
+	alt={alt || ''}
+	width={imageDimensions.width}
+	height={imageDimensions.height}
+	class={variant}
+	id={id}
+	loading={loading || 'lazy'}
+/>
+
+<style>
+	.full {
+		width: 100%;
+		max-height: 360px;
+		object-fit: cover;
+		border-radius: 24px;
+	}
+	@media (max-width: 768px) {
+		.full {
+			max-height: 110px;
+			border-radius: 16px;
+		}
+	}
+	.short {
+		width: 120px;
+		height: 120px;
+		object-fit: cover;
+		border-radius: 16px;
+	}
+	@media (max-width: 768px) {
+		.short {
+			width: 60px;
+			height: 60px;
+			border-radius: 12px;
+		}
+	}
+	.icon {
+		width: 60px;
+		height: 60px;
+		object-fit: cover;
+		border-radius: 8px;
+	}
+	@media (max-width: 768px) {
+		.icon {
+			width: 32px;
+			height: 32px;
+		}
+	}
+</style>

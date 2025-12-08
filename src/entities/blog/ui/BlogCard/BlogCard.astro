@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import type { EnrichedPost } from '@/shared/types';
+import { getMdxContentName, getMdxId, formatDate, getImageDimensions } from '@/shared';
+import AuthorLink from '../AuthorLink/AuthorLink.astro';
+
+interface Props {
+	post: EnrichedPost;
+	isFirst?: boolean;
+	description?: string;
+	class?: string;
+}
+
+const { post, isFirst = false, description = '', class: className = '' } = Astro.props;
+const hasCover = Boolean(post.data.coverImage);
+const useFullPlaceholder = isFirst && !hasCover;
+const fallbackImage = hasCover ? post.data.coverImage : '/placeholder.webp';
+const coverDimensions = fallbackImage.startsWith('/') ? await getImageDimensions(fallbackImage) : { width: 800, height: 600 };
+---
+
+<li
+	class={`w-full grid bg-white relative grid-rows-a1 shadow-card rounded-5 ${className}`}
+	class:grid-cols-2={isFirst}
+	class:max-h-122={isFirst}
+	class:grid-rows-a1={!isFirst}
+>
+	<div
+		class="relative p-6 h-64"
+		class:h-full={isFirst}
+		class:h-64={!isFirst}
+	>
+		{
+			useFullPlaceholder ? (
+				<picture class="w-full object-left absolute inset-0 h-full rounded-5">
+					<source
+						media="(min-width: 768px)"
+						srcset="/placeholder-full.webp"
+					/>
+					<Image
+						src="/placeholder.webp"
+						alt="cover"
+						width={coverDimensions.width}
+						height={coverDimensions.height}
+						class="w-full h-full object-cover rounded-5"
+					/>
+				</picture>
+			) : (
+				<Image
+					src={fallbackImage}
+					alt="cover"
+					width={coverDimensions.width}
+					height={coverDimensions.height}
+					class="w-full object-left absolute inset-0 h-full object-cover rounded-5"
+				/>
+			)
+		}
+		<ul class="flex relative flex-wrap gap-2">
+			{
+				post.data.tags?.map((tag: string | { tag: string }) => (
+					<li>
+						<span class="text-sm font-semibold text-white bg-dark-alpha rounded px-2 py-1">
+							{getMdxContentName(typeof tag === 'string' ? tag : tag.tag)}
+						</span>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+	<div class="p-6 grid grid-rows-a1a gap-3">
+		<a
+			href={`/articles/${getMdxId(post.id)}`}
+			class="text-xl before:absolute line-clamp-2 before:inset-0 hover:text-accent-orange transition-colors duration-200 leading-10 text-primary font-bold"
+			class:line-clamp-2={!isFirst}
+		>
+			{post.data.title}
+		</a>
+		<div
+			class="overflow-hidden text-ellipsis text-secondary"
+			class:line-clamp-10={isFirst}
+			class:line-clamp-3={!isFirst}
+			class:max-h-17={!isFirst}
+		>
+			{description}
+		</div>
+		<div class="flex justify-between items-center">
+			{post.data.author ? <AuthorLink author={post.data.author} /> : <div />}
+			<span class="text-xs font-semibold text-secondary">
+				{formatDate(post.data.date)}
+			</span>
+		</div>
+	</div>
+</li>

@@ -1,0 +1,165 @@
+---
+import { Image } from 'astro:assets';
+import GradientTextElem from '@/shared/ui/GradientTextElem/GradientTextElem.astro';
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import { getImageDimensions } from '@/shared';
+
+const imagesDimensions = {
+	filtersAndSorting: await getImageDimensions('/filters-and-sorting.webp', 320, 168),
+	reminders: await getImageDimensions('/reminders.webp', 400, 200),
+	attachments: await getImageDimensions('/attachments.webp', 320, 226),
+	integrations: await getImageDimensions('/integrations.webp', 320, 285),
+	recurring: await getImageDimensions('/recurring.webp', 340, 344),
+	taskTree: await getImageDimensions('/task-tree.webp', 400, 240),
+	across: await getImageDimensions('/across.webp', 340, 136),
+	roles: await getImageDimensions('/roles.webp', 320, 136),
+};
+---
+
+<section class="flex flex-col gap-6 lg:gap-8 items-center section-top-indent">
+	<h3 class="text-[24px] lg:text-[44px] leading-7 lg:leading-13 text-center font-bold text-primary">
+		Manage tasks
+		<br class="lg:hidden" />
+		<GradientTextElem>simply and efficiently</GradientTextElem>
+	</h3>
+	<div class="relative flex flex-col gap-4 lg:block lg:h-300 w-full">
+		<div class="lg:absolute lg:top-13.75 lg:left-123 overflow-hidden bg-orange-light shadow-card rounded-5">
+			<div class="pt-4 text-center px-4 pb-1">
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Filters and sorting</p>
+			</div>
+			<div class="w-full lg:h-42 lg:w-80 overflow-hidden">
+				<Image
+					src="/filters-and-sorting.webp"
+					alt="filters and sorting"
+					width={imagesDimensions.filtersAndSorting.width}
+					height={imagesDimensions.filtersAndSorting.height}
+					class="w-full h-full object-cover"
+					loading="lazy"
+					sizes="(max-width: 1024px) 100vw, 320px"
+				/>
+			</div>
+		</div>
+		<div class="bg-purple-light shadow-card rounded-5 lg:absolute lg:top-54.5 lg:left-0">
+			<div class="pt-4 text-center px-4 pb-1">
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Reminders and notifications</p>
+			</div>
+			<div class="w-full lg:w-100 lg:h-50">
+				<Image
+					src="/reminders.webp"
+					alt="reminders and notifications"
+					width={imagesDimensions.reminders.width}
+					height={imagesDimensions.reminders.height}
+					class="w-full h-full object-cover"
+					loading="lazy"
+					sizes="(max-width: 1024px) 100vw, 400px"
+				/>
+			</div>
+		</div>
+		<div class="bg-white shadow-card rounded-5 lg:absolute lg:top-54.5 lg:right-0">
+			<div class="pt-4 text-center px-4 pb-1">
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">
+					Attachments
+					<br class="hidden lg:block" />
+					and checklists
+				</p>
+			</div>
+			<div class="w-full lg:w-80 lg:h-50">
+				<Image
+					src="/attachments.webp"
+					alt="attachments and checklists"
+					width={imagesDimensions.attachments.width}
+					height={imagesDimensions.attachments.height}
+					class="w-full h-full object-cover"
+					loading="lazy"
+					sizes="(max-width: 1024px) 100vw, 320px"
+				/>
+			</div>
+		</div>
+		<div class="bg-white shadow-card rounded-5 lg:absolute lg:top-136.25 lg:left-27.5">
+			<div class="pt-4 text-center px-4 pb-1">
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Integrations</p>
+			</div>
+			<div class="w-full lg:h-35 lg:w-80 overflow-hidden">
+				<Image
+					src="/integrations.webp"
+					alt="integrations"
+					width={imagesDimensions.integrations.width}
+					height={imagesDimensions.integrations.height}
+					class="w-full h-full object-cover"
+					loading="lazy"
+					sizes="(max-width: 1024px) 100vw, 320px"
+				/>
+			</div>
+		</div>
+		<div class="bg-gray-light shadow-card rounded-5 lg:absolute lg:top-95.5 lg:left-136.75">
+			<div class="pt-4 text-center px-4 pb-1">
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Recurring tasks</p>
+			</div>
+			<div class="w-full lg:h-86 lg:w-85 overflow-hidden">
+				<Image
+					src="/recurring.webp"
+					alt="recurring tasks"
+					width={imagesDimensions.recurring.width}
+					height={imagesDimensions.recurring.height}
+					class="w-full h-full object-cover"
+					loading="lazy"
+					sizes="(max-width: 1024px) 100vw, 340px"
+				/>
+			</div>
+		</div>
+		<div class="bg-gray-light shadow-card rounded-5 lg:absolute lg:top-204.5 lg:left-13.75">
+			<div class="pt-4 text-center px-4 pb-1">
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Task tree</p>
+			</div>
+			<div class="w-full lg:h-60 lg:w-100 overflow-hidden">
+				<Image
+					src="/task-tree.webp"
+					alt="task tree"
+					width={imagesDimensions.taskTree.width}
+					height={imagesDimensions.taskTree.height}
+					class="w-full h-full object-cover"
+				/>
+			</div>
+		</div>
+		<div class="bg-purple-light shadow-card rounded-5 lg:absolute lg:top-177.5 lg:right-2">
+			<div class="pt-4 text-center px-4 pb-1">
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Across all devices</p>
+			</div>
+			<div class="w-full lg:h-34 lg:w-85 overflow-hidden">
+				<Image
+					src="/across.webp"
+					alt="across all devices"
+					width={imagesDimensions.across.width}
+					height={imagesDimensions.across.height}
+					class="w-full h-full object-cover"
+				/>
+			</div>
+		</div>
+		<div class="bg-orange-light shadow-card rounded-5 lg:absolute lg:top-232 lg:right-97.5">
+			<div class="pt-4 text-center px-4 pb-1">
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">
+					Roles and access
+					<br class="hidden lg:block" />
+					controls
+				</p>
+			</div>
+			<div class="w-full lg:h-34 lg:w-80 overflow-hidden">
+				<Image
+					src="/roles.webp"
+					alt="across all devices"
+					width={imagesDimensions.roles.width}
+					height={imagesDimensions.roles.height}
+					class="w-full h-full object-cover"
+				/>
+			</div>
+		</div>
+	</div>
+	<AppButton
+		variant="dark"
+		size="lg"
+		:clickEffect="true"
+		href="/features"
+	>
+		All features
+	</AppButton>
+</section>

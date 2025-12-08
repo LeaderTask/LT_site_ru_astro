@@ -1,0 +1,169 @@
+---
+import { Image } from 'astro:assets';
+import { getImageDimensions } from '@/shared';
+
+interface Props {
+	showTitle?: boolean;
+}
+
+const { showTitle = true } = Astro.props;
+
+const calendarImagesDimensions: Record<string, { width: number; height: number }> = {
+	day: await getImageDimensions('/day.webp', 784, 558),
+	dayMobile: await getImageDimensions('/day_mobile.webp', 595, 589),
+	week: await getImageDimensions('/week.webp', 784, 558),
+	weekMobile: await getImageDimensions('/week_mobile.webp', 595, 589),
+	month: await getImageDimensions('/month.webp', 784, 558),
+	monthMobile: await getImageDimensions('/month_mobile.webp', 595, 589),
+	year: await getImageDimensions('/year.webp', 784, 558),
+	yearMobile: await getImageDimensions('/year_mobile.webp', 595, 589),
+	tenYears: await getImageDimensions('/ten_years.webp', 784, 558),
+	tenYearsMobile: await getImageDimensions('/ten_years_mobile.webp', 595, 589),
+};
+
+const TABS = [
+	{
+		title: 'Day',
+		value: 'day',
+		imgDesktop: '/day.webp',
+		imgMobile: '/day_mobile.webp',
+	},
+	{
+		title: 'Week',
+		value: 'week',
+		imgDesktop: '/week.webp',
+		imgMobile: '/week_mobile.webp',
+	},
+	{
+		title: 'Month',
+		value: 'month',
+		imgDesktop: '/month.webp',
+		imgMobile: '/month_mobile.webp',
+	},
+	{
+		title: 'Year',
+		value: 'year',
+		imgDesktop: '/year.webp',
+		imgMobile: '/year_mobile.webp',
+	},
+	{
+		title: '10 years',
+		value: 'ten years',
+		imgDesktop: '/ten_years.webp',
+		imgMobile: '/ten_years_mobile.webp',
+	},
+];
+---
+
+<section
+	class="flex flex-col gap-3 lg:gap-6 lg:items-center bg-white shadow-card rounded-5 pt-4 px-4 lg:p-8"
+	id="calendar-section"
+	data-show-title={showTitle.toString()}
+>
+	<div
+		id="calendar-title"
+		class="flex gap-3 items-center"
+		class:list={[!showTitle ? 'hidden' : '']}
+	>
+		<svg class="w-5 h-5 lg:w-8 lg:h-8">
+			<use href="/icons/all-icons.svg#icon-calendar"></use>
+		</svg>
+		<span class="text-[14px] lg:text-[20px] leading-0 font-bold text-secondary">Calendar</span>
+	</div>
+	<h3 class="text-[24px] lg:text-[44px] leading-7 lg:leading-13 font-bold text-primary">Keep your schedule under control</h3>
+	<ul
+		class="flex overflow-x-auto max-w-[260px] min-[331px]:max-w-none justify-center lg:justify-start px-0 pt-2 pb-3 lg:p-0 gap-2 lg:gap-5 flex-nowrap"
+		id="calendar-tabs"
+	>
+		{
+			TABS.map((tab, index) => (
+				<li
+					data-tab-value={tab.value}
+					data-tab-index={index}
+					class={`px-1.5 py-1 lg:px-3 lg:py-2 font-semibold xl:font-bold text-[14px] lg:text-[16px] rounded-2 cursor-pointer relative overflow-hidden calendar-tab whitespace-nowrap flex-shrink-0 ${
+						index === 0 ? 'bg-secondary text-gray min-[331px]:ml-0 ml-5' : 'bg-light text-tertiary hover:bg-gray-light'
+					}`}
+				>
+					{tab.title}
+					<div class="ripple-container" />
+				</li>
+			))
+		}
+	</ul>
+	<div
+		class="relative w-full h-75 lg:h-139.5 shadow-card lg:w-187"
+		id="calendar-images"
+	>
+		{
+			TABS.map((tab) => {
+				const dimensionsKey = tab.value === 'ten years' ? 'tenYears' : tab.value;
+				const desktopKey = dimensionsKey;
+				const mobileKey = `${dimensionsKey}Mobile`;
+				const desktopDimensions = calendarImagesDimensions[desktopKey] || { width: 800, height: 600 };
+				const mobileDimensions = calendarImagesDimensions[mobileKey] || { width: 800, height: 600 };
+				return (
+					<>
+						<Image
+							src={tab.imgDesktop}
+							alt={`calendar ${tab.title}`}
+							data-tab-value={tab.value}
+							width={desktopDimensions.width}
+							height={desktopDimensions.height}
+							class={`absolute inset-0 hidden lg:block rounded-4 w-full h-full object-cover transition-opacity duration-300 calendar-image ${
+								tab.value === 'day' ? 'opacity-100' : 'opacity-0'
+							}`}
+						/>
+						<Image
+							src={tab.imgMobile}
+							alt={`calendar ${tab.title}`}
+							data-tab-value={tab.value}
+							width={mobileDimensions.width}
+							height={mobileDimensions.height}
+							class={`absolute inset-0 block lg:hidden rounded-4 w-full h-full object-cover transition-opacity duration-300 calendar-image ${
+								tab.value === 'day' ? 'opacity-100' : 'opacity-0'
+							}`}
+							loading="lazy"
+							sizes="(max-width: 1024px) 100vw, 0px"
+						/>
+					</>
+				);
+			})
+		}
+	</div>
+</section>
+
+<style>
+	.calendar-tab {
+		transition:
+			background-color 0.6s ease-out,
+			color 0.6s ease-out;
+	}
+
+	.ripple-container {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		overflow: hidden;
+		z-index: 1;
+	}
+
+	.ripple-effect {
+		position: absolute;
+		pointer-events: none;
+		background-color: rgba(10, 10, 12, 0.15);
+		border-radius: 50%;
+		transform: scale(0);
+		animation: ripple 0.6s ease-out;
+	}
+
+	@keyframes ripple {
+		0% {
+			transform: scale(0);
+			opacity: 0.1;
+		}
+		100% {
+			transform: scale(1);
+			opacity: 0;
+		}
+	}
+</style>

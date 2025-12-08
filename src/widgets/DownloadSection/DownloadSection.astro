@@ -1,0 +1,216 @@
+---
+import { Image } from 'astro:assets';
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import DeviceCard from '@/shared/ui/DeviceCard/DeviceCard.astro';
+import PlatformsSlider from '@/widgets/PlatformsSlider/PlatformsSlider.astro';
+import { SLIDER_ITEMS_PLATFORM_PAGES } from '@/shared/const';
+import { getImageDimensions } from '@/shared';
+
+const qrCodeDimensions = await getImageDimensions('/qr-code.webp');
+
+const QUICK_START_STEPS = [
+	{ number: 1, bold: 'Download LeaderTask', text: ' on any device you like' },
+	{ number: 2, bold: 'Sign up for free', text: ' with your email' },
+	{ number: 3, bold: 'Add your name and password', text: " – you're all set" },
+	{ number: 4, bold: 'Create your first task', text: ' and start getting things done.' },
+] as const;
+
+const LINKS = {
+	web: 'https://www.leadertask.com/web/login',
+	android: 'https://play.google.com/store/apps/details?id=com.leadertask.app',
+	ios: 'https://apps.apple.com/ru/app/leadertask-task-to-do-list/id6504613667',
+	windows: '/leadertask.exe',
+};
+
+const COLORS = {
+	iconColor: 'text-secondary',
+	textColor: 'text-secondary',
+	arrowColor: 'text-secondary',
+};
+
+const DESKTOP_DEVICES = [
+	{ platform: 'web', icon: 'icon-web-app', title: 'Web app', link: LINKS.web, ...COLORS },
+	{ platform: 'android', icon: 'icon-android-app', title: 'Android', link: LINKS.android, ...COLORS },
+	{ platform: 'ios', icon: 'icon-ios-app', title: 'iOS', link: LINKS.ios, ...COLORS },
+] as const;
+
+const MOBILE_DEVICES_BASE = [
+	{ platform: 'web', icon: 'icon-web-app', title: 'Web app', link: LINKS.web, ...COLORS },
+	{ platform: 'windows', icon: 'icon-windows-app', title: 'Windows', link: LINKS.windows, ...COLORS },
+] as const;
+
+const MOBILE_DEVICE_IOS = {
+	platform: 'android',
+	icon: 'icon-android-app',
+	title: 'Android',
+	link: LINKS.android,
+	...COLORS,
+};
+
+const MOBILE_DEVICE_ANDROID = {
+	platform: 'ios',
+	icon: 'icon-ios-app',
+	title: 'iOS',
+	link: LINKS.ios,
+	...COLORS,
+};
+---
+
+<div class="bg-gray">
+	<section class="text-center mt-15 md:mt-30 mb-15 md:mb-30">
+		<h1 class="hidden md:block font-bold text-[72px] leading-20 mb-10 text-primary">
+			Download Organizer<br />
+			<span class="bg-linear-to-r from-accent-orange to-accent-red bg-clip-text text-transparent">for Windows 64-bit</span>
+		</h1>
+
+		<h2 class="md:hidden font-bold text-[32px] leading-9 mb-5 text-primary">
+			Get LeaderTask<br />
+			<span class="bg-linear-to-r from-accent-orange to-accent-red bg-clip-text text-transparent">in one click</span>
+		</h2>
+
+		<p class="font-regular text-[16px] leading-6 md:text-[28px] md:leading-10 text-secondary mb-10 md:mb-15">
+			Try all features free for 3 days – no credit card needed
+		</p>
+
+		<AppButton
+			variant="primary"
+			size="lg"
+			customClass="w-37 md:w-61 h-10 md:h-15 flex items-center justify-center mx-auto md:text-[22px] md:leading-6"
+			id="download-button"
+			href={LINKS.windows}
+		>
+			Download for free
+		</AppButton>
+	</section>
+
+	<section class="mb-15 md:mb-30">
+		<h2 class="font-bold text-[24px] leading-7 md:text-[44px] md:leading-13 text-center text-primary mb-6 md:mb-15">
+			Quick start guide
+		</h2>
+
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 max-w-300 mx-auto">
+			{
+				QUICK_START_STEPS.map((step) => (
+					<div class="bg-[#FFF] rounded-4 p-6 shadow min-h-37">
+						<div class="w-9 h-9 md:w-10 md:h-10 bg-primary rounded-2 flex items-center justify-center mb-4">
+							<span class="font-bold text-[24px] leading-7 md:leading-8 text-[#FFF]">{step.number}</span>
+						</div>
+						<p class="font-regular text-[18px] leading-6 md:text-[20px] md:leading-8 text-secondary">
+							{step.bold && <span class="font-semibold">{step.bold}</span>}
+							{step.text}
+						</p>
+					</div>
+				))
+			}
+		</div>
+
+		<p class="text-center font-regular text-[14px] leading-5 text-secondary mt-4 md:mt-8">
+			Need help?
+			<a
+				href="/contacts"
+				class="text-accent-blue visited:text-accent-purple-link cursor-pointer no-underline hover:no-underline"
+			>
+				Contact us
+			</a>
+			– we're here to help.
+		</p>
+	</section>
+
+	<section class="mb-15 md:mb-30">
+		<div class="hidden md:block">
+			<PlatformsSlider
+				sliderItems={SLIDER_ITEMS_PLATFORM_PAGES.webApp}
+				sliderId="platforms-swiper-web"
+			/>
+		</div>
+
+		<div
+			id="mobile-slider-ios"
+			class="block md:hidden"
+		>
+			<PlatformsSlider
+				sliderItems={SLIDER_ITEMS_PLATFORM_PAGES.ios}
+				sliderId="platforms-swiper-ios"
+			/>
+		</div>
+
+		<div
+			id="mobile-slider-android"
+			class="md:hidden!"
+		>
+			<PlatformsSlider
+				sliderItems={SLIDER_ITEMS_PLATFORM_PAGES.android}
+				sliderId="platforms-swiper-android"
+			/>
+		</div>
+	</section>
+
+	<section>
+		<div class="text-center mb-6 md:mb-15">
+			<h2 class="font-bold text-[24px] leading-7 md:text-[44px] md:leading-13 text-primary mb-4 md:mb-6">
+				Stay productive<br class="md:hidden" /> on any device
+			</h2>
+			<p class="font-regular text-[16px] leading-6 md:text-[20px] md:leading-8 text-secondary">
+				Get LeaderTask for your device and stay organized wherever you are
+			</p>
+		</div>
+
+		<div class="hidden md:flex min-[1024px]:gap-5.75 mx-auto gap-2.5">
+			<div class="w-1/2 grid grid-cols-3 gap-5.75 max-[1024px]:gap-2.5">
+				{
+					DESKTOP_DEVICES.map((device) => (
+						<div style="padding: 59px 0;">
+							<DeviceCard device={device} />
+						</div>
+					))
+				}
+			</div>
+
+			<div class="w-1/2 flex items-center justify-center">
+				<div class="bg-gray-light rounded-3 xl:px-8 xl:py-6.5 w-full lg:p-5 p-2.5">
+					<div class="flex items-center gap-8">
+						<Image
+							src="/qr-code.webp"
+							alt="QR Code"
+							width={qrCodeDimensions.width}
+							height={qrCodeDimensions.height}
+							class="w-20 h-20 lg:w-25 lg:h-25 xl:w-35 xl:h-35 shrink-0"
+						/>
+						<div class="text-left text-secondary">
+							<h3 class="font-bold text-[22px] leading-6 mb-1 lg:mb-3">Tasks on the go? LeaderTask is here!</h3>
+							<p class="font-regular text-[16px] leading-6">LeaderTask for iOS and Android – just scan the code</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div
+			id="mobile-devices"
+			class="grid grid-cols-3 md:hidden gap-4"
+		>
+			{MOBILE_DEVICES_BASE.map((device) => <DeviceCard device={device} />)}
+			<div
+				id="mobile-device-third-ios"
+				style="display: none;"
+			>
+				<DeviceCard device={MOBILE_DEVICE_IOS} />
+			</div>
+			<div
+				id="mobile-device-third-android"
+				style="display: none;"
+			>
+				<DeviceCard device={MOBILE_DEVICE_ANDROID} />
+			</div>
+		</div>
+	</section>
+</div>
+
+<style>
+	.shadow {
+		box-shadow:
+			0 4px 8px rgba(0, 0, 0, 0.01),
+			0 15px 15px rgba(0, 0, 0, 0.01),
+			0 35px 21px rgba(0, 0, 0, 0.01);
+	}
+</style>

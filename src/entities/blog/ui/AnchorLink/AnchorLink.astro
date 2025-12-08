@@ -1,0 +1,32 @@
+---
+interface Props {
+	id: string;
+	text: string;
+	isActive: boolean;
+	isLink?: boolean;
+}
+
+const { id, text, isActive, isLink = true } = Astro.props;
+
+const baseClasses =
+	'text-primary w-full cursor-pointer hover:bg-orange-light transition-colors duration-200 rounded-3 px-3 flex items-center gap-2.5 py-2 text-sm';
+const activeClasses = isActive ? 'font-bold bg-orange-light' : '';
+const iconClasses = isActive ? 'bg-accent-orange' : '';
+---
+
+{
+	isLink ? (
+		<a
+			href={`#${id}`}
+			class={`${baseClasses} ${activeClasses}`}
+		>
+			<i class={`w-2 h-2 rounded-full transition-colors ${iconClasses}`} />
+			<span>{text}</span>
+		</a>
+	) : (
+		<button class={`${baseClasses} ${activeClasses}`}>
+			<i class={`w-2 h-2 rounded-full transition-colors ${iconClasses}`} />
+			<span>{text}</span>
+		</button>
+	)
+}

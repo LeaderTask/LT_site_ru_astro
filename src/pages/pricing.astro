@@ -1,0 +1,29 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PricingCardsBlock from '@/widgets/PricingCardsBlock/PricingCardsBlock.astro';
+import ComparisonTable from '@/widgets/ComparisonTable/ComparisonTable.astro';
+import { getCollection } from 'astro:content';
+
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.slug === 'pricing');
+---
+
+<Layout
+	title={page?.data.title || 'LeaderTask - Pricing'}
+	description={page?.data.description}
+	isFollow={page?.data.isFollow}
+>
+	<h1
+		class="font-bold text-center text-[32px] lg:text-[72px] lg:leading-20 leading-9 mb-10 mt-15 lg:mb-15 lg:mt-30 flex flex-col md:block text-primary"
+	>
+		Pick your
+		<span
+			class="bg-linear-to-r from-accent-orange to-accent-red bg-clip-text text-transparent"
+			style="text: linear-gradient(88deg, #FF4C00 58.78%, #FF002C 117.51%);"
+		>
+			perfect plan
+		</span>
+	</h1>
+	<PricingCardsBlock />
+	<ComparisonTable />
+</Layout>

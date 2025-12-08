@@ -1,0 +1,66 @@
+---
+import type { EnrichedPost } from '@/shared/types';
+import type { CollectionEntry } from 'astro:content';
+import BlogCard from '@/entities/blog/ui/BlogCard/BlogCard.astro';
+import Pagination from '@/shared/ui/Pagination/Pagination.astro';
+import { marked } from 'marked';
+
+interface Props {
+	posts: EnrichedPost[];
+	tags: CollectionEntry<'tags'>[];
+	currentPage?: number;
+	totalPages?: number;
+}
+
+const { posts, currentPage: rawCurrentPage = 1, totalPages = 1 } = Astro.props;
+const currentPage = Math.max(1, Math.min(rawCurrentPage, totalPages));
+
+const extractFirstParagraph = (html: string): string => {
+	const match = html.match(/<p[^>]*>(.*?)<\/p>/is);
+	if (match && match[1]) {
+		return match[1].replace(/<[^>]+>/g, '').trim();
+	}
+	return '';
+};
+
+const getDescription = (post: EnrichedPost): string => {
+	if (post.data.description) {
+		return post.data.description;
+	}
+
+	if (!post.body) {
+		return '';
+	}
+
+	const parsedBody = marked.parse(post.body) as string;
+	return extractFirstParagraph(parsedBody).slice(0, 119) + '...';
+};
+---
+
+<section class="flex flex-col items-center w-full gap-10">
+	<ul
+		id="blog-block"
+		class="w-full scroll-mt-25 section-y-indent grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+	>
+		{
+			posts.map((post: EnrichedPost, index: number) => (
+				<BlogCard
+					post={post}
+					isFirst={index === 0}
+					description={getDescription(post)}
+					class={index === 0 ? 'lg:col-span-2' : ''}
+				/>
+			))
+		}
+	</ul>
+	{
+		totalPages > 1 && (
+			<Pagination
+				pageNumber={totalPages}
+				modelValue={currentPage}
+				baseUrl="/articles/page/{page}"
+				mode="ssr"
+			/>
+		)
+	}
+</section>

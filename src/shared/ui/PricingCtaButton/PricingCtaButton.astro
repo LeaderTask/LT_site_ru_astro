@@ -1,0 +1,48 @@
+---
+interface Props {
+	text: string;
+	planType: 'free' | 'premium' | 'business';
+	width?: string;
+}
+
+const { text, planType, width } = Astro.props;
+
+const buttonClass =
+	planType === 'free'
+		? 'bg-primary text-white hover:bg-dark-hover'
+		: planType === 'premium'
+			? 'bg-accent-orange text-white hover:bg-accent-orange-dark'
+			: 'bg-accent-blue text-white hover:bg-accent-blue-link';
+
+const marketConfig: Record<'free' | 'premium' | 'business', { url: string; target: '_self' | '_blank' }> = {
+	free: {
+		url: '/downloads',
+		target: '_self',
+	},
+	premium: {
+		url: 'https://www.market.leadertask.ru/market-en',
+		target: '_blank',
+	},
+	business: {
+		url: 'https://www.market.leadertask.ru/market-en?userscount=2',
+		target: '_blank',
+	},
+};
+
+const config = marketConfig[planType as keyof typeof marketConfig];
+---
+
+<a
+	href={config.url}
+	target={config.target}
+	rel={config.target === '_blank' ? 'noopener noreferrer' : undefined}
+	class={`cursor-pointer rounded-2 py-2.5 px-2 font-semibold text-[14px] leading-5 md:text-base transition-all duration-300 inline-block text-center no-underline ${buttonClass} ${width ? `w-[${width}px]` : 'w-full'}`}
+>
+	{text}
+</a>
+
+<style>
+	a:active {
+		transform: scale(0.98);
+	}
+</style>

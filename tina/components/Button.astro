@@ -1,0 +1,36 @@
+---
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+
+interface Props {
+	text?: string;
+	url?: string;
+	variant?: 'primary' | 'secondary' | 'primary-stroke' | 'dark' | 'white';
+	size?: 'sm' | 'md' | 'lg';
+	target?: '_self' | '_blank';
+	center?: boolean;
+	class?: string;
+}
+
+const {
+	text = 'Button',
+	url = '#',
+	variant = 'primary',
+	size = 'md',
+	target = '_self',
+	center = false,
+	class: className = '',
+} = Astro.props;
+const customClass = [className].filter(Boolean).join(' ');
+---
+
+<div class={`w-full ${center ? 'flex justify-center' : ''}`}>
+	<AppButton
+		href={url}
+		variant={variant}
+		size={size}
+		target={target}
+		customClass={customClass}
+	>
+		{text}
+	</AppButton>
+</div>

@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import { getImageDimensions } from '@/shared';
+
+interface Props {
+	title?: string;
+	description?: string;
+	buttonText?: string;
+	buttonLink?: string;
+}
+
+const {
+	title = "Boost your team's productivity with LeaderTask",
+	description = 'Assign tasks, add teammates to projects, and track task progress together - all to free up time for what really matters.',
+	buttonText = 'Get started for free',
+	buttonLink = '#',
+} = Astro.props;
+
+const ctaImageDimensions = await getImageDimensions('/cta-picture.webp');
+const ctaMobileImageDimensions = await getImageDimensions('/cta-picture_mobile.webp');
+---
+
+<div class="w-full grid lg:grid-cols-1a bg-orange-light rounded-5">
+	<p class="text-[24px] p-4 my-0! leading-7 text-center font-bold text-primary lg:hidden">
+		{title}
+	</p>
+	<div class="px-6 py-5 flex flex-col gap-3">
+		<p class="text-[32px] my-0! leading-8 font-bold text-primary hidden lg:block">{title}</p>
+		<span class="text-secondary">{description}</span>
+		<AppButton
+			href={buttonLink}
+			customClass="w-max mt-6 mb-3 mx-auto lg:mx-0"
+		>
+			{buttonText}
+		</AppButton>
+	</div>
+	<Image
+		src="/cta-picture.webp"
+		alt="CTA Block"
+		width={ctaImageDimensions.width}
+		height={ctaImageDimensions.height}
+		class="w-full mt-0! mb-0! hidden lg:block max-h-69!"
+	/>
+	<Image
+		src="/cta-picture_mobile.webp"
+		alt="CTA Block"
+		width={ctaMobileImageDimensions.width}
+		height={ctaMobileImageDimensions.height}
+		class="w-full mt-0! mb-0! block lg:hidden row-start-2"
+	/>
+</div>

@@ -1,0 +1,84 @@
+---
+import AppButton from '@/shared/ui/AppButton/AppButton.astro';
+import LinksCardsList from '@/widgets/LinksCardsList/LinksCardsList.astro';
+
+const BUTTONS = [
+	{
+		text: 'Explore Features',
+		variant: 'primary' as const,
+		customClass: 'w-35 md:w-60 md:h-15 flex items-center justify-center',
+		href: '/features',
+	},
+	{
+		text: 'See Pricing',
+		variant: 'dark' as const,
+		customClass: 'w-35 md:w-60 md:h-15 flex items-center justify-center',
+		href: '/pricing',
+	},
+] as const;
+
+const DEVICES = [
+	{
+		icon: 'icon-web-app',
+		title: 'Web app',
+		link: '/platforms/web',
+	},
+	{
+		icon: 'icon-windows-app',
+		title: 'Windows',
+		link: '/platforms/windows',
+	},
+	{
+		icon: 'icon-android-app',
+		title: 'Android',
+		link: '/platforms/android',
+	},
+	{
+		icon: 'icon-ios-app',
+		title: 'iOS',
+		link: '/platforms/ios',
+	},
+];
+---
+
+<section class="welcome-section mt-15 md:mt-30 bg-gray">
+	<div>
+		<div class="text-center mb-10 md:mb-15">
+			<h1
+				class="font-bold text-center text-[32px] leading-9 md:text-[72px] md:leading-20 mb-5 md:mb-10 flex flex-col md:block text-primary"
+			>
+				Welcome to
+				<span
+					class="bg-linear-to-r from-accent-orange to-accent-red bg-clip-text text-transparent"
+					style="color: linear-gradient(88deg, #ff4c00 58.78%, #ff002c 117.51%)"
+				>
+					LeaderTask
+				</span>
+			</h1>
+			<p class="font-regular text-[16px] leading-6 md:text-[28px] md:leading-10 text-secondary max-w-150 mx-auto">
+				Thanks for joining! Your journey to maximum productivity starts here.
+			</p>
+		</div>
+
+		<div class="flex items-center justify-center gap-5 md:gap-6 text-center">
+			{
+				BUTTONS.map((button) => (
+					<AppButton
+						variant={button.variant}
+						size="lg"
+						customClass={button.customClass}
+						href={button.href}
+					>
+						{button.text}
+					</AppButton>
+				))
+			}
+		</div>
+
+		<LinksCardsList
+			title="Stay productive on any device"
+			description="Get LeaderTask for your device and stay organized wherever you are"
+			list={DEVICES}
+		/>
+	</div>
+</section>

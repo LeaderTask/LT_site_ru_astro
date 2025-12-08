@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import HeroBlock from '@/widgets/HeroBlock/HeroBlock.astro';
+import Features from '@/widgets/Features/Features.astro';
+import Thousands from '@/widgets/Thousands/Thousands.astro';
+import Planner from '@/widgets/Planner/Planner.astro';
+import CompaniesSlider from '@/widgets/CompaniesSlider/CompaniesSlider.astro';
+import SelectionTools from '@/widgets/SelectionTools/SelectionTools.astro';
+import AlwaysOnline from '@/widgets/AlwaysOnline/AlwaysOnline.astro';
+
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.slug === 'home');
+---
+
+<Layout
+	title={page?.data.title || 'LeaderTask - Time Management'}
+	description={page?.data.description}
+	isFollow={page?.data.isFollow}
+>
+	<HeroBlock />
+	<SelectionTools />
+	<Features />
+	<Thousands />
+	<Planner />
+	<CompaniesSlider />
+	<AlwaysOnline />
+</Layout>

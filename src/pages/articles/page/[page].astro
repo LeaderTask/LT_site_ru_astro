@@ -1,0 +1,82 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import GradientTextElem from '@/shared/ui/GradientTextElem/GradientTextElem.astro';
+import BlogBlock from '@/widgets/BlogBlock/BlogBlock.astro';
+import type { EnrichedPost } from '@/shared/types';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('articles');
+	const pageSize = 5;
+	const totalPages = Math.ceil(posts.length / pageSize);
+
+	return Array.from({ length: totalPages }, (_, i) => ({
+		params: { page: (i + 1).toString() },
+	}));
+}
+
+const { page } = Astro.params;
+const currentPage = Number(page) || 1;
+
+const posts = await getCollection('articles');
+const tags = await getCollection('tags');
+
+const enrichedPosts: EnrichedPost[] = await Promise.all(
+	posts.map(async (post) => {
+		const authorId = post.data.author ? post.data.author.replace('src/content/authors/', '').replace('.mdx', '') : null;
+		const authorEntry = authorId ? await getEntry('authors', authorId) : null;
+
+		const tagsData = await Promise.all(
+			(post.data.tags || []).map(async (tagRef) => {
+				const tagPath = typeof tagRef === 'string' ? tagRef : tagRef.tag;
+				const tagId = tagPath.replace('src/content/tags/', '').replace('.mdx', '');
+				const tagEntry = await getEntry('tags', tagId);
+				return tagEntry ? { tag: tagPath, data: tagEntry.data } : tagRef;
+			})
+		);
+
+		return {
+			...post,
+			data: {
+				...post.data,
+				author: authorEntry ? { ...authorEntry.data, id: authorEntry.id } : null,
+				tags: tagsData,
+			},
+		} as EnrichedPost;
+	})
+);
+
+const sortedPosts = [...enrichedPosts].sort(
+	(a: EnrichedPost, b: EnrichedPost) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const pageSize = 5;
+const totalPages = Math.ceil(sortedPosts.length / pageSize);
+const validPage = Math.max(1, Math.min(currentPage, totalPages));
+const startIndex = (validPage - 1) * pageSize;
+const postsForPage = sortedPosts.slice(startIndex, startIndex + pageSize);
+---
+
+<Layout
+	title="Blog - LeaderTask"
+	description="Blog - LeaderTask"
+	isFollow={true}
+>
+	<section class="section-top-indent flex flex-col gap-10 mb-10 lg:mb-30 items-center">
+		<div class="flex flex-col gap-5 lg:gap-10 items-center text-center">
+			<h1 class="text-[32px] leading-9 lg:text-[72px] lg:leading-20 font-bold text-primary">
+				<GradientTextElem>LeaderTask</GradientTextElem>
+				blog
+			</h1>
+			<p class="text-[16px] leading-6 lg:text-[28px] lg:leading-10 text-secondary max-w-200">
+				Helping you get things done and enjoy life
+			</p>
+		</div>
+	</section>
+	<BlogBlock
+		posts={postsForPage}
+		tags={tags}
+		currentPage={validPage}
+		totalPages={totalPages}
+	/>
+</Layout>

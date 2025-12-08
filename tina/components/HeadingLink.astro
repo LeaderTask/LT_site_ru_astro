@@ -1,0 +1,24 @@
+---
+interface Props {
+	level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+	href: string;
+	text: string;
+	id?: string;
+	target?: '_self' | '_blank';
+}
+
+const { level = 'h3', href, text, id, target = '_self' } = Astro.props;
+
+const HeadingTag = level;
+const customId = id || `${level}-${text.toLowerCase().replace(/ /g, '-')}`;
+---
+
+<HeadingTag id={customId}>
+	<a
+		class="text-accent-orange! hover:text-accent-orange-dark! font-bold underline! text-[24px] leading-7 lg:text-[32px] lg:leading-11 visited:text-accent-orange-visited!"
+		href={href}
+		target={target}
+	>
+		{text}
+	</a>
+</HeadingTag>

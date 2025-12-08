@@ -1,0 +1,24 @@
+---
+interface Props {
+	value: string | number | boolean;
+	color: 'black' | 'orange' | 'purple';
+}
+
+const { value, color } = Astro.props;
+
+const checkmarkColor = color === 'orange' ? 'text-accent-orange' : color === 'purple' ? 'text-accent-blue' : 'text-secondary';
+const textColor = color === 'orange' ? 'text-accent-orange' : color === 'purple' ? 'text-accent-blue' : 'text-secondary';
+---
+
+<div class="w-25 text-center flex items-center justify-center">
+	{
+		typeof value === 'boolean' && value && (
+			<svg class={`w-5 h-5 ${checkmarkColor}`}>
+				<use href="/icons/all-icons.svg#icon-check-mark" />
+			</svg>
+		)
+	}
+
+	{typeof value === 'boolean' && !value && <span class={`text-[14px] font-bold px-0.5 leading-5 ${textColor}`}>—</span>}
+	{typeof value !== 'boolean' && <span class={`font-medium text-[16px] leading-6 ${textColor}`}>{value}</span>}
+</div>
