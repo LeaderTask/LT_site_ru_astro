@@ -9,7 +9,10 @@ export const PartnersCollection: Collection = {
 		filename: {
 			slugify: (values: Record<string, unknown>) => {
 				const slug = typeof values?.slug === 'string' ? values.slug : '';
-				return slug.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+				return slug
+					.toLowerCase()
+					.replace(/\s+/g, '-')
+					.replace(/[^a-z0-9-]/g, '');
 			},
 		},
 	},
@@ -22,4 +25,3 @@ export const PartnersCollection: Collection = {
 		{ type: 'rich-text', name: 'body', label: 'Body', isBody: true },
 	],
 };
-
