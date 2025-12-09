@@ -14,44 +14,44 @@ export const HERO_BLOCK: Record<
 > = {
 	webApp: {
 		platform: 'web',
-		gradientText: 'Work with LeaderTask',
-		title: 'in the web app',
-		description: 'Work online in LeaderTask and keep your projects on track.',
-		features: ['Simple and fully featured', 'No setup needed', 'Try it free'],
+		gradientText: 'Работайте с LeaderTask',
+		title: 'в веб-приложении',
+		description: 'Работайте онлайн в LeaderTask и держите проекты под контролем.',
+		features: ['Просто и полнофункционально', 'Не требует настройки', 'Попробуйте бесплатно'],
 		image: '/site-app.webp',
 		imageMobile: '/site-app-mobile.webp',
-		textButton: 'Get started for free',
+		textButton: 'Начать бесплатно',
 		linkButton: 'https://www.leadertask.com/web/login',
 	},
 	windows: {
 		platform: 'windows',
-		gradientText: 'Work with LeaderTask',
-		title: 'on Windows',
-		description: 'Get the app on your PC and manage tasks with your team.',
-		features: ['Simple and fully featured', 'No setup needed', 'Try it free'],
+		gradientText: 'Работайте с LeaderTask',
+		title: 'на Windows',
+		description: 'Скачайте приложение на ПК и управляйте задачами вместе с командой.',
+		features: ['Просто и полнофункционально', 'Не требует настройки', 'Попробуйте бесплатно'],
 		image: '/windows-app.webp',
 		imageMobile: '/windows-app-mobile.webp',
-		textButton: 'Download',
+		textButton: 'Скачать',
 		linkButton: '/leadertask.exe',
 	},
 	android: {
 		platform: 'android',
-		gradientText: 'The best task planner',
-		title: 'for Android',
-		description: 'Your all-in-one to-do app and daily organizer',
-		features: ['Simple and fully featured', 'No setup needed', 'Try it free'],
+		gradientText: 'Лучший планировщик задач',
+		title: 'для Android',
+		description: 'Ваш универсальный список дел и ежедневник',
+		features: ['Просто и полнофункционально', 'Не требует настройки', 'Попробуйте бесплатно'],
 		image: '/android-app.webp',
-		textButton: 'Download',
+		textButton: 'Скачать',
 		linkButton: 'https://play.google.com/store/apps/details?id=com.leadertask.app&pli=1',
 	},
 	ios: {
 		platform: 'ios',
-		gradientText: 'The best task planner',
-		title: 'for iPhone',
-		description: 'Your all-in-one to-do app and daily organizer',
-		features: ['Simple and fully featured', 'No setup needed', 'Try it free'],
+		gradientText: 'Лучший планировщик задач',
+		title: 'для iPhone',
+		description: 'Ваш универсальный список дел и ежедневник',
+		features: ['Просто и полнофункционально', 'Не требует настройки', 'Попробуйте бесплатно'],
 		image: '/ios-app.webp',
-		textButton: 'Download',
+		textButton: 'Скачать',
 		linkButton:
 			'https://apps.apple.com/ru/app/%D0%BB%D0%B8%D0%B4%D0%B5%D1%80%D1%82%D0%B0%D1%81%D0%BA-%D0%BF%D0%BB%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D1%89%D0%B8%D0%BA-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87/id6504613667',
 	},
@@ -61,141 +61,145 @@ export const FEATURES_BLOCK: Record<string, { icon: string; title: string; descr
 	webApp: [
 		{
 			icon: 'icon-internet',
-			title: 'Access from anywhere',
+			title: 'Доступ отовсюду',
 			description:
-				'Open LeaderTask on any device or browser and keep your workspace just one click away,<br />wherever you are.',
+				'Открывайте LeaderTask на любом устройстве или в браузере и держите рабочее пространство в одном клике,<br />где бы вы ни были.',
 		},
 		{
 			icon: 'icon-calendar-features',
-			title: 'Flexible calendar views',
+			title: 'Гибкие виды календаря',
 			description:
-				'View your schedule by day, week, month, year, or even multiple years. Organize daily tasks or plan long-term goals all in one calendar.',
+				'Смотрите расписание по дням, неделям, месяцам, году или на несколько лет. Организуйте задачи на день и планируйте долгосрочные цели в одном календаре.',
 		},
 		{
 			icon: 'icon-board',
-			title: 'Boards',
+			title: 'Доски',
 			description:
-				'See your workflow at a glance with Kanban-style boards. Move tasks between stages and track progress effortlessly.',
+				'Видьте процесс целиком на досках в стиле Канбан. Перемещайте задачи между этапами и легко отслеживайте прогресс.',
 		},
 		{
 			icon: 'icon-reminder',
-			title: 'Notifications & reminders',
-			description: 'Stay on top of deadlines and events with reminders right in your browser or by email.',
+			title: 'Уведомления и напоминания',
+			description: 'Держите сроки и события под контролем с напоминаниями в браузере или на почту.',
 		},
 		{
 			icon: 'icon-archive',
-			title: 'Everything in one place',
-			description: 'Keep notes, files, and tasks together in a single app. Stay organized no matter where you are.',
+			title: 'Всё в одном месте',
+			description: 'Храните заметки, файлы и задачи вместе в одном приложении. Порядок сохраняется, где бы вы ни были.',
 		},
 		{
 			icon: 'icon-team-collaboration',
-			title: 'Team collaboration',
-			description: 'Share projects, assign tasks, and track progress in real time. Seamless collaboration from anywhere.',
+			title: 'Совместная работа команды',
+			description:
+				'Делитесь проектами, назначайте задачи и отслеживайте прогресс в реальном времени. Без швов — из любой точки.',
 		},
 	],
 	windows: [
 		{
 			icon: 'icon-offline-access',
-			title: 'Offline access',
+			title: 'Оффлайн-доступ',
 			description:
-				'Plan and manage your tasks anytime, even without internet. Everything updates automatically once you’re back online.',
+				'Планируйте и управляйте задачами в любое время, даже без интернета. Всё синхронизируется автоматически, как только вы вернётесь онлайн.',
 		},
 		{
 			icon: 'icon-calendar-features',
-			title: 'Flexible calendar views',
+			title: 'Гибкие виды календаря',
 			description:
-				'View your schedule by day, week, month, year, or even multiple years. Organize daily tasks or plan long-term goals all in one calendar.',
+				'Смотрите расписание по дням, неделям, месяцам, году или на несколько лет. Организуйте задачи на день и планируйте долгосрочные цели в одном календаре.',
 		},
 		{
 			icon: 'icon-board',
-			title: 'Boards',
+			title: 'Доски',
 			description:
-				'See your workflow at a glance with Kanban-style boards. Move tasks between stages and track progress effortlessly.',
+				'Видьте процесс целиком на досках в стиле Канбан. Перемещайте задачи между этапами и легко отслеживайте прогресс.',
 		},
 		{
 			icon: 'icon-reminder',
-			title: 'Notifications & reminders',
-			description: 'Stay on top of deadlines and events with reminders right in your browser or by email.',
+			title: 'Уведомления и напоминания',
+			description: 'Держите сроки и события под контролем с напоминаниями в браузере или на почту.',
 		},
 		{
 			icon: 'icon-archive',
-			title: 'Everything in one place',
-			description: 'Keep notes, files, and tasks together in a single app. Stay organized no matter where you are.',
+			title: 'Всё в одном месте',
+			description: 'Храните заметки, файлы и задачи вместе в одном приложении. Порядок сохраняется, где бы вы ни были.',
 		},
 		{
 			icon: 'icon-team-collaboration',
-			title: 'Team collaboration',
-			description: 'Share projects, assign tasks, and track progress in real time. Perfect for smooth teamwork on the go.',
+			title: 'Совместная работа команды',
+			description:
+				'Делитесь проектами, назначайте задачи и отслеживайте прогресс в реальном времени. Отлично подходит для слаженной работы в пути.',
 		},
 	],
 	android: [
 		{
 			icon: 'icon-offline-access',
-			title: 'Offline access',
+			title: 'Оффлайн-доступ',
 			description:
-				'Plan and manage your tasks anytime, even without internet. Everything updates automatically once you’re back online.',
+				'Планируйте и управляйте задачами в любое время, даже без интернета. Всё синхронизируется автоматически, как только вы вернётесь онлайн.',
 		},
 		{
 			icon: 'icon-calendar-features',
-			title: 'Flexible calendar views',
+			title: 'Гибкие виды календаря',
 			description:
-				'View your schedule by day, week, month, year, or even multiple years. Organize daily tasks or plan long-term goals all in one calendar.',
+				'Смотрите расписание по дням, неделям, месяцам, году или на несколько лет. Организуйте задачи на день и планируйте долгосрочные цели в одном календаре.',
 		},
 		{
 			icon: 'icon-board',
-			title: 'Boards',
+			title: 'Доски',
 			description:
-				'See your workflow at a glance with Kanban-style boards. Move tasks between stages and track progress effortlessly.',
+				'Видьте процесс целиком на досках в стиле Канбан. Перемещайте задачи между этапами и легко отслеживайте прогресс.',
 		},
 		{
 			icon: 'icon-reminder',
-			title: 'Notifications & reminders',
-			description: 'Stay on top of everything with instant notifications and timely reminders on your phone.',
+			title: 'Уведомления и напоминания',
+			description: 'Держите всё под контролем с мгновенными уведомлениями и своевременными напоминаниями на телефоне.',
 		},
 		{
 			icon: 'icon-archive',
-			title: 'Everything in one place',
-			description: 'Keep notes, files, and tasks together in a single app. Stay organized no matter where you are.',
+			title: 'Всё в одном месте',
+			description: 'Храните заметки, файлы и задачи вместе в одном приложении. Порядок сохраняется, где бы вы ни были.',
 		},
 		{
 			icon: 'icon-team-collaboration',
-			title: 'Team collaboration',
-			description: 'Share projects, assign tasks, and track progress in real time. Perfect for smooth teamwork on the go.',
+			title: 'Совместная работа команды',
+			description:
+				'Делитесь проектами, назначайте задачи и отслеживайте прогресс в реальном времени. Отлично подходит для слаженной работы в пути.',
 		},
 	],
 	ios: [
 		{
 			icon: 'icon-offline-access',
-			title: 'Offline access',
+			title: 'Оффлайн-доступ',
 			description:
-				'Plan and manage your tasks anytime, even without internet. Everything updates automatically once you’re back online.',
+				'Планируйте и управляйте задачами в любое время, даже без интернета. Всё синхронизируется автоматически, как только вы вернётесь онлайн.',
 		},
 		{
 			icon: 'icon-calendar-features',
-			title: 'Flexible calendar views',
+			title: 'Гибкие виды календаря',
 			description:
-				'View your schedule by day, week, month, year, or even multiple years. Organize daily tasks or plan long-term goals all in one calendar.',
+				'Смотрите расписание по дням, неделям, месяцам, году или на несколько лет. Организуйте задачи на день и планируйте долгосрочные цели в одном календаре.',
 		},
 		{
 			icon: 'icon-board',
-			title: 'Boards',
+			title: 'Доски',
 			description:
-				'See your workflow at a glance with Kanban-style boards. Move tasks between stages and track progress effortlessly.',
+				'Видьте процесс целиком на досках в стиле Канбан. Перемещайте задачи между этапами и легко отслеживайте прогресс.',
 		},
 		{
 			icon: 'icon-reminder',
-			title: 'Notifications & reminders',
-			description: 'Stay on top of everything with instant notifications and timely reminders on your phone.',
+			title: 'Уведомления и напоминания',
+			description: 'Держите всё под контролем с мгновенными уведомлениями и своевременными напоминаниями на телефоне.',
 		},
 		{
 			icon: 'icon-archive',
-			title: 'Everything in one place',
-			description: 'Keep notes, files, and tasks together in a single app. Stay organized no matter where you are.',
+			title: 'Всё в одном месте',
+			description: 'Храните заметки, файлы и задачи вместе в одном приложении. Порядок сохраняется, где бы вы ни были.',
 		},
 		{
 			icon: 'icon-team-collaboration',
-			title: 'Team collaboration',
-			description: 'Share projects, assign tasks, and track progress in real time. Perfect for smooth teamwork on the go.',
+			title: 'Совместная работа команды',
+			description:
+				'Делитесь проектами, назначайте задачи и отслеживайте прогресс в реальном времени. Отлично подходит для слаженной работы в пути.',
 		},
 	],
 };

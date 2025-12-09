@@ -7,24 +7,24 @@ export const LINKS: { title: string; links: Link[] }[] = [
 		links: [
 			{
 				href: '/pricing',
-				label: 'Pricing',
+				label: 'Цены',
 			},
 			{
 				href: '/features',
-				label: 'Features',
+				label: 'Возможности',
 			},
 			{
 				href: '/articles/page/1',
-				label: 'Blog',
+				label: 'Блог',
 			},
 		],
 	},
 	{
-		title: 'Platforms',
+		title: 'Платформы',
 		links: [
 			{
 				href: '/platforms/web',
-				label: 'Web',
+				label: 'Веб',
 			},
 			{
 				href: '/platforms/windows',
@@ -41,23 +41,23 @@ export const LINKS: { title: string; links: Link[] }[] = [
 		],
 	},
 	{
-		title: 'About',
+		title: 'О компании',
 		links: [
 			{
 				href: '/about',
-				label: 'About us',
+				label: 'О нас',
 			},
 			{
 				href: '/contacts',
-				label: 'Contact',
+				label: 'Контакты',
 			},
 			{
 				href: '/versions',
-				label: 'Updates',
+				label: 'Обновления',
 			},
 			{
 				href: '/security',
-				label: 'Security',
+				label: 'Безопасность',
 			},
 		],
 	},
@@ -66,26 +66,26 @@ export const LINKS: { title: string; links: Link[] }[] = [
 export const FEATURES_SLIDER_1_ITEMS = [
 	{
 		icon: 'icon-reminder',
-		title: 'Reminders and recurrence',
-		description: 'Set reminders and recurring tasks with flexible schedules – never miss a deadline.',
+		title: 'Напоминания и повторения',
+		description: 'Ставьте напоминания и повторяющиеся задачи с гибкими графиками — больше никаких пропущенных дедлайнов.',
 		image: '/reminders-and-recurrence.webp',
 	},
 	{
 		icon: 'icon-checklist-feature',
-		title: 'Checklists and task descriptions',
-		description: 'Add detailed descriptions and checklists to visualize every step of your workflow.',
+		title: 'Чек-листы и описания задач',
+		description: 'Добавляйте подробные описания и чек-листы, чтобы видеть каждый шаг процесса.',
 		image: '/checklists-and-task-descriptions.webp',
 	},
 	{
 		icon: 'icon-chat',
-		title: 'Chats and attachments',
-		description: 'Discuss tasks in built-in chats and attach files right to the task card – everything you need in one place.',
+		title: 'Чаты и вложения',
+		description: 'Обсуждайте задачи во встроенных чатах и прикрепляйте файлы прямо в карточку — всё нужное в одном месте.',
 		image: '/chats-and-attachments.webp',
 	},
 	{
 		icon: 'icon-tag',
-		title: 'Tags, colors, and focus',
-		description: 'Organize tasks by tags and colors. Highlight what matters most in the “Focus” list to boost concentration.',
+		title: 'Теги, цвета и фокус',
+		description: 'Организуйте задачи по тегам и цветам. Отмечайте главное в списке «Фокус», чтобы работать сосредоточенно.',
 		image: '/tags-colors-and-focus.webp',
 	},
 ];
@@ -93,28 +93,28 @@ export const FEATURES_SLIDER_1_ITEMS = [
 export const FEATURES_SLIDER_2_ITEMS = [
 	{
 		icon: 'icon-filter',
-		title: 'Filters',
-		description: 'Filter by date, status, assignee, project, and more to locate exactly what you need.',
+		title: 'Фильтры',
+		description: 'Фильтруйте по дате, статусу, исполнителю, проекту и другим параметрам, чтобы быстро находить нужное.',
 		image: '/filters.webp',
 	},
 	{
 		icon: 'icon-sorting',
-		title: 'Sorting',
-		description: 'Sort tasks by priority, due dates, or custom criteria with just a few clicks.',
+		title: 'Сортировка',
+		description: 'Сортируйте задачи по приоритету, срокам или своим критериям в пару кликов.',
 		image: '/sorting.webp',
 		customClass: '!max-w-44.5 !max-h-61.25 md:!max-h-109 md:!max-w-85 ',
 		justifyClass: '!justify-center',
 	},
 	{
 		icon: 'icon-hightlights',
-		title: 'Current highlights',
-		description: 'Stay on top of unread items, overdue tasks, and notifications in dedicated views.',
+		title: 'Актуальные выделения',
+		description: 'Держите под контролем непрочитанное, просрочки и уведомления в отдельных представлениях.',
 		image: '/current-highlights.webp',
 	},
 	{
 		icon: 'icon-recycle',
-		title: 'Recycle bin and archive',
-		description: 'Deleted tasks can be restored – your data is always under control.',
+		title: 'Корзина и архив',
+		description: 'Удалённые задачи можно восстановить — данные всегда под контролем.',
 		image: '/recycle-bin-and-archive.webp',
 	},
 ];
