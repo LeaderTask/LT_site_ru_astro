@@ -11,21 +11,21 @@ const imagesDimensions = {
 	integrations: await getImageDimensions('/integrations.webp', 320, 285),
 	recurring: await getImageDimensions('/recurring.webp', 340, 344),
 	taskTree: await getImageDimensions('/task-tree.webp', 400, 240),
-	across: await getImageDimensions('/across.webp', 340, 136),
+	across: await getImageDimensions('/across.webp', 340, 196),
 	roles: await getImageDimensions('/roles.webp', 320, 136),
 };
 ---
 
 <section class="flex flex-col gap-6 lg:gap-8 items-center section-top-indent">
 	<h3 class="text-[24px] lg:text-[44px] leading-7 lg:leading-13 text-center font-bold text-primary">
-		Manage tasks
+		Управляйте задачами
 		<br class="lg:hidden" />
-		<GradientTextElem>simply and efficiently</GradientTextElem>
+		<GradientTextElem>просто и быстро</GradientTextElem>
 	</h3>
 	<div class="relative flex flex-col gap-4 lg:block lg:h-300 w-full">
 		<div class="lg:absolute lg:top-13.75 lg:left-123 overflow-hidden bg-orange-light shadow-card rounded-5">
 			<div class="pt-4 text-center px-4 pb-1">
-				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Filters and sorting</p>
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Фильтры и сортировка</p>
 			</div>
 			<div class="w-full lg:h-42 lg:w-80 overflow-hidden">
 				<Image
@@ -41,7 +41,7 @@ const imagesDimensions = {
 		</div>
 		<div class="bg-purple-light shadow-card rounded-5 lg:absolute lg:top-54.5 lg:left-0">
 			<div class="pt-4 text-center px-4 pb-1">
-				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Reminders and notifications</p>
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Напоминания и уведомления</p>
 			</div>
 			<div class="w-full lg:w-100 lg:h-50">
 				<Image
@@ -58,9 +58,9 @@ const imagesDimensions = {
 		<div class="bg-white shadow-card rounded-5 lg:absolute lg:top-54.5 lg:right-0">
 			<div class="pt-4 text-center px-4 pb-1">
 				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">
-					Attachments
+					Вложения
 					<br class="hidden lg:block" />
-					and checklists
+					и чек-листы
 				</p>
 			</div>
 			<div class="w-full lg:w-80 lg:h-50">
@@ -77,7 +77,7 @@ const imagesDimensions = {
 		</div>
 		<div class="bg-white shadow-card rounded-5 lg:absolute lg:top-136.25 lg:left-27.5">
 			<div class="pt-4 text-center px-4 pb-1">
-				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Integrations</p>
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Интеграции</p>
 			</div>
 			<div class="w-full lg:h-35 lg:w-80 overflow-hidden">
 				<Image
@@ -93,7 +93,7 @@ const imagesDimensions = {
 		</div>
 		<div class="bg-gray-light shadow-card rounded-5 lg:absolute lg:top-95.5 lg:left-136.75">
 			<div class="pt-4 text-center px-4 pb-1">
-				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Recurring tasks</p>
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Повторы задач</p>
 			</div>
 			<div class="w-full lg:h-86 lg:w-85 overflow-hidden">
 				<Image
@@ -109,7 +109,7 @@ const imagesDimensions = {
 		</div>
 		<div class="bg-gray-light shadow-card rounded-5 lg:absolute lg:top-204.5 lg:left-13.75">
 			<div class="pt-4 text-center px-4 pb-1">
-				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Task tree</p>
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Дерево задач</p>
 			</div>
 			<div class="w-full lg:h-60 lg:w-100 overflow-hidden">
 				<Image
@@ -123,9 +123,9 @@ const imagesDimensions = {
 		</div>
 		<div class="bg-purple-light shadow-card rounded-5 lg:absolute lg:top-177.5 lg:right-2">
 			<div class="pt-4 text-center px-4 pb-1">
-				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Across all devices</p>
+				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">Для любых устройств</p>
 			</div>
-			<div class="w-full lg:h-34 lg:w-85 overflow-hidden">
+			<div class="w-full lg:h-49 lg:w-85 overflow-hidden">
 				<Image
 					src="/across.webp"
 					alt="across all devices"
@@ -138,9 +138,9 @@ const imagesDimensions = {
 		<div class="bg-orange-light shadow-card rounded-5 lg:absolute lg:top-232 lg:right-97.5">
 			<div class="pt-4 text-center px-4 pb-1">
 				<p class="text-[18px] lg:text-[24px] leading-6 font-bold text-primary">
-					Roles and access
+					Роли и права
 					<br class="hidden lg:block" />
-					controls
+					доступа
 				</p>
 			</div>
 			<div class="w-full lg:h-34 lg:w-80 overflow-hidden">
@@ -160,6 +160,6 @@ const imagesDimensions = {
 		:clickEffect="true"
 		href="/features"
 	>
-		All features
+		Все возможности
 	</AppButton>
 </section>

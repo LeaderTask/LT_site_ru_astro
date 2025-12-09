@@ -9,19 +9,19 @@ const page = pages.find((p) => p.slug === 'pricing');
 ---
 
 <Layout
-	title={page?.data.title || 'LeaderTask - Pricing'}
+	title={page?.data.title || 'LeaderTask - Тарифы'}
 	description={page?.data.description}
 	isFollow={page?.data.isFollow}
 >
 	<h1
 		class="font-bold text-center text-[32px] lg:text-[72px] lg:leading-20 leading-9 mb-10 mt-15 lg:mb-15 lg:mt-30 flex flex-col md:block text-primary"
 	>
-		Pick your
+		Выберите свой
 		<span
 			class="bg-linear-to-r from-accent-orange to-accent-red bg-clip-text text-transparent"
 			style="text: linear-gradient(88deg, #FF4C00 58.78%, #FF002C 117.51%);"
 		>
-			perfect plan
+			идеальный план
 		</span>
 	</h1>
 	<PricingCardsBlock />

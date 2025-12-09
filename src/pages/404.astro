@@ -6,27 +6,27 @@ import LinksCardsList from '@/widgets/LinksCardsList/LinksCardsList.astro';
 const LINKS = [
 	{
 		icon: 'icon-apps',
-		title: 'Apps',
+		title: 'Приложения',
 		link: '/downloads',
-		description: 'Get the app here',
+		description: 'Скачайте приложение здесь',
 	},
 	{
 		icon: 'icon-features',
-		title: 'Features',
+		title: 'Возможности',
 		link: '/features',
-		description: 'See what we offer',
+		description: 'Посмотрите, что мы предлагаем',
 	},
 	{
 		icon: 'icon-pricing',
-		title: 'Pricing',
+		title: 'Тарифы',
 		link: '/pricing',
-		description: 'Check plans and costs',
+		description: 'Проверьте планы и цены',
 	},
 	{
 		icon: 'icon-blog',
-		title: 'Blog',
+		title: 'Блог',
 		link: '/articles/page/1',
-		description: 'Learn smarter planning ideas',
+		description: 'Узнайте идеи для умного планирования',
 	},
 ] as {
 	icon: string;
@@ -36,17 +36,17 @@ const LINKS = [
 }[];
 ---
 
-<Layout title="Not found">
+<Layout title="Страница не найдена">
 	<section class="flex flex-col gap-10 lg:gap-15 items-center justify-center section-top-indent">
 		<div class="flex flex-col gap-5 lg:gap-10 text-center">
-			<h1 class="text-[32px] lg:text-[72px] leading-9 lg:leading-20 font-bold">Whoops! Something went wrong</h1>
+			<h1 class="text-[32px] lg:text-[72px] leading-9 lg:leading-20 font-bold">Упс! Что-то пошло не так</h1>
 			<p class="text-[16px] lg:text-[28px] lg:leading-8 max-w-200 mx-auto text-secondary">
-				The page you were looking for doesn’t exist. If you need help, please
+				Страница, которую вы искали, не существует. Если вам нужна помощь, пожалуйста,
 				<a
 					href="/contacts"
 					class="text-accent-blue"
 				>
-					contact us
+					свяжитесь с нами
 				</a>.
 			</p>
 		</div>
@@ -54,12 +54,12 @@ const LINKS = [
 			href="/"
 			size="lg"
 		>
-			Back to Home
+			Вернуться на главную
 		</AppButton>
 	</section>
 	<LinksCardsList
-		title="Lost? Try one of these"
-		description="These sections might be just what you need to continue planning."
+		title="Заблудились? Попробуйте один из этих"
+		description="Эти разделы могут быть именно тем, что вам нужно для продолжения планирования."
 		cardClass="p-4 lg:p-8 lg:h-48"
 		list={LINKS.map((link) => ({
 			...link,

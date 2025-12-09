@@ -16,7 +16,7 @@ const page = pages.find((p) => p.slug === 'features');
 ---
 
 <Layout
-	title={page?.data.title || 'Features'}
+	title={page?.data.title || 'Возможности'}
 	description={page?.data.description}
 	isFollow={page?.data.isFollow}
 >
@@ -25,15 +25,15 @@ const page = pages.find((p) => p.slug === 'features');
 	<FeaturesAccordion
 		items={FEATURES_SLIDER_1_ITEMS}
 		reverse={false}
-		title="Customize tasks"
-		gradientText="to your needs"
+		title="Настройте задачи"
+		gradientText="под ваши нужды"
 	/>
 	<WorkingSystem />
 	<FeaturesAccordion
 		items={FEATURES_SLIDER_2_ITEMS}
 		reverse={true}
-		title="Define priorities and keep"
-		gradientText="things in order"
+		title="Определяйте приоритеты и поддерживайте"
+		gradientText="порядок"
 	/>
 	<Calendar showTitle={false} />
 	<TeamWork />

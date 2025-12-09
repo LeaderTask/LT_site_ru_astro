@@ -16,10 +16,10 @@ interface Plan {
 const PLANS: Plan[] = [
 	{
 		type: 'free',
-		title: 'Free',
+		title: 'Бесплатный',
 		titleColor: 'text-primary',
 		color: 'black',
-		buttonText: 'Try Free plan now',
+		buttonText: 'Попробовать бесплатный тариф',
 		buttonClass: 'bg-primary hover:bg-dark-hover',
 	},
 	{
@@ -27,7 +27,7 @@ const PLANS: Plan[] = [
 		title: 'Premium',
 		titleColor: 'text-accent-orange',
 		color: 'orange',
-		buttonText: 'Subscribe Premium',
+		buttonText: 'Подписаться на Premium',
 		buttonClass: 'bg-accent-orange hover:bg-accent-orange-dark',
 	},
 	{
@@ -35,54 +35,54 @@ const PLANS: Plan[] = [
 		title: 'Business',
 		titleColor: 'text-accent-blue',
 		color: 'purple',
-		buttonText: 'Subscribe Business',
+		buttonText: 'Подписаться на Business',
 		buttonClass: 'bg-accent-blue hover:bg-accent-blue-link',
 	},
 ];
 
 const SECTIONS = [
 	{
-		title: 'Key features',
+		title: 'Основные возможности',
 		features: [
-			{ name: 'Tasks', free: '100', premium: '∞', business: '∞' },
-			{ name: 'Projects', free: '10', premium: '∞', business: '∞' },
-			{ name: 'Subprojects and subtasks', free: true, premium: true, business: true },
-			{ name: 'Cards on boards', free: '100', premium: '∞', business: '∞' },
-			{ name: 'Boards', free: '3', premium: '∞', business: '∞' },
-			{ name: 'Calendar view for tasks', free: true, premium: true, business: true },
-			{ name: 'Tasks from email', free: false, premium: true, business: true },
-			{ name: 'Notifications and reminders', free: true, premium: true, business: true },
-			{ name: 'Trash bin', free: false, premium: true, business: true },
-			{ name: 'Calendar', free: true, premium: true, business: true },
+			{ name: 'Задачи', free: '100', premium: '∞', business: '∞' },
+			{ name: 'Проекты', free: '10', premium: '∞', business: '∞' },
+			{ name: 'Подпроекты и подзадачи', free: true, premium: true, business: true },
+			{ name: 'Карточки на досках', free: '100', premium: '∞', business: '∞' },
+			{ name: 'Доски', free: '3', premium: '∞', business: '∞' },
+			{ name: 'Календарный вид задач', free: true, premium: true, business: true },
+			{ name: 'Задачи из email', free: false, premium: true, business: true },
+			{ name: 'Уведомления и напоминания', free: true, premium: true, business: true },
+			{ name: 'Корзина', free: false, premium: true, business: true },
+			{ name: 'Календарь', free: true, premium: true, business: true },
 		],
 	},
 	{
-		title: 'Task properties',
+		title: 'Свойства задач',
 		features: [
-			{ name: 'Labels', free: '3', premium: '∞', business: '∞' },
-			{ name: 'Colors', free: '3', premium: '∞', business: '∞' },
-			{ name: 'File attachments', free: false, premium: true, business: true },
-			{ name: 'Task and card chat', free: false, premium: true, business: true },
-			{ name: 'Recurring tasks', free: false, premium: true, business: true },
-			{ name: 'Checklists', free: false, premium: true, business: true },
+			{ name: 'Метки', free: '3', premium: '∞', business: '∞' },
+			{ name: 'Цвета', free: '3', premium: '∞', business: '∞' },
+			{ name: 'Вложения файлов', free: false, premium: true, business: true },
+			{ name: 'Чат задач и карточек', free: false, premium: true, business: true },
+			{ name: 'Повторяющиеся задачи', free: false, premium: true, business: true },
+			{ name: 'Чек-листы', free: false, premium: true, business: true },
 		],
 	},
 	{
-		title: 'Team collaboration',
+		title: 'Командная работа',
 		features: [
-			{ name: 'Shared boards', free: false, premium: false, business: true },
-			{ name: 'Shared projects', free: false, premium: false, business: true },
-			{ name: 'Task assignments', free: false, premium: false, business: true },
-			{ name: 'Department organization', free: false, premium: false, business: true },
+			{ name: 'Общие доски', free: false, premium: false, business: true },
+			{ name: 'Общие проекты', free: false, premium: false, business: true },
+			{ name: 'Назначение задач', free: false, premium: false, business: true },
+			{ name: 'Организация отделов', free: false, premium: false, business: true },
 		],
 	},
 	{
-		title: 'Autonomy',
+		title: 'Автономность',
 		features: [
-			{ name: 'Offline mode', free: true, premium: true, business: true },
-			{ name: 'Updates', free: true, premium: true, business: true },
-			{ name: 'Sync', free: false, premium: true, business: true },
-			{ name: 'Cloud storage', free: false, premium: true, business: true },
+			{ name: 'Офлайн режим', free: true, premium: true, business: true },
+			{ name: 'Обновления', free: true, premium: true, business: true },
+			{ name: 'Синхронизация', free: false, premium: true, business: true },
+			{ name: 'Облачное хранилище', free: false, premium: true, business: true },
 		],
 	},
 ];
@@ -203,7 +203,7 @@ const SECTIONS = [
 				aria-expanded="false"
 				aria-controls="desktop-content"
 			>
-				<span class="text-accent-orange font-semibold text-[16px] leading-5">See all features</span>
+				<span class="text-accent-orange font-semibold text-[16px] leading-5">Показать все возможности</span>
 				<svg
 					id="desktop-toggle-icon"
 					class="w-5 h-5 transition-transform"

@@ -52,18 +52,18 @@ const typesList = Array.from(typesSet).filter((type) => type !== 'Windows');
 
 const BREADCRUMBS = [
 	{
-		label: 'Home',
+		label: 'Главная',
 		url: '/',
 	},
 	{
-		label: 'Release history',
+		label: 'История релизов',
 		url: '/versions',
 	},
 ];
 ---
 
 <Layout
-	title={page?.data.title || 'Release history'}
+	title={page?.data.title || 'История релизов'}
 	description={page?.data.description}
 	isFollow={page?.data.isFollow}
 >
@@ -74,7 +74,7 @@ const BREADCRUMBS = [
 	>
 		<Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
-		<h2 class="text-[32px] leading-8 lg:text-[38px] lg:leading-10 font-bold text-center text-primary">Release history</h2>
+		<h2 class="text-[32px] leading-8 lg:text-[38px] lg:leading-10 font-bold text-center text-primary">История релизов</h2>
 
 		<ul
 			class="flex gap-2 justify-center lg:hidden"

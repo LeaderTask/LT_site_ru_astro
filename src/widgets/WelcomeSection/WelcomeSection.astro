@@ -4,13 +4,13 @@ import LinksCardsList from '@/widgets/LinksCardsList/LinksCardsList.astro';
 
 const BUTTONS = [
 	{
-		text: 'Explore Features',
+		text: 'Изучить возможности',
 		variant: 'primary' as const,
 		customClass: 'w-35 md:w-60 md:h-15 flex items-center justify-center',
 		href: '/features',
 	},
 	{
-		text: 'See Pricing',
+		text: 'Посмотреть тарифы',
 		variant: 'dark' as const,
 		customClass: 'w-35 md:w-60 md:h-15 flex items-center justify-center',
 		href: '/pricing',
@@ -47,16 +47,16 @@ const DEVICES = [
 			<h1
 				class="font-bold text-center text-[32px] leading-9 md:text-[72px] md:leading-20 mb-5 md:mb-10 flex flex-col md:block text-primary"
 			>
-				Welcome to
+				Добро пожаловать в
 				<span
 					class="bg-linear-to-r from-accent-orange to-accent-red bg-clip-text text-transparent"
 					style="color: linear-gradient(88deg, #ff4c00 58.78%, #ff002c 117.51%)"
 				>
-					LeaderTask
+					ЛидерТаск
 				</span>
 			</h1>
 			<p class="font-regular text-[16px] leading-6 md:text-[28px] md:leading-10 text-secondary max-w-150 mx-auto">
-				Thanks for joining! Your journey to maximum productivity starts here.
+				Спасибо, что присоединились! Ваш путь к максимальной продуктивности начинается здесь.
 			</p>
 		</div>
 
@@ -76,8 +76,8 @@ const DEVICES = [
 		</div>
 
 		<LinksCardsList
-			title="Stay productive on any device"
-			description="Get LeaderTask for your device and stay organized wherever you are"
+			title="Будьте продуктивны на любом устройстве"
+			description="Получите ЛидерТаск для своего устройства и оставайтесь организованными где бы вы ни были"
 			list={DEVICES}
 		/>
 	</div>

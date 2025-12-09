@@ -9,10 +9,10 @@ import { getImageDimensions } from '@/shared';
 const qrCodeDimensions = await getImageDimensions('/qr-code.webp');
 
 const QUICK_START_STEPS = [
-	{ number: 1, bold: 'Download LeaderTask', text: ' on any device you like' },
-	{ number: 2, bold: 'Sign up for free', text: ' with your email' },
-	{ number: 3, bold: 'Add your name and password', text: " – you're all set" },
-	{ number: 4, bold: 'Create your first task', text: ' and start getting things done.' },
+	{ number: 1, bold: 'Скачайте ЛидерТаск', text: ' на любое устройство' },
+	{ number: 2, bold: 'Зарегистрируйтесь бесплатно', text: ' используя email' },
+	{ number: 3, bold: 'Добавьте имя и пароль', text: ' — готово' },
+	{ number: 4, bold: 'Создайте первую задачу', text: ' и начните выполнять дела.' },
 ] as const;
 
 const LINKS = {
@@ -59,17 +59,17 @@ const MOBILE_DEVICE_ANDROID = {
 <div class="bg-gray">
 	<section class="text-center mt-15 md:mt-30 mb-15 md:mb-30">
 		<h1 class="hidden md:block font-bold text-[72px] leading-20 mb-10 text-primary">
-			Download Organizer<br />
-			<span class="bg-linear-to-r from-accent-orange to-accent-red bg-clip-text text-transparent">for Windows 64-bit</span>
+			Скачайте Органайзер<br />
+			<span class="bg-linear-to-r from-accent-orange to-accent-red bg-clip-text text-transparent">для Windows 64-bit</span>
 		</h1>
 
 		<h2 class="md:hidden font-bold text-[32px] leading-9 mb-5 text-primary">
-			Get LeaderTask<br />
-			<span class="bg-linear-to-r from-accent-orange to-accent-red bg-clip-text text-transparent">in one click</span>
+			Получите ЛидерТаск<br />
+			<span class="bg-linear-to-r from-accent-orange to-accent-red bg-clip-text text-transparent">в один клик</span>
 		</h2>
 
 		<p class="font-regular text-[16px] leading-6 md:text-[28px] md:leading-10 text-secondary mb-10 md:mb-15">
-			Try all features free for 3 days – no credit card needed
+			Попробуйте все возможности бесплатно 3 дня — без банковской карты
 		</p>
 
 		<AppButton
@@ -79,13 +79,13 @@ const MOBILE_DEVICE_ANDROID = {
 			id="download-button"
 			href={LINKS.windows}
 		>
-			Download for free
+			Скачать бесплатно
 		</AppButton>
 	</section>
 
 	<section class="mb-15 md:mb-30">
 		<h2 class="font-bold text-[24px] leading-7 md:text-[44px] md:leading-13 text-center text-primary mb-6 md:mb-15">
-			Quick start guide
+			Краткое руководство
 		</h2>
 
 		<div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 max-w-300 mx-auto">
@@ -105,14 +105,14 @@ const MOBILE_DEVICE_ANDROID = {
 		</div>
 
 		<p class="text-center font-regular text-[14px] leading-5 text-secondary mt-4 md:mt-8">
-			Need help?
+			Нужна помощь?
 			<a
 				href="/contacts"
 				class="text-accent-blue visited:text-accent-purple-link cursor-pointer no-underline hover:no-underline"
 			>
-				Contact us
+				Свяжитесь с нами
 			</a>
-			– we're here to help.
+			— мы всегда готовы помочь.
 		</p>
 	</section>
 
@@ -148,10 +148,10 @@ const MOBILE_DEVICE_ANDROID = {
 	<section>
 		<div class="text-center mb-6 md:mb-15">
 			<h2 class="font-bold text-[24px] leading-7 md:text-[44px] md:leading-13 text-primary mb-4 md:mb-6">
-				Stay productive<br class="md:hidden" /> on any device
+				Будьте продуктивны<br class="md:hidden" /> на любом устройстве
 			</h2>
 			<p class="font-regular text-[16px] leading-6 md:text-[20px] md:leading-8 text-secondary">
-				Get LeaderTask for your device and stay organized wherever you are
+				Получите ЛидерТаск для своего устройства и оставайтесь организованными где бы вы ни были
 			</p>
 		</div>
 
@@ -177,8 +177,8 @@ const MOBILE_DEVICE_ANDROID = {
 							class="w-20 h-20 lg:w-25 lg:h-25 xl:w-35 xl:h-35 shrink-0"
 						/>
 						<div class="text-left text-secondary">
-							<h3 class="font-bold text-[22px] leading-6 mb-1 lg:mb-3">Tasks on the go? LeaderTask is here!</h3>
-							<p class="font-regular text-[16px] leading-6">LeaderTask for iOS and Android – just scan the code</p>
+							<h3 class="font-bold text-[22px] leading-6 mb-1 lg:mb-3">Задачи в пути? ЛидерТаск здесь!</h3>
+							<p class="font-regular text-[16px] leading-6">ЛидерТаск для iOS и Android — просто отсканируйте код</p>
 						</div>
 					</div>
 				</div>
