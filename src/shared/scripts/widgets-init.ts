@@ -60,7 +60,7 @@ function initAll() {
 		initThousandsSwiper();
 	}
 
-	if (document.getElementById('companies-swiper')) {
+	if (document.getElementById('companies-swiper-first')) {
 		if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
 			requestIdleCallback(initCompaniesSlider, { timeout: 2000 });
 		} else {

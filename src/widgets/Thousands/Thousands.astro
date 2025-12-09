@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import AppButton from '@/shared/ui/AppButton/AppButton.astro';
-import GradientTextElem from '@/shared/ui/GradientTextElem/GradientTextElem.astro';
 import { getLinkToGetStarted } from '@/shared/helpers';
 import ThousandsSwiper from './ThousandsSwiper.astro';
 
@@ -18,43 +17,43 @@ const REVIEWS_LIST: REVIEW[] = [
 		id: 1,
 		name: 'aatanat',
 		platform: 'app-store',
-		text: 'I was looking for an app to help me plan different areas of my life: studies, relationships, hobbies. I like that <span class="text-accent-orange">the app syncs with my laptop and phone, and that it\'s intuitive - I quickly figured it out</span> and wrote down all my tasks, and then just looked at it and marked what I needed to do during the day.',
-		date: 'April 17, 2025',
+		text: 'Искал приложение, чтобы планировать разные сферы жизни: учёбу, отношения, хобби. Нравится, что <span class="text-accent-orange">приложение синхронизируется с ноутбуком и телефоном, оно интуитивно понятное — быстро разобрался и записал все задачи</span>, затем просто смотрю и отмечаю, что нужно сделать за день.',
+		date: '17 апреля 2025',
 	},
 	{
 		id: 2,
 		name: 'komarov-d-v',
 		platform: 'app-store',
-		text: '<span class="text-accent-orange">Very easy and convenient to use. It saves a lot of time, makes it comfortable to plan working hours!</span> The reminders about scheduled events are just GREAT, no need to worry that you will forget something!',
-		date: 'April 9, 2025',
+		text: '<span class="text-accent-orange">Очень легко и удобно пользоваться. Экономит много времени, комфортно планировать рабочие часы!</span> Напоминания о запланированных событиях просто ОТЛИЧНЫЕ, можно не переживать, что что-то забудешь!',
+		date: '9 апреля 2025',
 	},
 	{
 		id: 3,
 		name: 'Ilsur Shaidullin',
 		platform: 'google-play',
-		text: 'Seven years ago I was looking for a good task planner, found Leadertask, started using it, everything was great. But because the sysadmin refused to install it on my work PC, I had to stop using it with regret. I changed company and was surprised when at the beginning of this year, looking for a good planner, I realized that Leadertask stayed among my favorites. <span class="text-accent-orange">The main plus for me is usability, everything is intuitive. I recommend it.</span>',
-		date: 'May 8, 2025',
+		text: 'Семь лет назад искал хороший планировщик задач, нашёл Leadertask, начал пользоваться — всё было отлично. Но админ отказался ставить его на рабочий ПК, пришлось с сожалением отказаться. Сменил компанию и удивился, когда в начале этого года, снова ища планировщик, увидел, что Leadertask остался в избранном. <span class="text-accent-orange">Главный плюс для меня — удобство, всё интуитивно. Рекомендую.</span>',
+		date: '8 мая 2025',
 	},
 	{
 		id: 4,
 		name: 'Ildar Sul',
 		platform: 'google-play',
-		text: 'Very convenient app. I bought the premium version, <span class="text-accent-orange">synchronization works, tasks get done.</span> Overall everything is great.',
-		date: 'September 6, 2025',
+		text: 'Очень удобное приложение. Купил премиум, <span class="text-accent-orange">синхронизация работает, задачи закрываются.</span> В целом всё отлично.',
+		date: '6 сентября 2025',
 	},
 	{
 		id: 5,
 		name: 'Nina Artamonova',
 		platform: 'google-play',
-		text: 'This is a very convenient and functional app. All tasks and plans are in one place. You can create tasks and build a schedule at any time, whether you\'re on the go with your phone or using your computer. <span class="text-accent-orange">Everything syncs, and reminders pop up, the interface is convenient and clear.</span>',
-		date: 'July 4, 2025',
+		text: 'Очень удобное и функциональное приложение. Все задачи и планы в одном месте. Можно создавать задачи и строить расписание в любой момент — с телефона или с компьютера. <span class="text-accent-orange">Всё синхронизируется, приходят напоминания, интерфейс удобный и понятный.</span>',
+		date: '4 июля 2025',
 	},
 	{
 		id: 6,
 		name: 'Two Kik',
 		platform: 'app-store',
-		text: 'If I could only keep one app on my phone, it would be LeaderTask without a doubt. Thank you to the developers <span class="text-accent-orange">for improving the program and providing timely updates and fixes.</span> I use it every day and am delighted by what our developers are capable of creating! ❤️',
-		date: 'June 11, 2025',
+		text: 'Если бы на телефоне можно было оставить только одно приложение, без сомнений это был бы LeaderTask. Спасибо разработчикам <span class="text-accent-orange">за улучшения программы и своевременные обновления и исправления.</span> Пользуюсь каждый день и в восторге от того, что наши разработчики умеют создавать! ❤️',
+		date: '11 июня 2025',
 	},
 ];
 
@@ -66,8 +65,7 @@ const initialGetStartedLink = getLinkToGetStarted(initialDevice);
 
 <section class="section-top-indent grid lg:gap-15">
 	<h3 class="text-[24px] leading-7 lg:text-[44px] pb-10 lg:pb-0 lg:leading-10 font-bold text-center text-primary">
-		<GradientTextElem>Тысячи пользователей</GradientTextElem>
-		уже <br class="lg:hidden" /> используют ЛидерТаск
+		Отзывы о нас
 	</h3>
 	<div class="grid-cols-3 hidden lg:grid gap-8">
 		{

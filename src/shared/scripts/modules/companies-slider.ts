@@ -4,19 +4,25 @@ declare const setTimeout: (callback: () => void, delay?: number) => number;
 declare const clearTimeout: (id: number) => void;
 
 export async function initCompaniesSlider() {
-	const swiperContainer = document.getElementById('companies-swiper');
-	if (!swiperContainer) return;
+	const swiperFirst = document.getElementById('companies-swiper-first');
+	const swiperSecond = document.getElementById('companies-swiper-seconds');
+	if (!swiperFirst && !swiperSecond) return;
 
 	const { default: Swiper } = await import('swiper');
 	const { Autoplay } = await import('swiper/modules');
 
-	let swiperInstance: InstanceType<typeof Swiper> | null = null;
+	type SwiperData = { element: HTMLElement; reverse: boolean };
+	const swipers: SwiperData[] = [
+		...(swiperFirst ? [{ element: swiperFirst, reverse: false }] : []),
+		...(swiperSecond ? [{ element: swiperSecond, reverse: true }] : []),
+	];
+	const instances = new Map<HTMLElement, InstanceType<typeof Swiper>>();
 
 	function init() {
-		if (swiperInstance) {
-			(swiperInstance as unknown as { destroy: (cleanStyles?: boolean, cleanSlides?: boolean) => void }).destroy(true, true);
-			swiperInstance = null;
-		}
+		instances.forEach((instance) => {
+			(instance as unknown as { destroy: (cleanStyles?: boolean, cleanSlides?: boolean) => void }).destroy(true, true);
+		});
+		instances.clear();
 
 		function getSlidesPerView() {
 			return window.innerWidth < 1024 ? 2.5 : 6;
@@ -26,32 +32,38 @@ export async function initCompaniesSlider() {
 			return window.innerWidth < 1024 ? 30 : 80;
 		}
 
-		if (!swiperContainer) return;
 		const isMobile = window.innerWidth < 1024;
-		swiperInstance = new Swiper(swiperContainer, {
-			slidesPerView: getSlidesPerView(),
-			spaceBetween: getSpaceBetween(),
-			loop: true,
-			loopAdditionalSlides: 2,
-			watchOverflow: true,
-			autoplay: {
-				delay: 0,
-				disableOnInteraction: false,
-			},
-			speed: 3000,
-			modules: [Autoplay],
-			allowTouchMove: !isMobile,
+		swipers.forEach(({ element, reverse }) => {
+			const instance = new Swiper(element, {
+				slidesPerView: getSlidesPerView(),
+				spaceBetween: getSpaceBetween(),
+				loop: true,
+				loopAdditionalSlides: 2,
+				watchOverflow: true,
+				autoplay: {
+					delay: 0,
+					disableOnInteraction: false,
+					reverseDirection: reverse,
+				},
+				speed: 3000,
+				modules: [Autoplay],
+				allowTouchMove: !isMobile,
+			});
+			instances.set(element, instance);
 		});
 
 		let resizeTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
 		window.addEventListener('resize', () => {
 			if (resizeTimeout) clearTimeout(resizeTimeout);
 			resizeTimeout = setTimeout(() => {
-				if (swiperInstance) {
-					swiperInstance.destroy(true, true);
-					swiperInstance = null;
-					init();
-				}
+				instances.forEach((instance) => {
+					(instance as unknown as { destroy: (cleanStyles?: boolean, cleanSlides?: boolean) => void }).destroy(
+						true,
+						true
+					);
+				});
+				instances.clear();
+				init();
 			}, 100);
 		});
 	}

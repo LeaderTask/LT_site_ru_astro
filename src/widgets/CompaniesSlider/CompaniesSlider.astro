@@ -2,24 +2,46 @@
 import { Image } from 'astro:assets';
 import 'swiper/css';
 import { getImageDimensions } from '@/shared';
+import GradientTextElem from '@/shared/ui/GradientTextElem/GradientTextElem.astro';
 
-const slides = [
-	'albilad-bank',
-	'bnp-paribas',
-	'logivert',
-	'sitronics',
-	'kucheneli',
+const slidesFirst = [
+	'sber',
+	'moskov',
+	'rusfinance',
+	'science',
+	'beeline',
 	'lukoil',
+	'trk',
+	'strou-invest',
+	'documents',
+	'irs',
+	'gor-project',
 	'tajero',
-	'allieduniversal',
-	'probitek',
-	'9am',
-	'faberlic',
-	'icts',
+	'gubinsky',
+	'roven',
 ];
 
+const slidesSeconds = [
+	'amur',
+	'rustelemat',
+	'avangard',
+	'lotos-plaza',
+	'programos',
+	'greentech',
+	'slavneft',
+	'techexpert',
+	'faberlic',
+	'sinergiya',
+	'2gis',
+	'sdeck',
+	'mossbit',
+	'contur',
+];
+
+const slidesAll = [...slidesFirst, ...slidesSeconds];
+
 const slidesDimensions = await Promise.all(
-	slides.map(async (slide) => ({
+	slidesAll.map(async (slide) => ({
 		slide,
 		dimensions: await getImageDimensions(`/${slide}.webp`),
 	}))
@@ -29,14 +51,41 @@ const getSlideDim = (slideName: string) =>
 		?.dimensions || { width: 100, height: 100 };
 ---
 
-<section class="section-top-indent grid">
+<section class="section-top-indent grid gap-6 lg:gap-8">
+	<h3 class="text-[24px] leading-7 lg:text-[44px] pb-10 lg:pb-0 lg:leading-10 font-bold text-center text-primary">
+		<GradientTextElem>Тысячи пользователей</GradientTextElem>
+		уже <br class="lg:hidden" /> используют ЛидерТаск
+	</h3>
 	<div
-		id="companies-swiper"
+		id="companies-swiper-first"
 		class="w-full h-32 grid-cols-full overflow-hidden"
 	>
 		<div class="swiper-wrapper">
 			{
-				slides.map((slide) => (
+				slidesFirst.map((slide) => (
+					<div class="swiper-slide w-full h-full">
+						<div class="w-full h-full flex items-center">
+							<Image
+								src={`/${slide}.webp`}
+								alt={slide}
+								width={getSlideDim(slide).width}
+								height={getSlideDim(slide).height}
+								class="w-full min-w-25 h-full object-contain"
+								loading="lazy"
+							/>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+	<div
+		id="companies-swiper-seconds"
+		class="w-full h-32 grid-cols-full overflow-hidden"
+	>
+		<div class="swiper-wrapper">
+			{
+				slidesSeconds.map((slide) => (
 					<div class="swiper-slide w-full h-full">
 						<div class="w-full h-full flex items-center">
 							<Image
