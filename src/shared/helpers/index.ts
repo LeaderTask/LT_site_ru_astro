@@ -5,7 +5,7 @@ export const getMdxContentName = (value: string) => {
 export const getMdxId = (value: string) => value.replace('.mdx', '');
 
 export const formatDate = (date: Date) => {
-	return new Date(date).toLocaleDateString('en-US', {
+	return new Date(date).toLocaleDateString('ru-RU', {
 		day: 'numeric',
 		month: 'long',
 		year: 'numeric',

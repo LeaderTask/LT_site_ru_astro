@@ -67,7 +67,7 @@ export function initAnchorList() {
 
 			const icon = linkElement.querySelector('i');
 			if (icon) {
-				icon.className = `w-2 h-2 rounded-full transition-colors ${iconClasses}`.trim();
+				icon.className = `w-2 h-2 rounded-full transition-colors shrink-0 ${iconClasses}`.trim();
 			}
 		});
 	}

@@ -25,7 +25,7 @@ const checkmarkColor = planType === 'free' ? 'text-secondary' : planType === 'pr
 ---
 
 <div class="pricing-card flex flex-col rounded-4 overflow-hidden bg-white">
-	<div class={`p-4 md:p-8 rounded-4 ${bgColorClass}`}>
+	<div class={`p-4 md:p-8 rounded-4 ${bgColorClass} lg:h-72`}>
 		<div class="mb-2 md:mb-4">
 			<h2 class="font-bold text-[18px] leading-6 mb-1 md:text-[24px] md:leading-8 text-primary">{title}</h2>
 			<p class="font-regular text-[16px] leading-6 text-secondary">{subtitle}</p>
@@ -35,7 +35,7 @@ const checkmarkColor = planType === 'free' ? 'text-secondary' : planType === 'pr
 			<div class="flex items-baseline gap-2">
 				{
 					price > 0 ? (
-						<span class="font-bold text-[44px] leading-13 text-primary">${price}</span>
+						<span class="font-bold text-[44px] leading-13 text-primary">{price} ₽</span>
 					) : (
 						<span class="font-bold text-[44px] leading-13 text-primary">0</span>
 					)
