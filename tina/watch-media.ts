@@ -12,7 +12,11 @@ const PUBLIC_DIR = join(__dirname, '../public');
 
 async function processFile(filePath: string): Promise<void> {
 	try {
-		const webpPath = filePath.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+		const lower = filePath.toLowerCase();
+		if (lower.endsWith('.webp') || lower.endsWith('.svg') || lower.endsWith('.gif')) {
+			return;
+		}
+		const webpPath = filePath.replace(/\.[^.]+$/i, '.webp');
 		const result = await convertToWebP(filePath, webpPath);
 		if (result) {
 			if (result.alreadyExists) {

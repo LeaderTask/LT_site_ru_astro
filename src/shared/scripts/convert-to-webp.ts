@@ -3,13 +3,7 @@
 import { readdir, stat } from 'node:fs/promises';
 import { join, dirname, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import {
-	convertImageToWebP,
-	optimizeWebP,
-	IMAGE_EXTENSIONS,
-	MAX_WEBP_SIZE_KB,
-	type ConversionResult,
-} from '../helpers/imageConverter.js';
+import { convertImageToWebP, optimizeWebP, MAX_WEBP_SIZE_KB, type ConversionResult } from '../helpers/imageConverter.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -34,8 +28,8 @@ async function processDirectory(dirPath: string, basePath = ''): Promise<Convers
 			results.push(...subResults);
 		} else {
 			const ext = extname(entry.name).toLowerCase();
-			if (IMAGE_EXTENSIONS.includes(ext)) {
-				const webpPath = fullPath.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+			if (ext !== '.webp' && ext !== '.svg' && ext !== '.gif') {
+				const webpPath = fullPath.replace(/\.[^.]+$/i, '.webp');
 
 				const result = await convertToWebP(fullPath, webpPath);
 				if (result) {

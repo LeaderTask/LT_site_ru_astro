@@ -18,8 +18,9 @@ function getPublicDir(): string {
 
 const PUBLIC_DIR = getPublicDir();
 
-export const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg'];
+export const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.bmp', '.tif', '.tiff', '.avif', '.heic', '.heif'];
 export const WEBP_QUALITY = 80;
+export const MIN_WEBP_SIZE_KB = 50;
 export const MAX_WEBP_SIZE_KB = 100;
 
 export interface ConversionResult {
@@ -90,7 +91,64 @@ export async function convertImageToWebP(
 		const sourceStats = await stat(sourcePath);
 		const originalSize = sourceStats.size;
 		const fileBuffer = await readFile(sourcePath);
-		const webpBuffer = await sharp(fileBuffer).webp({ quality: WEBP_QUALITY }).toBuffer();
+		const targetBytes = MAX_WEBP_SIZE_KB * 1024;
+		const minTargetBytes = MIN_WEBP_SIZE_KB * 1024;
+		const image = sharp(fileBuffer);
+		const metadata = await image.metadata();
+		let quality = WEBP_QUALITY;
+		let width = metadata.width;
+		let height = metadata.height;
+		let webpBuffer = await image.webp({ quality }).toBuffer();
+		let newSize = webpBuffer.length;
+		let iterations = 0;
+		const maxIterations = 80;
+
+		while (newSize > targetBytes && iterations < maxIterations) {
+			iterations++;
+			let processingImage = sharp(fileBuffer);
+
+			if (width && height) {
+				const scaleHint = Math.sqrt(targetBytes / newSize) * 0.95;
+				const resizeFactor = Math.min(0.9, Math.max(0.15, scaleHint));
+				width = Math.max(300, Math.floor(width * resizeFactor));
+				height = Math.max(300, Math.floor(height * resizeFactor));
+				processingImage = processingImage.resize(width, height, { withoutEnlargement: true });
+			}
+
+			if (quality > 60) {
+				quality = Math.max(60, quality - 10);
+			} else if (quality > 30) {
+				quality = Math.max(30, quality - 7);
+			} else {
+				quality = Math.max(10, quality - 3);
+			}
+
+			webpBuffer = await processingImage.webp({ quality }).toBuffer();
+			newSize = webpBuffer.length;
+		}
+
+		if (newSize > targetBytes) {
+			const scaleHint = Math.sqrt(targetBytes / newSize);
+			if (width && height && scaleHint < 1) {
+				const finalWidth = Math.max(256, Math.floor(width * scaleHint));
+				const finalHeight = Math.max(256, Math.floor(height * scaleHint));
+				webpBuffer = await sharp(fileBuffer)
+					.resize(finalWidth, finalHeight, { withoutEnlargement: true })
+					.webp({ quality })
+					.toBuffer();
+				newSize = webpBuffer.length;
+			}
+		}
+
+		if (newSize < minTargetBytes && quality < 100) {
+			quality = Math.min(100, quality + 10);
+			webpBuffer = await sharp(fileBuffer).webp({ quality }).toBuffer();
+			newSize = webpBuffer.length;
+		}
+
+		if (newSize > targetBytes) {
+			return null;
+		}
 
 		await mkdir(dirname(targetPath), { recursive: true });
 		await writeFile(targetPath, webpBuffer);
@@ -100,8 +158,8 @@ export async function convertImageToWebP(
 			return null;
 		}
 
-		const newSize = targetStats.size;
-		const ratio = (((originalSize - newSize) / originalSize) * 100).toFixed(1);
+		const targetSize = targetStats.size;
+		const ratio = (((originalSize - targetSize) / originalSize) * 100).toFixed(1);
 
 		if (relativePath) {
 			const normalizedSource = relativePath.replace(/\\/g, '/');
@@ -125,7 +183,7 @@ export async function convertImageToWebP(
 		return {
 			source: relativePath || sourcePath,
 			originalSize,
-			newSize,
+			newSize: targetSize,
 			ratio: `${ratio}%`,
 			alreadyExists: false,
 		};
@@ -152,8 +210,9 @@ export async function optimizeWebP(
 		const originalStats = await stat(webpPath);
 		const originalSize = originalStats.size;
 		const maxSizeBytes = maxSizeKB * 1024;
+		const minSizeBytes = MIN_WEBP_SIZE_KB * 1024;
 
-		if (originalSize <= maxSizeBytes) {
+		if (originalSize <= minSizeBytes) {
 			return null;
 		}
 
@@ -212,11 +271,23 @@ export async function optimizeWebP(
 			}
 		}
 
+		if (newSize < minSizeBytes) {
+			while (newSize < minSizeBytes && quality < 100) {
+				quality = Math.min(100, quality + 5);
+				optimizedBuffer = await sharp(fileBuffer).webp({ quality }).toBuffer();
+				newSize = optimizedBuffer.length;
+			}
+		}
+
 		if (newSize >= originalSize) {
 			return null;
 		}
 
 		if (newSize > maxSizeBytes) {
+			return null;
+		}
+
+		if (newSize < minSizeBytes) {
 			return null;
 		}
 
