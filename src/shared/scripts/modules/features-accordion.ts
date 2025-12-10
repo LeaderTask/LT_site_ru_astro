@@ -11,10 +11,9 @@ export function initFeaturesAccordion() {
 
 		const reverse = root.dataset.accordionReverse === 'true';
 		const desktopContainer = document.getElementById(`${accordionId}-desktop`);
-		const imageContainer = document.getElementById(`${accordionId}-image-container`);
 		let activeIndex = 0;
 
-		if (!(desktopContainer && imageContainer)) {
+		if (!desktopContainer) {
 			return;
 		}
 
@@ -23,7 +22,7 @@ export function initFeaturesAccordion() {
 				return;
 			}
 
-			const allImages = imageContainer.querySelectorAll('[data-image-index]');
+			const allImages = desktopContainer.querySelectorAll('[data-image-index]');
 
 			allImages.forEach((imgWrapper, index) => {
 				if (imgWrapper instanceof HTMLElement) {

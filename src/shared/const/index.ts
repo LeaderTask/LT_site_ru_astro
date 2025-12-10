@@ -102,8 +102,6 @@ export const FEATURES_SLIDER_2_ITEMS = [
 		title: 'Сортировка',
 		description: 'Сортируйте задачи по приоритету, срокам или своим критериям в пару кликов.',
 		image: '/sorting.webp',
-		customClass: '!max-w-44.5 !max-h-61.25 md:!max-h-109 md:!max-w-85 ',
-		justifyClass: '!justify-center',
 	},
 	{
 		icon: 'icon-hightlights',

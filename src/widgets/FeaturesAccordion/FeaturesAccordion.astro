@@ -66,31 +66,24 @@ const getImageDim = (imagePath: string) =>
 				))
 			}
 		</div>
-		<div class="flex-1 flex items-center justify-center h-full">
-			<div
-				id={`${accordionId}-image-container`}
-				class="relative w-full lg:min-h-117 max-w-160 rounded-5 bg-orange-light overflow-hidden shadow-card pt-8"
-			>
-				{
-					items.map((item: FeatureItem, index: number) => (
-						<div
-							id={`${accordionId}-image-${index}`}
-							class={`absolute inset-0 flex justify-end items-end w-full transition-opacity duration-500 ${item.justifyClass || 'pl-13'}`}
-							style={`opacity: ${index === 0 ? '1' : '0'}; pointer-events: ${index === 0 ? 'auto' : 'none'};`}
-							data-image-index={index}
-						>
-							<Image
-								src={item.image}
-								alt={item.title}
-								width={getImageDim(item.image).width}
-								height={getImageDim(item.image).height}
-								class={`w-full h-auto object-cover ${item.customClass || ''}`}
-								loading={index === 0 ? 'eager' : 'lazy'}
-							/>
-						</div>
-					))
-				}
-			</div>
+		<div
+			class="flex-1 flex items-center justify-center h-full bg-orange-light rounded-5 relative w-full lg:min-h-117 max-w-160 overflow-hidden"
+		>
+			{
+				items.map((item: FeatureItem, index: number) => (
+					<Image
+						id={`${accordionId}-image-${index}`}
+						src={item.image}
+						alt={item.title}
+						style={`opacity: ${index === 0 ? '1' : '0'}; pointer-events: ${index === 0 ? 'auto' : 'none'};`}
+						data-image-index={index}
+						width={getImageDim(item.image).width}
+						height={getImageDim(item.image).height}
+						class={`absolute transition-opacity inset-0 w-full h-full ${item.customClass || ''}`}
+						loading={index === 0 ? 'eager' : 'lazy'}
+					/>
+				))
+			}
 		</div>
 	</div>
 	<div

@@ -9,6 +9,45 @@ const imagesDimensions = {
 	workingSystem3: await getImageDimensions('/working-system-3.webp'),
 	workingSystem4: await getImageDimensions('/working-system-4.webp'),
 };
+
+const workingSystemCards = [
+	{
+		title: 'Дерево задач',
+		description: 'Структурируйте задачи и подзадачи иерархически — идеальный метод для управления сложными проектами.',
+		mobileBreaks: true,
+		wrapperClass: 'md:w-[calc(50%-24px)] lg:w-77.5 bg-orange-light',
+		imageKey: 'workingSystem1',
+		imageSrc: '/working-system-1.webp',
+		imageAlt: 'Working system 1',
+	},
+	{
+		title: 'Проекты',
+		description: 'Создавайте проекты с неограниченным количеством вложенных задач и подпроектов для поддержания ясности.',
+		mobileBreaks: false,
+		wrapperClass: 'md:w-[calc(50%-10px)] lg:max-w-77.5 bg-purple-light',
+		imageKey: 'workingSystem2',
+		imageSrc: '/working-system-2.webp',
+		imageAlt: 'Working system 2',
+	},
+	{
+		title: 'Kanban-доски',
+		description: 'Визуализируйте рабочий процесс от начала до конца — перемещайте задачи по этапам и следите за прогрессом.',
+		mobileBreaks: false,
+		wrapperClass: 'md:w-[calc(50%-10px)] lg:max-w-77.5 bg-white',
+		imageKey: 'workingSystem3',
+		imageSrc: '/working-system-3.webp',
+		imageAlt: 'Working system 3',
+	},
+	{
+		title: 'Избранное',
+		description: 'Добавляйте в закладки важные задачи и проекты для быстрого доступа.',
+		mobileBreaks: false,
+		wrapperClass: 'md:w-[calc(50%-10px)] lg:max-w-77.5 bg-gray-light',
+		imageKey: 'workingSystem4',
+		imageSrc: '/working-system-4.webp',
+		imageAlt: 'Working system 4',
+	},
+] as const;
 ---
 
 <section class="flex flex-col gap-8 md:gap-10 xl:gap-15 items-center">
@@ -20,66 +59,31 @@ const imagesDimensions = {
 		<GradientTextElem>идеальную рабочую систему</GradientTextElem>
 	</h3>
 	<div class="w-full flex flex-wrap justify-center items-start gap-4 lg:gap-6 select-none">
-		<div
-			class="group w-full md:w-[calc(50%-24px)] lg:w-77.5 flex flex-col gap-3 bg-orange-light rounded-3 md:rounded-3 lg:rounded-4 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden max-h-118.75 md:max-h-none"
-		>
-			<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">Дерево задач</h4>
-			<p class="text-[16px] md:text-[16px] leading-6 text-secondary">
-				Структурируйте задачи и подзадачи <br class="md:hidden" /> иерархически — идеальный метод <br class="md:hidden" /> для
-				управления сложными проектами.
-			</p>
-			<Image
-				src="/working-system-1.webp"
-				alt="Working system 1"
-				width={imagesDimensions.workingSystem1.width}
-				height={imagesDimensions.workingSystem1.height}
-				class="max-w-59.25 md:max-w-none w-full h-full object-cover pt-2.5 px-2.75 md:translate-y-7.5 md:transition-transform md:duration-300 md:group-hover:translate-y-0 self-center"
-			/>
-		</div>
-		<div
-			class="group w-full md:w-[calc(50%-10px)] lg:max-w-77.5 flex flex-col gap-3 bg-purple-light rounded-3 md:rounded-3 lg:rounded-4 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden max-h-118.75 md:max-h-none"
-		>
-			<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">Проекты</h4>
-			<p class="text-[16px] md:text-[16px] leading-5 md:leading-6 text-secondary">
-				Создавайте проекты с неограниченным количеством вложенных задач и подпроектов для поддержания ясности.
-			</p>
-			<Image
-				src="/working-system-2.webp"
-				alt="Working system 2"
-				width={imagesDimensions.workingSystem2.width}
-				height={imagesDimensions.workingSystem2.height}
-				class="max-w-59.25 md:max-w-none w-full h-full object-cover pt-2.5 px-2.75 md:translate-y-7.5 md:transition-transform md:duration-300 md:group-hover:translate-y-0 self-center"
-			/>
-		</div>
-		<div
-			class="group w-full md:w-[calc(50%-10px)] lg:max-w-77.5 flex flex-col gap-3 bg-white rounded-3 md:rounded-3 lg:rounded-4 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden max-h-118.75 md:max-h-none"
-		>
-			<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">Kanban-доски</h4>
-			<p class="text-[16px] md:text-[16px] leading-5 md:leading-6 text-secondary">
-				Визуализируйте рабочий процесс от начала до конца — перемещайте задачи по этапам и следите за прогрессом.
-			</p>
-			<Image
-				src="/working-system-3.webp"
-				alt="Working system 3"
-				width={imagesDimensions.workingSystem3.width}
-				height={imagesDimensions.workingSystem3.height}
-				class="max-w-59.25 md:max-w-none w-full h-full object-cover pt-2.5 px-2.75 md:translate-y-7.5 md:transition-transform md:duration-300 md:group-hover:translate-y-0 self-center"
-			/>
-		</div>
-		<div
-			class="group w-full md:w-[calc(50%-10px)] lg:max-w-77.5 flex flex-col gap-3 bg-gray-light rounded-3 md:rounded-3 lg:rounded-4 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden max-h-118.75 md:max-h-none"
-		>
-			<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">Избранное</h4>
-			<p class="text-[16px] md:text-[16px] leading-5 md:leading-6 text-secondary">
-				Добавляйте в закладки важные задачи и проекты для быстрого доступа.
-			</p>
-			<Image
-				src="/working-system-4.webp"
-				alt="Working system 4"
-				width={imagesDimensions.workingSystem4.width}
-				height={imagesDimensions.workingSystem4.height}
-				class="max-w-59.25 md:max-w-none w-full h-full object-cover pt-2.5 px-2.75 md:translate-y-7.5 md:transition-transform md:duration-300 md:group-hover:translate-y-0 self-center"
-			/>
-		</div>
+		{
+			workingSystemCards.map((card) => (
+				<div
+					class={`group w-full flex flex-col gap-3 rounded-3 md:rounded-3 lg:rounded-4 p-5 md:p-6 pb-0 md:pb-0 overflow-hidden max-h-118.75 md:max-h-none lg:h-140.5 ${card.wrapperClass}`}
+				>
+					<h4 class="text-[18px] md:text-[22px] lg:text-[24px] leading-6 font-bold text-primary">{card.title}</h4>
+					<p class="text-[16px] md:text-[16px] leading-5 md:leading-6 text-secondary">
+						{card.mobileBreaks ? (
+							<>
+								Структурируйте задачи и подзадачи <br class="md:hidden" /> иерархически — идеальный метод
+								<br class="md:hidden" /> для управления сложными проектами.
+							</>
+						) : (
+							card.description
+						)}
+					</p>
+					<Image
+						src={card.imageSrc}
+						alt={card.imageAlt}
+						width={imagesDimensions[card.imageKey].width}
+						height={imagesDimensions[card.imageKey].height}
+						class="max-w-59.25 md:max-w-none w-full border border-[#DBDBDD] rounded-t-4 h-full md:translate-y-7.5 md:transition-transform md:duration-300 md:group-hover:translate-y-0 self-center"
+					/>
+				</div>
+			))
+		}
 	</div>
 </section>
