@@ -1,4 +1,5 @@
-export const getMdxContentName = (value: string) => {
+export const getMdxContentName = (value: string | undefined) => {
+	if (!value) return undefined;
 	return value.split('/').pop()?.replace('.mdx', '');
 };
 

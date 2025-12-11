@@ -78,13 +78,17 @@ if (post.data.recommendation && post.data.recommendation.length > 0) {
 
 if (recommendationEntries.length === 0) {
 	const allPosts = await getCollection('articles');
-	const currentTagPaths = (post.data.tags || []).map((tag) => (typeof tag === 'string' ? tag : tag.tag));
+	const currentTagPaths = (post.data.tags || [])
+		.map((tag) => (typeof tag === 'string' ? tag : tag.tag))
+		.filter((tagPath): tagPath is string => Boolean(tagPath));
 
 	if (currentTagPaths.length > 0) {
 		const postsWithSimilarTags = allPosts
 			.filter((p) => {
 				if (p.id === post.id) return false;
-				const postTagPaths = (p.data.tags || []).map((tag) => (typeof tag === 'string' ? tag : tag.tag));
+				const postTagPaths = (p.data.tags || [])
+					.map((tag) => (typeof tag === 'string' ? tag : tag.tag))
+					.filter((tagPath): tagPath is string => Boolean(tagPath));
 				return postTagPaths.some((tagPath) => currentTagPaths.includes(tagPath));
 			})
 			.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
@@ -104,6 +108,8 @@ if (recommendationEntries.length === 0) {
 		recommendationEntries = await generatedEnrichedPosts(latestPosts);
 	}
 }
+
+console.log(authorEntry, post.data);
 ---
 
 <BlogLayout

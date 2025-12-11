@@ -29,9 +29,16 @@ const enrichedPosts: EnrichedPost[] = await Promise.all(
 		const tagsData = await Promise.all(
 			(post.data.tags || []).map(async (tagRef) => {
 				const tagPath = typeof tagRef === 'string' ? tagRef : tagRef.tag;
+				if (!tagPath) {
+					return tagRef;
+				}
 				const tagId = tagPath.replace('src/content/tags/', '').replace('.mdx', '');
-				const tagEntry = await getEntry('tags', tagId);
-				return tagEntry ? { tag: tagPath, data: tagEntry.data } : tagRef;
+				try {
+					const tagEntry = await getEntry('tags', tagId);
+					return tagEntry ? { tag: tagPath, data: tagEntry.data } : tagRef;
+				} catch {
+					return tagRef;
+				}
 			})
 		);
 

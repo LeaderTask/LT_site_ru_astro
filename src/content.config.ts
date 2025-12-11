@@ -17,9 +17,11 @@ const articles = defineCollection({
 			.array(
 				z.union([
 					z.string(),
-					z.object({
-						tag: z.string(),
-					}),
+					z
+						.object({
+							tag: z.string().optional(),
+						})
+						.passthrough(),
 				])
 			)
 			.optional(),
