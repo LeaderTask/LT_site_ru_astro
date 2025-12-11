@@ -32,7 +32,14 @@ export const AuthorsCollection: Collection = {
 			type: 'string',
 			name: 'position',
 			label: 'Должность',
-			required: true,
+		},
+		{
+			type: 'string',
+			name: 'bio',
+			label: 'Описание',
+			ui: {
+				component: 'textarea',
+			},
 		},
 		{
 			type: 'string',
