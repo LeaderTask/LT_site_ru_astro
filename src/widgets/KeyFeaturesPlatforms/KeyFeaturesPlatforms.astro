@@ -12,10 +12,10 @@ const { features } = Astro.props;
 
 <section class="py-15 md:py-20 xl:py-30">
 	<h3 class="text-[24px] lg:text-[44px] lg:leading-10 font-bold text-primary text-center mb-6 lg:mb-15">Ключевые возможности</h3>
-	<div class="flex flex-wrap gap-4 lg:gap-8">
+	<div class="gap-4 lg:gap-8 grid grid-cols-[repeat(auto-fit,minmax(416px,1fr))]">
 		{
 			features.map((feature: { icon: string; title: string; description: string }) => (
-				<div class="flex flex-col items-start justify-center bg-white rounded-5 p-6 shadow-card w-full md:w-[calc(50%-32px)] lg:w-[calc((100%-64px)/3)] xl:w-[calc((100%-64px)/3)]">
+				<div class="flex flex-col items-start justify-center bg-white rounded-5 p-6 shadow-card w-full">
 					<svg class="w-8 h-8 shrink-0">
 						<use href={`/icons/all-icons.svg#${feature.icon}`} />
 					</svg>

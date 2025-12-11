@@ -38,9 +38,10 @@ const imageClass = heroBlock.platform === 'web' || heroBlock.platform === 'windo
 <div class="overflow-x-hidden">
 	<section class={`flex flex-col lg:flex-row gap-10 lg:gap-8 items-center pt-15 lg:pt-30 relative ${sectionClass}`}>
 		<div class={`flex flex-col ${heroBlock.platform === 'web' || heroBlock.platform === 'windows' ? 'px-5 lg:px-16' : ''}`}>
-			<h1 class="text-[32px] lg:text-[72px] leading-10 lg:leading-20 font-bold text-primary text-center lg:text-left w-max">
+			<h1
+				class="text-[32px] lg:text-[72px] leading-10 lg:leading-20 font-bold text-primary text-center lg:text-left w-max lg:max-w-188"
+			>
 				<GradientTextElem>{heroBlock.gradientText}</GradientTextElem>
-				<br />
 				{heroBlock.title}
 			</h1>
 			<p class="text-[16px] lg:text-[28px] leading-6 lg:leading-8 text-secondary text-center lg:text-left my-5 lg:my-10">
